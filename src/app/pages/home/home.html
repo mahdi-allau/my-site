@@ -1,0 +1,181 @@
+<!-- ============================= HERO ============================= -->
+<section class="relative overflow-hidden">
+  <div class="glow -left-40 top-[-10rem] h-[26rem] w-[26rem] bg-accent-500/20" aria-hidden="true"></div>
+  <div class="glow right-[-12rem] top-24 h-[22rem] w-[22rem] bg-accent-600/10" aria-hidden="true"></div>
+
+  <div class="container-page relative z-10 pb-20 pt-20 md:pb-28 md:pt-28">
+    <div class="animate-rise max-w-3xl">
+      <span class="inline-flex items-center gap-2 rounded-full border border-line bg-ink-850 px-4 py-1.5 text-xs font-medium text-muted-strong">
+        <span class="h-1.5 w-1.5 rounded-full bg-accent-400" aria-hidden="true"></span>
+        Disponibile per nuovi progetti
+      </span>
+
+      <h1 class="display mt-7 text-[2.75rem] leading-[1.05] sm:text-6xl lg:text-7xl">
+        Siti web su misura per
+        <span class="text-accent-400">ristoranti</span>
+        e piccole aziende.
+      </h1>
+
+      <p class="mt-7 max-w-2xl text-lg leading-relaxed text-muted">
+        Sono Mahdi Allau, sviluppatore. Progetto e realizzo siti, web application e dashboard:
+        dal primo schizzo alla messa online, con un pannello che ti permette di aggiornare
+        i contenuti da solo, quando vuoi.
+      </p>
+
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a routerLink="/contact" class="btn btn-primary">Richiedi un preventivo</a>
+        <a routerLink="/projects" class="btn btn-ghost">Guarda i progetti</a>
+      </div>
+    </div>
+
+    <dl class="mt-16 grid max-w-3xl gap-px overflow-hidden rounded-2xl border border-line-soft bg-line-soft sm:grid-cols-3">
+      <div class="bg-ink-900 px-6 py-5">
+        <dt class="text-xs uppercase tracking-wider text-muted">Stack</dt>
+        <dd class="mt-1.5 text-[0.95rem] font-medium text-white">Angular · TypeScript · Supabase</dd>
+      </div>
+      <div class="bg-ink-900 px-6 py-5">
+        <dt class="text-xs uppercase tracking-wider text-muted">Approccio</dt>
+        <dd class="mt-1.5 text-[0.95rem] font-medium text-white">Codice scritto a mano</dd>
+      </div>
+      <div class="bg-ink-900 px-6 py-5">
+        <dt class="text-xs uppercase tracking-wider text-muted">Incluso</dt>
+        <dd class="mt-1.5 text-[0.95rem] font-medium text-white">Pannello di gestione</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============================= SERVIZI ============================= -->
+<section class="border-t border-line-soft bg-ink-900/40 py-20 md:py-24">
+  <div class="container-page">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div class="max-w-xl">
+        <span class="eyebrow">Cosa faccio</span>
+        <h2 class="display mt-4 text-4xl sm:text-5xl">Dal sito vetrina al gestionale interno.</h2>
+      </div>
+      <a routerLink="/services" class="text-sm font-semibold text-accent-400 hover:text-accent-300">
+        Tutti i servizi →
+      </a>
+    </div>
+
+    <div class="mt-12 grid gap-5 sm:grid-cols-2">
+      @for (service of topServices(); track service.id) {
+        <a
+          routerLink="/services"
+          [fragment]="service.slug"
+          class="card flex flex-col p-7 focus-visible:border-accent-400"
+        >
+          <span class="grid h-11 w-11 place-items-center rounded-xl border border-line bg-ink-800 text-accent-400">
+            <app-service-icon [name]="service.icon" />
+          </span>
+          <h3 class="mt-5 text-lg font-semibold text-white">{{ service.title }}</h3>
+          <p class="mt-2 text-sm font-medium text-accent-400/90">{{ service.tagline }}</p>
+          <p class="mt-3 text-[0.9375rem] leading-relaxed text-muted">{{ service.description }}</p>
+        </a>
+      } @empty {
+        <p class="text-muted">Caricamento dei servizi…</p>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ============================= PROGETTI ============================= -->
+<section class="py-20 md:py-24">
+  <div class="container-page">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div class="max-w-xl">
+        <span class="eyebrow">Portfolio</span>
+        <h2 class="display mt-4 text-4xl sm:text-5xl">Progetti in evidenza.</h2>
+      </div>
+      <a routerLink="/projects" class="text-sm font-semibold text-accent-400 hover:text-accent-300">
+        Tutti i progetti →
+      </a>
+    </div>
+
+    <div class="mt-12 grid gap-5 lg:grid-cols-3">
+      @for (project of featured(); track project.id) {
+        <app-project-card [project]="project" />
+      } @empty {
+        @if (loading()) {
+          <p class="text-muted">Caricamento dei progetti…</p>
+        } @else {
+          <p class="text-muted">Nessun progetto pubblicato al momento.</p>
+        }
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ============================= PROCESSO ============================= -->
+<section class="border-y border-line-soft bg-ink-900/40 py-20 md:py-24">
+  <div class="container-page">
+    <div class="max-w-xl">
+      <span class="eyebrow">Come lavoro</span>
+      <h2 class="display mt-4 text-4xl sm:text-5xl">Quattro passi, nessuna sorpresa.</h2>
+    </div>
+
+    <ol class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      @for (phase of process; track phase.step) {
+        <li class="card p-7">
+          <span class="display text-3xl text-accent-400">{{ phase.step }}</span>
+          <h3 class="mt-4 text-lg font-semibold text-white">{{ phase.title }}</h3>
+          <p class="mt-2 text-[0.9375rem] leading-relaxed text-muted">{{ phase.body }}</p>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<!-- ============================= STACK ============================= -->
+<section class="py-20 md:py-24">
+  <div class="container-page">
+    <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+      <div>
+        <span class="eyebrow">Competenze</span>
+        <h2 class="display mt-4 text-4xl sm:text-5xl">Tecnologie che uso davvero.</h2>
+        <p class="mt-5 max-w-md text-[0.9375rem] leading-relaxed text-muted">
+          Non un elenco di parole chiave: sono gli strumenti con cui ho costruito i progetti
+          qui sopra, dal firmware su microcontrollore all’interfaccia web.
+        </p>
+        <a routerLink="/about" class="mt-7 inline-block text-sm font-semibold text-accent-400 hover:text-accent-300">
+          Il mio percorso →
+        </a>
+      </div>
+
+      <div class="space-y-8">
+        @for (group of skillGroups; track group.label) {
+          <div>
+            <h3 class="text-sm font-semibold uppercase tracking-wider text-muted">{{ group.label }}</h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+              @for (item of group.items; track item) {
+                <span class="chip">{{ item }}</span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CTA ============================= -->
+<section class="pb-8">
+  <div class="container-page">
+    <div class="relative overflow-hidden rounded-3xl border border-line bg-ink-850 px-8 py-16 text-center md:px-16">
+      <div class="glow left-1/2 top-[-8rem] h-72 w-72 -translate-x-1/2 bg-accent-500/20" aria-hidden="true"></div>
+      <div class="relative z-10">
+        <h2 class="display mx-auto max-w-2xl text-4xl sm:text-5xl">
+          Hai un’attività e un sito che non ti rappresenta?
+        </h2>
+        <p class="mx-auto mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-muted">
+          Raccontami cosa ti serve. Ti rispondo con una proposta concreta:
+          struttura, tempi e costo, senza impegno.
+        </p>
+        <div class="mt-9 flex flex-wrap justify-center gap-3">
+          <a routerLink="/contact" class="btn btn-primary">Scrivimi</a>
+          <a routerLink="/services" class="btn btn-ghost">Vedi i servizi</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

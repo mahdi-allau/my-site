@@ -1,0 +1,98 @@
+<section class="relative overflow-hidden border-b border-line-soft">
+  <div class="glow -left-32 top-[-8rem] h-[22rem] w-[22rem] bg-accent-500/15" aria-hidden="true"></div>
+
+  <div class="container-page relative z-10 py-20 md:py-24">
+    <div class="animate-rise max-w-3xl">
+      <span class="eyebrow">Servizi</span>
+      <h1 class="display mt-5 text-5xl sm:text-6xl">Cosa posso costruire per te.</h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+        Dal sito vetrina che presenta l’attività fino allo strumento interno che ti fa
+        risparmiare ore ogni settimana. Sempre su misura, mai un tema comprato e riadattato.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 md:py-20">
+  <div class="container-page space-y-4">
+    @for (service of services(); track service.id) {
+      <article [id]="service.slug" class="card scroll-mt-28 p-8 md:p-10">
+        <div class="grid gap-8 md:grid-cols-[1.4fr_1fr]">
+          <div>
+            <div class="flex items-center gap-4">
+              <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-line bg-ink-800 text-accent-400">
+                <app-service-icon [name]="service.icon" />
+              </span>
+              <div>
+                <h2 class="display text-2xl text-white sm:text-3xl">{{ service.title }}</h2>
+                <p class="mt-1 text-sm font-medium text-accent-400/90">{{ service.tagline }}</p>
+              </div>
+            </div>
+
+            <p class="mt-6 max-w-2xl text-[0.9375rem] leading-relaxed text-muted">
+              {{ service.description }}
+            </p>
+          </div>
+
+          @if (service.deliverables.length) {
+            <div class="rounded-2xl border border-line-soft bg-ink-900 p-6">
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-muted">Cosa comprende</h3>
+              <ul class="mt-4 space-y-3">
+                @for (item of service.deliverables; track item) {
+                  <li class="flex gap-3 text-[0.9375rem] leading-relaxed text-muted-strong">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         class="mt-1 h-4 w-4 shrink-0 text-accent-400" aria-hidden="true">
+                      <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span>{{ item }}</span>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        </div>
+      </article>
+    } @empty {
+      <div class="card p-10 text-center">
+        <p class="text-muted">
+          @if (loading()) {
+            Caricamento dei servizi…
+          } @else {
+            Nessun servizio pubblicato al momento.
+          }
+        </p>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- Domande frequenti -->
+<section class="border-t border-line-soft bg-ink-900/40 py-20 md:py-24">
+  <div class="container-page">
+    <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+      <div>
+        <span class="eyebrow">Domande frequenti</span>
+        <h2 class="display mt-4 text-4xl sm:text-5xl">Le cose che mi chiedono sempre.</h2>
+        <p class="mt-5 max-w-sm text-[0.9375rem] leading-relaxed text-muted">
+          Se la tua domanda non è qui, scrivimi: rispondo anche solo per capire se posso esserti utile.
+        </p>
+        <a routerLink="/contact" class="btn btn-primary mt-8">Fai la tua domanda</a>
+      </div>
+
+      <div class="space-y-3">
+        @for (item of faq; track item.question) {
+          <details class="card group p-6 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 text-base font-semibold text-white">
+              {{ item.question }}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   class="h-5 w-5 shrink-0 text-accent-400 transition-transform group-open:rotate-45" aria-hidden="true">
+                <path d="M12 5v14M5 12h14" stroke-linecap="round" />
+              </svg>
+            </summary>
+            <p class="mt-4 text-[0.9375rem] leading-relaxed text-muted">{{ item.answer }}</p>
+          </details>
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,1 +1,234 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   Design tokens — tema scuro caldo, accento ambra.
+   --------------------------------------------------------------- */
+@theme {
+  --color-ink-950: #07070a;
+  --color-ink-900: #0c0c11;
+  --color-ink-850: #111117;
+  --color-ink-800: #16161e;
+  --color-ink-700: #1f1f29;
+  --color-line: #2a2a36;
+  --color-line-soft: #1c1c25;
+
+  --color-accent-300: #ffd08a;
+  --color-accent-400: #ffb454;
+  --color-accent-500: #f59e0b;
+  --color-accent-600: #d97706;
+
+  --color-muted: #9a9aa8;
+  --color-muted-strong: #c7c7d3;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+
+  --radius-card: 1rem;
+}
+
+/* ---------------------------------------------------------------
+   Base
+   --------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink-950);
+    color: var(--color-muted-strong);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-400);
+    color: var(--color-ink-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-400);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  h1, h2, h3 {
+    color: #f4f4f7;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Componenti riutilizzabili
+   --------------------------------------------------------------- */
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent-400);
+  }
+
+  .card {
+    background-color: var(--color-ink-850);
+    border: 1px solid var(--color-line-soft);
+    border-radius: var(--radius-card);
+    transition: border-color 220ms ease, transform 220ms ease, background-color 220ms ease;
+  }
+
+  .card:hover {
+    border-color: var(--color-line);
+    background-color: var(--color-ink-800);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, opacity 180ms ease;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background-color: var(--color-accent-400);
+    color: var(--color-ink-950);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-accent-300);
+  }
+
+  .btn-sm {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+
+  .btn-ghost {
+    border: 1px solid var(--color-line);
+    color: #e8e8ee;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--color-accent-400);
+    color: var(--color-accent-400);
+  }
+
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--color-line);
+    border-radius: 9999px;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+    white-space: nowrap;
+    transition: border-color 180ms ease, color 180ms ease;
+  }
+
+  /* Variante selezionabile, usata dai filtri della pagina Progetti. */
+  .chip-selectable:hover {
+    color: #e8e8ee;
+  }
+
+  .chip-active {
+    border-color: var(--color-accent-400);
+    color: var(--color-accent-400);
+  }
+
+  .field {
+    width: 100%;
+    background-color: var(--color-ink-900);
+    border: 1px solid var(--color-line);
+    border-radius: 0.625rem;
+    padding: 0.75rem 0.9rem;
+    color: #f4f4f7;
+    font-size: 0.9375rem;
+    transition: border-color 180ms ease;
+  }
+
+  .field::placeholder {
+    color: #5d5d6b;
+  }
+
+  .field:focus {
+    border-color: var(--color-accent-400);
+    outline: none;
+  }
+
+  .label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  /* Alone luminoso usato dietro le sezioni hero */
+  .glow {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Animazione d'ingresso (rispetta prefers-reduced-motion)
+   --------------------------------------------------------------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-rise {
+  animation: rise 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

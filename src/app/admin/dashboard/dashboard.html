@@ -1,0 +1,237 @@
+<div class="min-h-screen bg-ink-950">
+  <!-- Intestazione -->
+  <header class="sticky top-0 z-30 border-b border-line-soft bg-ink-950/85 backdrop-blur-xl">
+    <div class="container-page flex h-16 items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="grid h-9 w-9 place-items-center rounded-lg bg-accent-400 font-display text-lg text-ink-950" aria-hidden="true">M</span>
+        <div class="leading-tight">
+          <p class="text-sm font-semibold text-white">Dashboard</p>
+          <p class="text-xs text-muted">{{ userEmail() }}</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a routerLink="/" class="hidden rounded-full px-4 py-2 text-sm text-muted transition-colors hover:text-white sm:block">
+          Vedi il sito
+        </a>
+        <button type="button" class="btn btn-ghost btn-sm" (click)="signOut()">Esci</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container-page py-10">
+    <!-- Tab -->
+    <div class="flex flex-wrap items-center gap-2 rounded-full border border-line-soft bg-ink-900 p-1.5">
+      <button type="button" [class]="tabClass('messages')" (click)="select('messages')">
+        Messaggi
+        @if (unreadCount() > 0) {
+          <span class="ml-2 rounded-full bg-ink-950/20 px-2 py-0.5 text-xs">{{ unreadCount() }}</span>
+        }
+      </button>
+      <button type="button" [class]="tabClass('projects')" (click)="select('projects')">
+        Progetti
+        <span class="ml-2 text-xs opacity-70">{{ projects().length }}</span>
+      </button>
+
+      <button type="button" class="ml-auto rounded-full px-4 py-2 text-sm text-muted transition-colors hover:text-white"
+              (click)="load()" [disabled]="loading()">
+        @if (loading()) { Aggiorno… } @else { Aggiorna }
+      </button>
+    </div>
+
+    @if (error()) {
+      <p class="mt-6 rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+        {{ error() }}
+      </p>
+    }
+
+    <!-- ============================ MESSAGGI ============================ -->
+    @if (tab() === 'messages') {
+      <section class="mt-8">
+        @if (loading()) {
+          <p class="text-muted">Caricamento…</p>
+        } @else {
+          <div class="space-y-3">
+            @for (message of messages(); track message.id) {
+              <article class="card p-6" [class.opacity-60]="message.handled">
+                <div class="flex flex-wrap items-start justify-between gap-4">
+                  <div>
+                    <h2 class="text-base font-semibold text-white">
+                      {{ message.name }}
+                      @if (message.company) {
+                        <span class="font-normal text-muted"> · {{ message.company }}</span>
+                      }
+                    </h2>
+                    <a [href]="'mailto:' + message.email" class="text-sm text-accent-400 hover:text-accent-300">
+                      {{ message.email }}
+                    </a>
+                  </div>
+
+                  <div class="flex items-center gap-3">
+                    @if (message.budget) {
+                      <span class="chip">{{ message.budget }}</span>
+                    }
+                    <time class="text-xs text-muted" [attr.datetime]="message.createdAt">
+                      {{ message.createdAt | date: 'd MMM y, HH:mm' }}
+                    </time>
+                  </div>
+                </div>
+
+                <p class="mt-4 whitespace-pre-line text-[0.9375rem] leading-relaxed text-muted-strong">{{ message.message }}</p>
+
+                <div class="mt-5 flex flex-wrap gap-4 border-t border-line-soft pt-4">
+                  <button type="button" class="text-sm font-medium text-accent-400 hover:text-accent-300"
+                          (click)="toggleHandled(message)">
+                    @if (message.handled) { Segna come da gestire } @else { Segna come gestito }
+                  </button>
+                  <a [href]="'mailto:' + message.email" class="text-sm font-medium text-muted hover:text-white">
+                    Rispondi
+                  </a>
+                  <button type="button" class="ml-auto text-sm font-medium text-red-400/80 hover:text-red-400"
+                          (click)="removeMessage(message)">
+                    Elimina
+                  </button>
+                </div>
+              </article>
+            } @empty {
+              <div class="card p-12 text-center">
+                <p class="text-muted">Nessun messaggio ricevuto per ora.</p>
+              </div>
+            }
+          </div>
+        }
+      </section>
+    }
+
+    <!-- ============================ PROGETTI ============================ -->
+    @if (tab() === 'projects') {
+      <section class="mt-8">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <h2 class="display text-2xl text-white">Progetti pubblicati</h2>
+          <button type="button" class="btn btn-primary btn-sm" (click)="newProject()">Nuovo progetto</button>
+        </div>
+
+        @if (formOpen()) {
+          <form [formGroup]="projectForm" (ngSubmit)="saveProject()" class="card mt-6 p-7" novalidate>
+            <h3 class="text-lg font-semibold text-white">
+              @if (editingId()) { Modifica progetto } @else { Nuovo progetto }
+            </h3>
+
+            <div class="mt-6 grid gap-5 sm:grid-cols-2">
+              <div>
+                <label class="label" for="p-title">Titolo *</label>
+                <input id="p-title" type="text" class="field" formControlName="title" (blur)="suggestSlug()" />
+              </div>
+              <div>
+                <label class="label" for="p-slug">Slug *</label>
+                <input id="p-slug" type="text" class="field" formControlName="slug" />
+              </div>
+              <div>
+                <label class="label" for="p-category">Categoria</label>
+                <input id="p-category" type="text" class="field" formControlName="category"
+                       placeholder="Es. Sviluppo web" />
+              </div>
+              <div>
+                <label class="label" for="p-year">Anno</label>
+                <input id="p-year" type="number" class="field" formControlName="year" />
+              </div>
+            </div>
+
+            <div class="mt-5">
+              <label class="label" for="p-summary">Sintesi</label>
+              <textarea id="p-summary" rows="2" class="field resize-y" formControlName="summary"
+                        placeholder="Una o due righe, mostrate nelle anteprime."></textarea>
+            </div>
+
+            <div class="mt-5">
+              <label class="label" for="p-description">Descrizione estesa</label>
+              <textarea id="p-description" rows="4" class="field resize-y" formControlName="description"></textarea>
+            </div>
+
+            <div class="mt-5 grid gap-5 sm:grid-cols-2">
+              <div>
+                <label class="label" for="p-tech">Tecnologie <span class="text-muted/70">(separate da virgola)</span></label>
+                <textarea id="p-tech" rows="3" class="field resize-y" formControlName="technologies"
+                          placeholder="Angular, TypeScript, Supabase"></textarea>
+              </div>
+              <div>
+                <label class="label" for="p-highlights">Punti chiave <span class="text-muted/70">(uno per riga)</span></label>
+                <textarea id="p-highlights" rows="3" class="field resize-y" formControlName="highlights"></textarea>
+              </div>
+            </div>
+
+            <div class="mt-5 grid gap-5 sm:grid-cols-3">
+              <div>
+                <label class="label" for="p-image">URL immagine</label>
+                <input id="p-image" type="url" class="field" formControlName="imageUrl" />
+              </div>
+              <div>
+                <label class="label" for="p-live">URL progetto online</label>
+                <input id="p-live" type="url" class="field" formControlName="liveUrl" />
+              </div>
+              <div>
+                <label class="label" for="p-repo">URL repository</label>
+                <input id="p-repo" type="url" class="field" formControlName="repoUrl" />
+              </div>
+            </div>
+
+            <div class="mt-5 flex flex-wrap items-center gap-6">
+              <div class="w-32">
+                <label class="label" for="p-order">Ordine</label>
+                <input id="p-order" type="number" class="field" formControlName="sortOrder" />
+              </div>
+              <label class="flex cursor-pointer items-center gap-3 pt-5 text-sm text-muted-strong">
+                <input type="checkbox" formControlName="featured"
+                       class="h-4 w-4 rounded border-line bg-ink-900 accent-accent-400" />
+                Mostra fra i progetti in evidenza
+              </label>
+            </div>
+
+            <div class="mt-7 flex flex-wrap gap-3 border-t border-line-soft pt-6">
+              <button type="submit" class="btn btn-primary" [disabled]="saving()">
+                @if (saving()) { Salvataggio… } @else { Salva }
+              </button>
+              <button type="button" class="btn btn-ghost" (click)="closeForm()">Annulla</button>
+            </div>
+          </form>
+        }
+
+        <div class="mt-6 space-y-3">
+          @for (project of projects(); track project.id) {
+            <article class="card flex flex-wrap items-start justify-between gap-4 p-6">
+              <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-center gap-3">
+                  <h3 class="text-base font-semibold text-white">{{ project.title }}</h3>
+                  @if (project.featured) {
+                    <span class="chip chip-active">In evidenza</span>
+                  }
+                </div>
+                <p class="mt-1 text-xs text-muted">
+                  /{{ project.slug }}
+                  @if (project.category) { · {{ project.category }} }
+                  @if (project.year) { · {{ project.year }} }
+                </p>
+                <p class="mt-3 line-clamp-2 text-[0.9375rem] leading-relaxed text-muted">{{ project.summary }}</p>
+              </div>
+
+              <div class="flex shrink-0 gap-4">
+                <button type="button" class="text-sm font-medium text-accent-400 hover:text-accent-300"
+                        (click)="editProject(project)">
+                  Modifica
+                </button>
+                <button type="button" class="text-sm font-medium text-red-400/80 hover:text-red-400"
+                        (click)="removeProject(project)">
+                  Elimina
+                </button>
+              </div>
+            </article>
+          } @empty {
+            <div class="card p-12 text-center">
+              <p class="text-muted">Nessun progetto in archivio. Creane uno con il pulsante qui sopra.</p>
+            </div>
+          }
+        </div>
+      </section>
+    }
+  </div>
+</div>

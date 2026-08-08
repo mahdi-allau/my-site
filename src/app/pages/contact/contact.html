@@ -1,0 +1,158 @@
+<section class="relative overflow-hidden border-b border-line-soft">
+  <div class="glow -left-32 top-[-8rem] h-[22rem] w-[22rem] bg-accent-500/15" aria-hidden="true"></div>
+
+  <div class="container-page relative z-10 py-20 md:py-24">
+    <div class="animate-rise max-w-3xl">
+      <span class="eyebrow">Contatti</span>
+      <h1 class="display mt-5 text-5xl sm:text-6xl">Raccontami il tuo progetto.</h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+        Bastano due righe per iniziare. Ti rispondo con qualche domanda mirata e,
+        se il progetto ha senso, con una proposta chiara su struttura, tempi e costo.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 md:py-20">
+  <div class="container-page grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-start">
+    <!-- Form -->
+    <div class="card p-8 md:p-10">
+      @if (state() === 'sent') {
+        <div class="py-10 text-center">
+          <span class="mx-auto grid h-14 w-14 place-items-center rounded-full bg-accent-400/15 text-accent-400">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-7 w-7" aria-hidden="true">
+              <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <h2 class="display mt-6 text-3xl">Messaggio ricevuto.</h2>
+          <p class="mx-auto mt-3 max-w-sm text-[0.9375rem] leading-relaxed text-muted">
+            Grazie. Ti rispondo appena possibile, di solito entro un paio di giorni lavorativi.
+          </p>
+          <button type="button" class="btn btn-ghost mt-8" (click)="reset()">Invia un altro messaggio</button>
+        </div>
+      } @else if (state() === 'mailto') {
+        <div class="py-10 text-center">
+          <h2 class="display text-3xl">Sto aprendo il tuo client di posta.</h2>
+          <p class="mx-auto mt-3 max-w-md text-[0.9375rem] leading-relaxed text-muted">
+            Se non si è aperto nulla, scrivimi direttamente a
+            <a [href]="'mailto:' + email" class="text-accent-400 hover:text-accent-300">{{ email }}</a>.
+          </p>
+          <button type="button" class="btn btn-ghost mt-8" (click)="reset()">Torna al modulo</button>
+        </div>
+      } @else {
+        <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label class="label" for="name">Nome e cognome *</label>
+              <input id="name" type="text" class="field" formControlName="name" autocomplete="name"
+                     placeholder="Come ti chiami?" />
+              @if (invalid('name')) {
+                <p class="mt-1.5 text-xs text-red-400">Inserisci almeno 2 caratteri.</p>
+              }
+            </div>
+
+            <div>
+              <label class="label" for="email">Email *</label>
+              <input id="email" type="email" class="field" formControlName="email" autocomplete="email"
+                     placeholder="dove ti rispondo" />
+              @if (invalid('email')) {
+                <p class="mt-1.5 text-xs text-red-400">Controlla l’indirizzo email.</p>
+              }
+            </div>
+
+            <div>
+              <label class="label" for="company">Attività</label>
+              <input id="company" type="text" class="field" formControlName="company" autocomplete="organization"
+                     placeholder="Nome del locale o dell’azienda" />
+            </div>
+
+            <div>
+              <label class="label" for="budget">Budget indicativo</label>
+              <select id="budget" class="field" formControlName="budget">
+                <option value="">Preferisco non dirlo</option>
+                @for (item of budgets; track item) {
+                  <option [value]="item">{{ item }}</option>
+                }
+              </select>
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <label class="label" for="message">Il progetto *</label>
+            <textarea id="message" rows="6" class="field resize-y" formControlName="message"
+                      placeholder="Che attività hai, cosa ti serve e cosa non funziona nel sito attuale."></textarea>
+            @if (invalid('message')) {
+              <p class="mt-1.5 text-xs text-red-400">Scrivi almeno 20 caratteri, così capisco di cosa si tratta.</p>
+            }
+          </div>
+
+          <!-- Campo trappola anti-spam: nascosto agli utenti e ai lettori di schermo -->
+          <div class="hidden" aria-hidden="true">
+            <label for="website">Non compilare questo campo</label>
+            <input id="website" type="text" formControlName="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          @if (state() === 'error') {
+            <p class="mt-5 rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+              Non sono riuscito a inviare il messaggio: {{ errorMessage() }}<br />
+              Puoi scrivermi direttamente a
+              <a [href]="'mailto:' + email" class="underline">{{ email }}</a>.
+            </p>
+          }
+
+          <div class="mt-7 flex flex-wrap items-center gap-4">
+            <button type="submit" class="btn btn-primary" [disabled]="state() === 'sending'">
+              @if (state() === 'sending') {
+                Invio in corso…
+              } @else {
+                Invia il messaggio
+              }
+            </button>
+            <p class="text-xs text-muted">I campi con * sono obbligatori.</p>
+          </div>
+        </form>
+      }
+    </div>
+
+    <!-- Contatti diretti -->
+    <aside class="space-y-4">
+      <div class="card p-7">
+        <h2 class="text-sm font-semibold uppercase tracking-wider text-muted">Scrivimi direttamente</h2>
+        <a [href]="'mailto:' + email" class="mt-3 block text-lg font-medium text-white hover:text-accent-400">
+          {{ email }}
+        </a>
+      </div>
+
+      <div class="card p-7">
+        <h2 class="text-sm font-semibold uppercase tracking-wider text-muted">Cosa succede dopo</h2>
+        <ol class="mt-4 space-y-4">
+          <li class="flex gap-4">
+            <span class="display text-xl text-accent-400/70">1</span>
+            <p class="text-[0.9375rem] leading-relaxed text-muted">
+              Leggo il messaggio e ti rispondo con qualche domanda per capire meglio.
+            </p>
+          </li>
+          <li class="flex gap-4">
+            <span class="display text-xl text-accent-400/70">2</span>
+            <p class="text-[0.9375rem] leading-relaxed text-muted">
+              Ci sentiamo per una chiamata di venti minuti, senza impegno.
+            </p>
+          </li>
+          <li class="flex gap-4">
+            <span class="display text-xl text-accent-400/70">3</span>
+            <p class="text-[0.9375rem] leading-relaxed text-muted">
+              Ricevi un preventivo scritto con struttura, tempi e costo voce per voce.
+            </p>
+          </li>
+        </ol>
+      </div>
+
+      <div class="card p-7">
+        <h2 class="text-sm font-semibold uppercase tracking-wider text-muted">Tempi di risposta</h2>
+        <p class="mt-3 text-[0.9375rem] leading-relaxed text-muted">
+          Di norma rispondo entro uno o due giorni lavorativi. Se hai una scadenza stretta, scrivilo nel messaggio.
+        </p>
+      </div>
+    </aside>
+  </div>
+</section>

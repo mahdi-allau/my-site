@@ -1,0 +1,60 @@
+<div class="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-16">
+  <div class="glow left-1/2 top-[-6rem] h-[24rem] w-[24rem] -translate-x-1/2 bg-accent-500/15" aria-hidden="true"></div>
+
+  <div class="relative z-10 w-full max-w-md">
+    <a routerLink="/" class="mb-8 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent-400">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-4 w-4" aria-hidden="true">
+        <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Torna al sito
+    </a>
+
+    <div class="card p-8">
+      <div class="flex items-center gap-3">
+        <span class="grid h-10 w-10 place-items-center rounded-lg bg-accent-400 font-display text-xl text-ink-950" aria-hidden="true">M</span>
+        <div>
+          <h1 class="text-lg font-semibold text-white">Area riservata</h1>
+          <p class="text-xs text-muted">Accesso amministratore</p>
+        </div>
+      </div>
+
+      @if (!isConfigured) {
+        <div class="mt-7 rounded-lg border border-accent-400/30 bg-accent-400/10 px-4 py-4 text-sm leading-relaxed text-accent-300">
+          <p class="font-semibold text-accent-300">Supabase non è ancora collegato.</p>
+          <p class="mt-2 text-muted-strong">
+            Inserisci <code class="text-accent-300">supabaseUrl</code> e
+            <code class="text-accent-300">supabaseAnonKey</code> nei file dentro
+            <code class="text-accent-300">src/environments/</code>, poi esegui lo script
+            <code class="text-accent-300">supabase/schema.sql</code>. Le istruzioni complete sono nel README.
+          </p>
+        </div>
+      } @else {
+        <form [formGroup]="form" (ngSubmit)="submit()" class="mt-7" novalidate>
+          <div>
+            <label class="label" for="admin-email">Email</label>
+            <input id="admin-email" type="email" class="field" formControlName="email" autocomplete="username" />
+          </div>
+
+          <div class="mt-4">
+            <label class="label" for="admin-password">Password</label>
+            <input id="admin-password" type="password" class="field" formControlName="password" autocomplete="current-password" />
+          </div>
+
+          @if (error()) {
+            <p class="mt-4 rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+              {{ error() }}
+            </p>
+          }
+
+          <button type="submit" class="btn btn-primary mt-6 w-full" [disabled]="busy()">
+            @if (busy()) { Accesso in corso… } @else { Accedi }
+          </button>
+        </form>
+      }
+    </div>
+
+    <p class="mt-6 text-center text-xs text-muted">
+      Quest’area è riservata alla gestione dei contenuti del sito.
+    </p>
+  </div>
+</div>

@@ -1,59 +1,154 @@
-# MySite
+# Mahdi Allau — sito personale e vetrina
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.33.
+Portfolio personale e sito dell'attività di sviluppo web per ristoranti e piccole aziende.
 
-## Development server
+**Stack:** Angular 20 (standalone, build esbuild/Vite) · TypeScript · Tailwind CSS 4 · Supabase (database, autenticazione, storage).
+Nessun backend Node/Express: il browser parla direttamente con Supabase e la sicurezza è affidata alle policy RLS.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Avvio rapido
 
 ```bash
-ng generate component component-name
+npm install
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
+Il sito è su http://localhost:4200. **Funziona già così**, senza database: i contenuti
+vengono dai dati statici in `src/app/core/seed-content.ts`.
 
-To build the project run:
+---
 
-```bash
-ng build
+## Struttura
+
+```
+src/
+├─ app/
+│  ├─ core/            servizi, modelli, guard, contenuti statici
+│  ├─ layout/          navbar e footer
+│  ├─ pages/           home, about, projects, services, contact, 404
+│  ├─ admin/           login e dashboard (area riservata)
+│  └─ shared/          componenti riutilizzabili (card progetto, icone)
+├─ environments/       configurazione Supabase
+└─ styles.css          token di design e classi comuni (Tailwind 4)
+supabase/schema.sql    schema del database, policy RLS e contenuti iniziali
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+| Rotta           | Pagina                    |
+| --------------- | ------------------------- |
+| `/`             | Home                      |
+| `/about`        | Chi sono                  |
+| `/projects`     | Progetti                  |
+| `/services`     | Servizi                   |
+| `/contact`      | Contatti                  |
+| `/admin/login`  | Login amministratore      |
+| `/admin`        | Dashboard (protetta)      |
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Collegare Supabase
 
-```bash
-ng test
+Finché le credenziali non sono inserite, il sito usa i contenuti statici e il form
+contatti apre il client di posta. Per attivare database, pannello admin e messaggi:
+
+### 1. Creare il progetto
+
+Su [supabase.com](https://supabase.com) crea un progetto e scegli la region più vicina
+(`eu-central` per l'Italia).
+
+### 2. Eseguire lo schema
+
+Apri **SQL Editor**, incolla il contenuto di `supabase/schema.sql` ed esegui.
+Crea le tabelle `projects`, `services`, `contact_messages`, le policy RLS, il bucket
+`media` e i contenuti iniziali.
+
+### 3. Inserire le credenziali
+
+Da **Project Settings → API** copia *Project URL* e la chiave *anon public*, poi
+compila entrambi i file:
+
+- `src/environments/environment.ts` (build di produzione)
+- `src/environments/environment.development.ts` (`npm start`)
+
+```ts
+export const environment = {
+  production: false,
+  supabaseUrl: 'https://xxxxxxxx.supabase.co',
+  supabaseAnonKey: 'eyJhbGciOi...',
+  contactEmail: 'mahdiallau@gmail.com',
+};
 ```
 
-## Running end-to-end tests
+La anon key è pubblica per progetto: è pensata per stare nel bundle del browser.
+**La `service_role` key non va mai messa qui.**
 
-For end-to-end (e2e) testing, run:
+### 4. Creare l'utente amministratore
 
-```bash
-ng e2e
-```
+> Passaggio obbligatorio per la sicurezza.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+1. **Authentication → Sign In / Providers → Email**: imposta
+   *Allow new users to sign up* su **OFF**.
+   Senza questo, chiunque potrebbe registrarsi e ottenere i permessi di scrittura.
+2. **Authentication → Users → Add user**: crea il tuo utente con email e password,
+   spuntando *Auto Confirm User*.
 
-## Additional Resources
+Da quel momento `/admin/login` funziona e `/admin` mostra messaggi e progetti.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+## Modello di sicurezza
+
+| Chi                    | Progetti e servizi | Messaggi di contatto        |
+| ---------------------- | ------------------ | --------------------------- |
+| Visitatore (`anon`)    | sola lettura       | può solo inserire           |
+| Amministratore (login) | lettura e scrittura| lettura, modifica, elimina  |
+
+Le regole vivono nel database (RLS), non nel codice Angular: anche chiamando l'API
+direttamente non si può scrivere senza essere autenticati.
+
+Il form contatti include un campo trappola nascosto contro i bot, e il database
+rifiuta messaggi con email non plausibile o testo troppo corto.
+
+---
+
+## Comandi
+
+| Comando          | Cosa fa                                        |
+| ---------------- | ---------------------------------------------- |
+| `npm start`      | server di sviluppo su :4200                    |
+| `npm run build`  | build di produzione in `dist/my-site/browser`  |
+| `npm test`       | unit test (Karma)                              |
+
+---
+
+## Pubblicazione
+
+Il risultato della build è un sito statico: `dist/my-site/browser`.
+
+**Vercel / Netlify / Cloudflare Pages** — build command `npm run build`, output
+directory `dist/my-site/browser`.
+
+Trattandosi di una single page application, il server deve reindirizzare tutte le
+rotte su `index.html`, altrimenti aprendo direttamente `/projects` si ottiene un 404.
+Il file `public/_redirects` (già presente) lo configura per Netlify; Vercel e
+Cloudflare Pages lo rilevano in automatico per i progetti Angular.
+
+---
+
+## Da personalizzare
+
+I testi sono una base di partenza scritta sul contenuto del CV. Prima di andare
+online vale la pena rivedere:
+
+- **`src/app/pages/about/about.ts`** — percorso personale e principi di lavoro
+- **`src/app/pages/services/services.ts`** — le domande frequenti e le risposte
+- **`src/app/core/seed-content.ts`** — descrizioni dei progetti e dei servizi
+- **`src/environments/`** — indirizzo email di contatto
+- **`public/favicon.ico`** — il `.ico` di fallback è ancora quello di Angular
+  (`favicon.svg`, usato dai browser moderni, è già personalizzato)
+
+Una volta collegato Supabase, progetti e servizi si modificano dalla dashboard
+invece che dal codice.
