@@ -49,45 +49,23 @@ supabase/schema.sql    schema del database, policy RLS e contenuti iniziali
 
 ---
 
-## Collegare Supabase
+## Supabase
 
-Finché le credenziali non sono inserite, il sito usa i contenuti statici e il form
-contatti apre il client di posta. Per attivare database, pannello admin e messaggi:
+Il progetto è **già collegato**: `pujouykvgptcurolpfys` (region `eu-north-1`).
+Schema applicato, RLS attiva, contenuti iniziali caricati, bucket `media` creato.
 
-### 1. Creare il progetto
-
-Su [supabase.com](https://supabase.com) crea un progetto e scegli la region più vicina
-(`eu-central` per l'Italia).
-
-### 2. Eseguire lo schema
-
-Apri **SQL Editor**, incolla il contenuto di `supabase/schema.sql` ed esegui.
-Crea le tabelle `projects`, `services`, `contact_messages`, le policy RLS, il bucket
-`media` e i contenuti iniziali.
-
-### 3. Inserire le credenziali
-
-Da **Project Settings → API** copia *Project URL* e la chiave *anon public*, poi
-compila entrambi i file:
-
-- `src/environments/environment.ts` (build di produzione)
-- `src/environments/environment.development.ts` (`npm start`)
-
-```ts
-export const environment = {
-  production: false,
-  supabaseUrl: 'https://xxxxxxxx.supabase.co',
-  supabaseAnonKey: 'eyJhbGciOi...',
-  contactEmail: 'mahdiallau@gmail.com',
-};
-```
-
-La anon key è pubblica per progetto: è pensata per stare nel bundle del browser.
+Le credenziali sono in `src/environments/environment.ts` (produzione) e
+`environment.development.ts` (`npm start`). La chiave usata è la *publishable key*:
+è pubblica per progetto ed è pensata per stare nel bundle del browser.
 **La `service_role` key non va mai messa qui.**
 
-### 4. Creare l'utente amministratore
+Se un giorno serve ricreare il database da zero — nuovo progetto, ambiente di
+staging — basta eseguire `supabase/schema.sql` nel SQL Editor e aggiornare i due
+file di ambiente.
 
-> Passaggio obbligatorio per la sicurezza.
+### Creare l'utente amministratore
+
+> Unico passaggio ancora da fare, ed è obbligatorio per la sicurezza.
 
 1. **Authentication → Sign In / Providers → Email**: imposta
    *Allow new users to sign up* su **OFF**.
