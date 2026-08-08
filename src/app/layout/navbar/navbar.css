@@ -1,0 +1,139 @@
+/* Intestazione: trasparente in cima, carta velata appena la pagina scorre */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 550ms var(--ease-luxe),
+    border-color 550ms var(--ease-luxe);
+}
+
+.site-header.is-solid {
+  background: rgba(247, 242, 231, 0.82);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border-bottom-color: var(--border-soft);
+}
+
+/* Menù aperto: l'intestazione deve sparire dentro l'overlay, anche se
+   la pagina sotto era già scorsa e quindi `is-solid` era attivo. */
+.site-header.on-dark,
+.site-header.on-dark.is-solid {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: transparent;
+}
+
+.site-header.on-dark .progress {
+  opacity: 0;
+}
+
+/* Monogramma invertito: chiaro su verde */
+.site-header.on-dark .mark {
+  background: var(--color-sand-100);
+  color: var(--color-forest-950);
+  box-shadow: none;
+}
+
+/* Barra di avanzamento della lettura */
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--color-forest-800), var(--color-forest-500));
+}
+
+/* Monogramma */
+.mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.7rem 0.7rem 0.7rem 0;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: #f7f2e7;
+  background: linear-gradient(140deg, var(--color-forest-600), var(--color-forest-900));
+  box-shadow: 0 8px 20px -12px rgba(28, 63, 47, 0.9);
+  transition: transform 600ms var(--ease-luxe);
+}
+
+a:hover .mark {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+/* --------------------------------------------------------------
+   Menù mobile a tutto schermo
+   -------------------------------------------------------------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 39;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #101f18;
+  animation: overlay-in 520ms var(--ease-luxe) both;
+}
+
+/* Stessa trama a righe delle fasce verdi */
+.overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(244, 238, 225, 0.03) 0px,
+    rgba(244, 238, 225, 0.03) 1px,
+    transparent 1px,
+    transparent 9px
+  );
+  pointer-events: none;
+}
+
+@keyframes overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.overlay-link {
+  position: relative;
+  display: block;
+  padding: 0.6rem 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 11vw, 3.25rem);
+  line-height: 1.1;
+  color: #f4eee1;
+  animation: overlay-link-in 700ms var(--ease-luxe) both;
+  animation-delay: calc(120ms + var(--i) * 70ms);
+}
+
+.overlay-link.is-active {
+  color: #8bc7aa;
+  font-style: italic;
+}
+
+@keyframes overlay-link-in {
+  from { opacity: 0; transform: translateY(26px); filter: blur(8px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
+}
+
+.overlay-foot {
+  position: relative;
+  animation: overlay-link-in 700ms var(--ease-luxe) 440ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .overlay-link,
+  .overlay-foot {
+    animation: none;
+  }
+}

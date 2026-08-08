@@ -4,10 +4,11 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map } from 'rxjs';
 import { Navbar } from './layout/navbar/navbar';
 import { Footer } from './layout/footer/footer';
+import { Ambience } from './layout/ambience/ambience';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar, Footer],
+  imports: [RouterOutlet, Navbar, Footer, Ambience],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

@@ -1,15 +1,22 @@
 <a
   href="#contenuto"
-  class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent-400 focus:px-5 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink-950"
+  class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-forest-800 focus:px-5 focus:py-2 focus:text-sm focus:font-semibold focus:text-sand-100"
 >
   Salta al contenuto
 </a>
 
+<app-ambience />
+
 @if (!isAdminArea()) {
+  <!-- Sipario d'ingresso: si solleva da solo, nessuno stato da gestire -->
+  <div class="curtain" aria-hidden="true">
+    <span class="curtain-mark">M</span>
+  </div>
+
   <app-navbar />
 }
 
-<main id="contenuto" class="min-h-[60vh]">
+<main id="contenuto" class="relative min-h-[60vh]">
   <router-outlet />
 </main>
 

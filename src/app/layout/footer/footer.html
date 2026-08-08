@@ -1,26 +1,26 @@
-<footer class="mt-24 border-t border-line-soft bg-ink-900">
-  <div class="container-page py-14">
-    <div class="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+<footer class="band-dark on-dark relative mt-0">
+  <div class="container-page py-20">
+    <div class="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
       <div>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3.5">
           <span
-            class="grid h-9 w-9 place-items-center rounded-lg bg-accent-400 font-display text-lg text-ink-950"
+            class="grid h-10 w-10 place-items-center rounded-xl rounded-bl-none bg-sand-100 font-display text-lg text-forest-950"
             aria-hidden="true"
           >M</span>
-          <span class="text-[0.95rem] font-semibold text-white">Mahdi Allau</span>
+          <span class="text-[0.95rem] font-semibold tracking-tight text-heading">Mahdi Allau</span>
         </div>
-        <p class="mt-4 max-w-sm text-sm leading-relaxed text-muted">
+        <p class="mt-5 max-w-sm text-sm leading-relaxed text-body">
           Sviluppo siti web, web application e dashboard su misura per ristoranti e piccole aziende.
           Codice scritto a mano, senza template preconfezionati.
         </p>
       </div>
 
       <nav aria-label="Link del sito">
-        <h2 class="text-sm font-semibold text-white">Il sito</h2>
-        <ul class="mt-4 space-y-2.5">
+        <h2 class="text-[0.6875rem] font-semibold uppercase tracking-[0.24em] text-accent">Il sito</h2>
+        <ul class="mt-5 space-y-3">
           @for (link of siteLinks; track link.path) {
             <li>
-              <a [routerLink]="link.path" class="text-sm text-muted transition-colors hover:text-accent-400">
+              <a [routerLink]="link.path" class="text-sm text-body transition-colors duration-300 hover:text-accent">
                 {{ link.label }}
               </a>
             </li>
@@ -29,20 +29,20 @@
       </nav>
 
       <div>
-        <h2 class="text-sm font-semibold text-white">Contatti</h2>
-        <ul class="mt-4 space-y-2.5">
+        <h2 class="text-[0.6875rem] font-semibold uppercase tracking-[0.24em] text-accent">Contatti</h2>
+        <ul class="mt-5 space-y-3">
           <li>
-            <a [href]="'mailto:' + email" class="text-sm text-muted transition-colors hover:text-accent-400">
+            <a [href]="'mailto:' + email" class="text-sm text-body transition-colors duration-300 hover:text-accent">
               {{ email }}
             </a>
           </li>
           <li>
-            <a routerLink="/contact" class="text-sm text-muted transition-colors hover:text-accent-400">
+            <a routerLink="/contact" class="text-sm text-body transition-colors duration-300 hover:text-accent">
               Richiedi un preventivo
             </a>
           </li>
           <li>
-            <a routerLink="/admin/login" class="text-sm text-muted/60 transition-colors hover:text-accent-400">
+            <a routerLink="/admin/login" class="text-sm text-muted transition-colors duration-300 hover:text-accent">
               Area riservata
             </a>
           </li>
@@ -50,7 +50,9 @@
       </div>
     </div>
 
-    <div class="mt-12 flex flex-col gap-3 border-t border-line-soft pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+    <hr class="hairline mt-16" />
+
+    <div class="flex flex-col gap-3 pt-8 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
       <p>© {{ year }} Mahdi Allau. Tutti i diritti riservati.</p>
       <p>Costruito con Angular, Tailwind CSS e Supabase.</p>
     </div>

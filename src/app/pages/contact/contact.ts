@@ -2,12 +2,15 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from '../../../environments/environment';
 import { ContentService } from '../../core/content.service';
+import { RevealDirective } from '../../shared/motion/reveal.directive';
+import { TiltDirective } from '../../shared/motion/tilt.directive';
+import { MagneticDirective } from '../../shared/motion/magnetic.directive';
 
 type FormState = 'idle' | 'sending' | 'sent' | 'mailto' | 'error';
 
 @Component({
   selector: 'app-contact',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RevealDirective, TiltDirective, MagneticDirective],
   templateUrl: './contact.html',
 })
 export class Contact {

@@ -3,12 +3,15 @@ import { RouterLink } from '@angular/router';
 import { ContentService } from '../../core/content.service';
 import { Project } from '../../core/models';
 import { ProjectCard } from '../../shared/project-card/project-card';
+import { RevealDirective } from '../../shared/motion/reveal.directive';
+import { TiltDirective } from '../../shared/motion/tilt.directive';
+import { MagneticDirective } from '../../shared/motion/magnetic.directive';
 
 const ALL = 'Tutti';
 
 @Component({
   selector: 'app-projects',
-  imports: [RouterLink, ProjectCard],
+  imports: [RouterLink, ProjectCard, RevealDirective, TiltDirective, MagneticDirective],
   templateUrl: './projects.html',
 })
 export class Projects {

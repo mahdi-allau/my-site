@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SKILL_GROUPS } from '../../core/seed-content';
+import { RevealDirective } from '../../shared/motion/reveal.directive';
+import { TiltDirective } from '../../shared/motion/tilt.directive';
+import { MagneticDirective } from '../../shared/motion/magnetic.directive';
 
 @Component({
   selector: 'app-about',
-  imports: [RouterLink],
+  imports: [RouterLink, RevealDirective, TiltDirective, MagneticDirective],
   templateUrl: './about.html',
 })
 export class About {

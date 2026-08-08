@@ -5,10 +5,20 @@ import { Project, ServiceOffer } from '../../core/models';
 import { SKILL_GROUPS, WORK_PROCESS } from '../../core/seed-content';
 import { ProjectCard } from '../../shared/project-card/project-card';
 import { ServiceIconComponent } from '../../shared/service-icon/service-icon';
+import { RevealDirective } from '../../shared/motion/reveal.directive';
+import { TiltDirective } from '../../shared/motion/tilt.directive';
+import { MagneticDirective } from '../../shared/motion/magnetic.directive';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, ProjectCard, ServiceIconComponent],
+  imports: [
+    RouterLink,
+    ProjectCard,
+    ServiceIconComponent,
+    RevealDirective,
+    TiltDirective,
+    MagneticDirective,
+  ],
   templateUrl: './home.html',
 })
 export class Home {
@@ -21,7 +31,28 @@ export class Home {
   protected readonly process = WORK_PROCESS;
   protected readonly skillGroups = SKILL_GROUPS;
 
-  /** In home mostro solo i progetti marcati come "in evidenza". */
+  /** Il titolo entra parola per parola: serve spezzarlo qui. */
+  protected readonly headline = ['Siti', 'web', 'su', 'misura', 'per', 'ristoranti', 'e', 'piccole', 'aziende.'];
+  protected readonly accentWord = 'ristoranti';
+
+  /** Nastro scorrevole: la lista è raddoppiata nel template per un anello continuo. */
+  protected readonly marquee = [
+    'Angular',
+    'TypeScript',
+    'Tailwind CSS',
+    'Supabase',
+    'PostgreSQL',
+    'Python',
+    'SQL',
+    'Power BI',
+    'Arduino',
+    'ESP32',
+    'Java',
+    'C++',
+    'MATLAB',
+    'Git',
+  ];
+
   protected readonly featured = computed(() => {
     const all = this.projects();
     const marked = all.filter((project) => project.featured);

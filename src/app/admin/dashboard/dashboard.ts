@@ -86,8 +86,8 @@ export class Dashboard {
   protected tabClass(tab: Tab): string {
     const base = 'rounded-full px-4 py-2 text-sm font-medium transition-colors';
     return this.tab() === tab
-      ? `${base} bg-accent-400 text-ink-950`
-      : `${base} text-muted hover:text-white`;
+      ? `${base} bg-forest-800 text-sand-100`
+      : `${base} text-muted hover:text-heading`;
   }
 
   // ------------------------------------------------------------------

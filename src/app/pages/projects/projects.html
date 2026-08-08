@@ -1,11 +1,11 @@
-<section class="relative overflow-hidden border-b border-line-soft">
-  <div class="glow -left-32 top-[-8rem] h-[22rem] w-[22rem] bg-accent-500/15" aria-hidden="true"></div>
-
-  <div class="container-page relative z-10 py-20 md:py-24">
-    <div class="animate-rise max-w-3xl">
+<section class="relative overflow-hidden">
+  <div class="container-page relative z-10 pb-16 pt-28 md:pt-36">
+    <div class="max-w-3xl">
       <span class="eyebrow">Portfolio</span>
-      <h1 class="display mt-5 text-5xl sm:text-6xl">Progetti.</h1>
-      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+      <h1 class="display mt-7 text-[3.5rem] sm:text-7xl lg:text-8xl">
+        <span class="word" style="--i: 0">Progetti.</span>
+      </h1>
+      <p appReveal [revealDelay]="260" class="mt-8 max-w-2xl text-lg leading-relaxed text-body">
         Una selezione di lavori che raccontano come affronto un problema: dal dato grezzo
         alla dashboard, dal sensore all’interfaccia, dall’idea al sito online.
       </p>
@@ -13,10 +13,12 @@
   </div>
 </section>
 
-<section class="py-16 md:py-20">
-  <div class="container-page">
+<section class="relative pb-28">
+  <hr class="hairline absolute inset-x-0 top-0" />
+
+  <div class="container-page pt-16">
     @if (categories().length > 2) {
-      <div class="flex flex-wrap gap-2" role="group" aria-label="Filtra i progetti per categoria">
+      <div appReveal class="flex flex-wrap gap-2.5" role="group" aria-label="Filtra i progetti per categoria">
         @for (category of categories(); track category) {
           <button
             type="button"
@@ -30,11 +32,13 @@
       </div>
     }
 
-    <div class="mt-10 grid gap-5 lg:grid-cols-2">
-      @for (project of visible(); track project.id) {
-        <app-project-card [project]="project" [detailed]="true" />
+    <div class="mt-12 grid gap-6 lg:grid-cols-2">
+      @for (project of visible(); track project.id; let i = $index) {
+        <div appReveal="scale" [revealDelay]="i * 110">
+          <app-project-card [project]="project" [detailed]="true" />
+        </div>
       } @empty {
-        <div class="card p-10 text-center lg:col-span-2">
+        <div class="card p-14 text-center lg:col-span-2">
           <p class="text-muted">
             @if (loading()) {
               Caricamento dei progetti…
@@ -46,12 +50,21 @@
       }
     </div>
 
-    <div class="mt-16 rounded-3xl border border-line bg-ink-850 px-8 py-12 text-center">
-      <h2 class="display text-3xl sm:text-4xl">Il prossimo progetto potrebbe essere il tuo.</h2>
-      <p class="mx-auto mt-4 max-w-xl text-[0.9375rem] leading-relaxed text-muted">
-        Raccontami cosa ti serve: ti rispondo con una proposta chiara su struttura, tempi e costo.
-      </p>
-      <a routerLink="/contact" class="btn btn-primary mt-8">Parliamone</a>
+    <div appReveal="scale" class="mt-20">
+      <div appTilt [tiltStrength]="2.5" class="card relative overflow-hidden px-8 py-16 text-center">
+        <div class="glow left-1/2 top-[-8rem] h-80 w-80 -translate-x-1/2 bg-forest-500/15" aria-hidden="true"></div>
+        <div class="relative z-10">
+          <h2 class="display text-[2rem] sm:text-5xl">
+            Il prossimo progetto<br class="hidden sm:block" />
+            potrebbe essere il <span class="headline-accent">tuo</span>.
+          </h2>
+          <p class="mx-auto mt-6 max-w-xl text-[0.9375rem] leading-relaxed text-body">
+            Raccontami cosa ti serve: ti rispondo con una proposta chiara su struttura,
+            tempi e costo.
+          </p>
+          <a routerLink="/contact" appMagnetic class="btn btn-primary mt-10">Parliamone</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>

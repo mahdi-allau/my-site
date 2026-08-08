@@ -1,5 +1,17 @@
-import { Component, HostListener, computed, signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  computed,
+  effect,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { MagneticDirective } from '../../shared/motion/magnetic.directive';
 
 interface NavItem {
   label: string;
@@ -8,10 +20,17 @@ interface NavItem {
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, MagneticDirective],
   templateUrl: './navbar.html',
+  styleUrl: './navbar.css',
 })
-export class Navbar {
+export class Navbar implements OnInit, OnDestroy {
+  private readonly zone = inject(NgZone);
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+
+  private readonly header = viewChild.required<ElementRef<HTMLElement>>('header');
+  private readonly progress = viewChild.required<ElementRef<HTMLElement>>('progress');
+
   protected readonly links: NavItem[] = [
     { label: 'Home', path: '/' },
     { label: 'Chi sono', path: '/about' },
@@ -20,21 +39,61 @@ export class Navbar {
   ];
 
   protected readonly menuOpen = signal(false);
-  protected readonly scrolled = signal(false);
 
-  /** L'intestazione diventa opaca appena la pagina scorre o il menù è aperto. */
-  protected readonly headerClass = computed(() => {
-    const solid = this.scrolled() || this.menuOpen();
-    return [
-      'sticky top-0 z-40 border-b transition-colors duration-300',
-      solid ? 'border-line-soft bg-ink-950/80 backdrop-blur-xl' : 'border-transparent',
-    ].join(' ');
-  });
+  private frame = 0;
+  private solid = false;
 
-  @HostListener('window:scroll')
-  protected onScroll(): void {
-    this.scrolled.set(window.scrollY > 12);
+  constructor() {
+    // Con il menù a tutto schermo aperto la pagina sotto non deve scorrere.
+    effect(() => {
+      document.body.style.overflow = this.menuOpen() ? 'hidden' : '';
+    });
   }
+
+  /**
+   * Lo scroll aggiorna due cose: l'opacità dell'intestazione e la barra di
+   * avanzamento. Entrambe vengono scritte direttamente sul DOM fuori da
+   * Angular — far girare un ciclo di change detection a ogni pixel di
+   * scorrimento renderebbe il movimento a scatti.
+   */
+  ngOnInit(): void {
+    this.zone.runOutsideAngular(() => {
+      window.addEventListener('scroll', this.onScroll, { passive: true });
+      window.addEventListener('resize', this.onScroll, { passive: true });
+      this.onScroll();
+    });
+  }
+
+  ngOnDestroy(): void {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+    if (this.frame) {
+      cancelAnimationFrame(this.frame);
+    }
+    document.body.style.overflow = '';
+  }
+
+  private readonly onScroll = (): void => {
+    if (this.frame) {
+      return;
+    }
+
+    this.frame = requestAnimationFrame(() => {
+      this.frame = 0;
+
+      const y = window.scrollY;
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? Math.min(y / scrollable, 1) : 0;
+
+      this.progress().nativeElement.style.transform = `scaleX(${ratio})`;
+
+      const shouldBeSolid = y > 16;
+      if (shouldBeSolid !== this.solid) {
+        this.solid = shouldBeSolid;
+        this.header().nativeElement.classList.toggle('is-solid', shouldBeSolid);
+      }
+    });
+  };
 
   protected toggleMenu(): void {
     this.menuOpen.update((open) => !open);

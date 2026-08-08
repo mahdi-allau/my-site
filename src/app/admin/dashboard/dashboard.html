@@ -1,17 +1,20 @@
-<div class="min-h-screen bg-ink-950">
+<div class="min-h-screen">
   <!-- Intestazione -->
-  <header class="sticky top-0 z-30 border-b border-line-soft bg-ink-950/85 backdrop-blur-xl">
+  <header class="sticky top-0 z-30 border-b border-line-soft bg-sand-100/85 backdrop-blur-xl">
     <div class="container-page flex h-16 items-center justify-between gap-4">
       <div class="flex items-center gap-3">
-        <span class="grid h-9 w-9 place-items-center rounded-lg bg-accent-400 font-display text-lg text-ink-950" aria-hidden="true">M</span>
+        <span
+          class="grid h-9 w-9 place-items-center rounded-lg rounded-bl-none bg-forest-800 font-display text-lg text-sand-100"
+          aria-hidden="true"
+        >M</span>
         <div class="leading-tight">
-          <p class="text-sm font-semibold text-white">Dashboard</p>
+          <p class="text-sm font-semibold text-heading">Dashboard</p>
           <p class="text-xs text-muted">{{ userEmail() }}</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <a routerLink="/" class="hidden rounded-full px-4 py-2 text-sm text-muted transition-colors hover:text-white sm:block">
+        <a routerLink="/" class="hidden rounded-full px-4 py-2 text-sm text-muted transition-colors hover:text-heading sm:block">
           Vedi il sito
         </a>
         <button type="button" class="btn btn-ghost btn-sm" (click)="signOut()">Esci</button>
@@ -21,11 +24,11 @@
 
   <div class="container-page py-10">
     <!-- Tab -->
-    <div class="flex flex-wrap items-center gap-2 rounded-full border border-line-soft bg-ink-900 p-1.5">
+    <div class="flex flex-wrap items-center gap-2 rounded-full border border-line-soft bg-surface p-1.5">
       <button type="button" [class]="tabClass('messages')" (click)="select('messages')">
         Messaggi
         @if (unreadCount() > 0) {
-          <span class="ml-2 rounded-full bg-ink-950/20 px-2 py-0.5 text-xs">{{ unreadCount() }}</span>
+          <span class="ml-2 rounded-full bg-black/15 px-2 py-0.5 text-xs">{{ unreadCount() }}</span>
         }
       </button>
       <button type="button" [class]="tabClass('projects')" (click)="select('projects')">
@@ -33,7 +36,7 @@
         <span class="ml-2 text-xs opacity-70">{{ projects().length }}</span>
       </button>
 
-      <button type="button" class="ml-auto rounded-full px-4 py-2 text-sm text-muted transition-colors hover:text-white"
+      <button type="button" class="ml-auto rounded-full px-4 py-2 text-sm text-muted transition-colors hover:text-heading"
               (click)="load()" [disabled]="loading()">
         @if (loading()) { Aggiorno… } @else { Aggiorna }
       </button>
@@ -56,13 +59,13 @@
               <article class="card p-6" [class.opacity-60]="message.handled">
                 <div class="flex flex-wrap items-start justify-between gap-4">
                   <div>
-                    <h2 class="text-base font-semibold text-white">
+                    <h2 class="text-base font-semibold text-heading">
                       {{ message.name }}
                       @if (message.company) {
                         <span class="font-normal text-muted"> · {{ message.company }}</span>
                       }
                     </h2>
-                    <a [href]="'mailto:' + message.email" class="text-sm text-accent-400 hover:text-accent-300">
+                    <a [href]="'mailto:' + message.email" class="text-sm text-accent hover:text-forest-800">
                       {{ message.email }}
                     </a>
                   </div>
@@ -77,14 +80,14 @@
                   </div>
                 </div>
 
-                <p class="mt-4 whitespace-pre-line text-[0.9375rem] leading-relaxed text-muted-strong">{{ message.message }}</p>
+                <p class="mt-4 whitespace-pre-line text-[0.9375rem] leading-relaxed text-body">{{ message.message }}</p>
 
                 <div class="mt-5 flex flex-wrap gap-4 border-t border-line-soft pt-4">
-                  <button type="button" class="text-sm font-medium text-accent-400 hover:text-accent-300"
+                  <button type="button" class="text-sm font-medium text-accent hover:text-forest-800"
                           (click)="toggleHandled(message)">
                     @if (message.handled) { Segna come da gestire } @else { Segna come gestito }
                   </button>
-                  <a [href]="'mailto:' + message.email" class="text-sm font-medium text-muted hover:text-white">
+                  <a [href]="'mailto:' + message.email" class="text-sm font-medium text-muted hover:text-heading">
                     Rispondi
                   </a>
                   <button type="button" class="ml-auto text-sm font-medium text-red-400/80 hover:text-red-400"
@@ -107,13 +110,13 @@
     @if (tab() === 'projects') {
       <section class="mt-8">
         <div class="flex flex-wrap items-center justify-between gap-4">
-          <h2 class="display text-2xl text-white">Progetti pubblicati</h2>
+          <h2 class="display text-2xl text-heading">Progetti pubblicati</h2>
           <button type="button" class="btn btn-primary btn-sm" (click)="newProject()">Nuovo progetto</button>
         </div>
 
         @if (formOpen()) {
           <form [formGroup]="projectForm" (ngSubmit)="saveProject()" class="card mt-6 p-7" novalidate>
-            <h3 class="text-lg font-semibold text-white">
+            <h3 class="text-lg font-semibold text-heading">
               @if (editingId()) { Modifica progetto } @else { Nuovo progetto }
             </h3>
 
@@ -180,9 +183,9 @@
                 <label class="label" for="p-order">Ordine</label>
                 <input id="p-order" type="number" class="field" formControlName="sortOrder" />
               </div>
-              <label class="flex cursor-pointer items-center gap-3 pt-5 text-sm text-muted-strong">
+              <label class="flex cursor-pointer items-center gap-3 pt-5 text-sm text-body">
                 <input type="checkbox" formControlName="featured"
-                       class="h-4 w-4 rounded border-line bg-ink-900 accent-accent-400" />
+                       class="h-4 w-4 rounded border-line accent-forest-700" />
                 Mostra fra i progetti in evidenza
               </label>
             </div>
@@ -201,7 +204,7 @@
             <article class="card flex flex-wrap items-start justify-between gap-4 p-6">
               <div class="min-w-0 flex-1">
                 <div class="flex flex-wrap items-center gap-3">
-                  <h3 class="text-base font-semibold text-white">{{ project.title }}</h3>
+                  <h3 class="text-base font-semibold text-heading">{{ project.title }}</h3>
                   @if (project.featured) {
                     <span class="chip chip-active">In evidenza</span>
                   }
@@ -215,7 +218,7 @@
               </div>
 
               <div class="flex shrink-0 gap-4">
-                <button type="button" class="text-sm font-medium text-accent-400 hover:text-accent-300"
+                <button type="button" class="text-sm font-medium text-accent hover:text-forest-800"
                         (click)="editProject(project)">
                   Modifica
                 </button>

@@ -3,10 +3,13 @@ import { RouterLink } from '@angular/router';
 import { ContentService } from '../../core/content.service';
 import { ServiceOffer } from '../../core/models';
 import { ServiceIconComponent } from '../../shared/service-icon/service-icon';
+import { RevealDirective } from '../../shared/motion/reveal.directive';
+import { TiltDirective } from '../../shared/motion/tilt.directive';
+import { MagneticDirective } from '../../shared/motion/magnetic.directive';
 
 @Component({
   selector: 'app-services',
-  imports: [RouterLink, ServiceIconComponent],
+  imports: [RouterLink, ServiceIconComponent, RevealDirective, TiltDirective, MagneticDirective],
   templateUrl: './services.html',
 })
 export class Services {

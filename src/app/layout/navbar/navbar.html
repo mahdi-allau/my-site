@@ -1,67 +1,77 @@
-<header [class]="headerClass()">
-  <nav class="container-page flex h-18 items-center justify-between gap-6 py-4" aria-label="Navigazione principale">
-    <a routerLink="/" (click)="closeMenu()" class="group flex items-center gap-3">
-      <span
-        class="grid h-9 w-9 place-items-center rounded-lg bg-accent-400 font-display text-lg text-ink-950"
-        aria-hidden="true"
-      >M</span>
+<!-- Con il menù aperto l'intestazione sta sopra all'overlay verde:
+     `on-dark` le fa ereditare i colori chiari, altrimenti resterebbe
+     scritta in verde scuro su verde scuro. -->
+<header #header class="site-header" [class.on-dark]="menuOpen()">
+  <nav class="container-page flex h-20 items-center justify-between gap-8" aria-label="Navigazione principale">
+    <a routerLink="/" (click)="closeMenu()" class="group flex items-center gap-3.5">
+      <span class="mark" aria-hidden="true">M</span>
       <span class="flex flex-col leading-tight">
-        <span class="text-[0.95rem] font-semibold text-white">Mahdi Allau</span>
-        <span class="text-[0.7rem] tracking-wide text-muted">Sviluppo web</span>
+        <span class="text-[0.95rem] font-semibold tracking-tight text-heading">Mahdi Allau</span>
+        <span class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">Sviluppo web</span>
       </span>
     </a>
 
     <!-- Desktop -->
-    <div class="hidden items-center gap-1 md:flex">
+    <div class="hidden items-center gap-8 md:flex">
       @for (link of links; track link.path) {
         <a
           [routerLink]="link.path"
-          routerLinkActive="text-accent-400"
+          routerLinkActive="is-active"
           [routerLinkActiveOptions]="{ exact: link.path === '/' }"
-          class="rounded-full px-4 py-2 text-sm font-medium text-muted transition-colors hover:text-white"
+          class="nav-link"
         >{{ link.label }}</a>
       }
     </div>
 
     <div class="hidden md:block">
-      <a routerLink="/contact" class="btn btn-primary btn-sm">Parliamone</a>
+      <a routerLink="/contact" appMagnetic class="btn btn-primary btn-sm">Parliamone</a>
     </div>
 
     <!-- Mobile -->
     <button
       type="button"
-      class="grid h-10 w-10 place-items-center rounded-lg border border-line text-white md:hidden"
+      class="relative z-[41] grid h-11 w-11 place-items-center rounded-xl border border-line text-heading transition-colors hover:border-accent md:hidden"
       [attr.aria-expanded]="menuOpen()"
       aria-controls="menu-mobile"
       [attr.aria-label]="menuOpen() ? 'Chiudi il menù' : 'Apri il menù'"
       (click)="toggleMenu()"
     >
       @if (menuOpen()) {
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-5 w-5" aria-hidden="true">
           <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" />
         </svg>
       } @else {
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5" aria-hidden="true">
-          <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" />
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-5 w-5" aria-hidden="true">
+          <path d="M4 8h16M4 16h10" stroke-linecap="round" />
         </svg>
       }
     </button>
   </nav>
 
-  @if (menuOpen()) {
-    <div id="menu-mobile" class="container-page pb-6 md:hidden">
-      <div class="flex flex-col gap-1">
-        @for (link of links; track link.path) {
-          <a
-            [routerLink]="link.path"
-            routerLinkActive="text-accent-400"
-            [routerLinkActiveOptions]="{ exact: link.path === '/' }"
-            (click)="closeMenu()"
-            class="rounded-lg px-3 py-3 text-base font-medium text-muted-strong transition-colors hover:bg-ink-850 hover:text-white"
-          >{{ link.label }}</a>
-        }
-        <a routerLink="/contact" (click)="closeMenu()" class="btn btn-primary mt-3 w-full">Parliamone</a>
+  <span #progress class="progress" aria-hidden="true"></span>
+</header>
+
+<!-- Menù mobile a tutto schermo -->
+@if (menuOpen()) {
+  <div id="menu-mobile" class="overlay on-dark md:hidden">
+    <div class="container-page">
+      @for (link of links; track link.path; let i = $index) {
+        <a
+          [routerLink]="link.path"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+          (click)="closeMenu()"
+          class="overlay-link"
+          [style.--i]="i"
+        >{{ link.label }}</a>
+      }
+
+      <div class="overlay-foot mt-10">
+        <a routerLink="/contact" (click)="closeMenu()" class="btn btn-primary w-full">Parliamone</a>
+        <p class="mt-8 text-xs uppercase tracking-[0.25em] text-muted">
+          Siti web per ristoranti e piccole aziende
+        </p>
       </div>
     </div>
-  }
-</header>
+  </div>
+}
