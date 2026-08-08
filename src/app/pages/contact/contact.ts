@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { ContentService } from '../../core/content.service';
 import { I18nService } from '../../core/i18n/i18n.service';
@@ -12,7 +13,7 @@ type FormState = 'idle' | 'sending' | 'sent' | 'mailto' | 'error';
 
 @Component({
   selector: 'app-contact',
-  imports: [ReactiveFormsModule, RevealDirective, TiltDirective, MagneticDirective],
+  imports: [ReactiveFormsModule, RouterLink, RevealDirective, TiltDirective, MagneticDirective],
   templateUrl: './contact.html',
 })
 export class Contact {

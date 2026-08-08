@@ -1,0 +1,60 @@
+<section class="relative overflow-hidden">
+  <div class="container-page relative z-10 pb-16 pt-28 md:pt-36">
+    <div class="max-w-3xl">
+      <span class="eyebrow">{{ i18n.t('privacy.eyebrow') }}</span>
+      <h1 class="display mt-7 text-[2.75rem] sm:text-6xl">
+        @for (word of headline(); track $index; let i = $index) {
+          <span class="word" [style.--i]="i" [class.headline-accent]="word.accent">{{ word.text }}</span>
+          {{ ' ' }}
+        }
+      </h1>
+      <p appReveal [revealDelay]="450" class="mt-8 max-w-2xl text-lg leading-relaxed text-body">
+        {{ i18n.t('privacy.intro') }}
+      </p>
+      <p appReveal [revealDelay]="550" class="mt-4 text-xs uppercase tracking-[0.2em] text-muted">
+        {{ i18n.t('privacy.updated') }}: {{ updated | date: 'longDate' }}
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="relative pb-28">
+  <hr class="hairline absolute inset-x-0 top-0" />
+
+  <div class="container-page max-w-4xl pt-16">
+    <div class="space-y-5">
+      @for (section of sections; track section; let i = $index) {
+        <div appReveal [revealDelay]="i * 80">
+          <div appTilt [tiltStrength]="2" class="card grid gap-6 p-8 md:grid-cols-[auto_1fr] md:items-start md:p-10">
+            <span class="numeral">0{{ section }}</span>
+            <div>
+              <h2 class="display text-xl text-heading sm:text-2xl">
+                {{ i18n.t('privacy.' + section + '.title') }}
+              </h2>
+              <p class="mt-3 text-[0.9375rem] leading-relaxed text-body">
+                {{ i18n.t('privacy.' + section + '.body') }}
+              </p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div appReveal="scale" class="mt-10">
+      <div class="card p-8 text-center">
+        <h2 class="text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-accent">
+          {{ i18n.t('privacy.contactTitle') }}
+        </h2>
+        <a [href]="'mailto:' + email"
+           class="mt-4 inline-block font-display text-2xl text-heading transition-colors duration-300 hover:text-accent">
+          {{ email }}
+        </a>
+        <div class="mt-8">
+          <a routerLink="/contact" class="link-arrow">
+            <span>{{ i18n.t('nav.contact') }}</span><span>→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -269,6 +269,61 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.rights': 'Tutti i diritti riservati.',
     'footer.builtWith': 'Costruito con Angular, Tailwind CSS e Supabase.',
 
+    // --- Testa del documento ---
+    'seo.home.title': 'Mahdi Allau — Siti web per ristoranti e piccole aziende',
+    'seo.home.description':
+      'Siti web, web application e dashboard su misura per ristoranti e piccole aziende. Con un pannello per aggiornare i contenuti da solo, quando vuoi.',
+    'seo.about.title': 'Chi sono',
+    'seo.about.description':
+      'Sviluppatore web full-stack: sviluppo web, analisi dei dati e sistemi embedded, applicati oggi ai siti per la ristorazione e le piccole imprese.',
+    'seo.projects.title': 'Progetti',
+    'seo.projects.description':
+      'Dashboard analitiche, sistemi IoT su ESP32 e web application in Angular: una selezione di progetti con tecnologie e risultati.',
+    'seo.services.title': 'Servizi',
+    'seo.services.description':
+      'Siti web moderni, siti per ristoranti con menù gestibile, web application e dashboard su misura. Preventivo chiaro, voce per voce.',
+    'seo.contact.title': 'Contatti',
+    'seo.contact.description':
+      'Raccontami il tuo progetto: rispondo entro uno o due giorni lavorativi con una proposta su struttura, tempi e costo.',
+    'seo.privacy.title': 'Informativa privacy',
+    'seo.privacy.description':
+      'Quali dati raccoglie il modulo di contatto di questo sito, perché, dove vengono conservati e come chiederne la cancellazione.',
+    'seo.admin.title': 'Area riservata',
+    'seo.admin.description': 'Accesso riservato alla gestione dei contenuti del sito.',
+    'seo.notfound.title': 'Pagina non trovata',
+    'seo.notfound.description':
+      'La pagina che cercavi non esiste o è stata spostata. Da qui puoi tornare alla home o guardare i progetti realizzati.',
+
+    // --- Privacy ---
+    'privacy.eyebrow': 'Informativa',
+    'privacy.title': 'Come tratto i tuoi dati.',
+    'privacy.accent': 'i tuoi dati.',
+    'privacy.intro':
+      'Questa pagina spiega, senza formule inutili, cosa succede alle informazioni che mi lasci quando scrivi tramite il modulo di contatto.',
+    'privacy.updated': 'Ultimo aggiornamento',
+    'privacy.1.title': 'Chi tratta i dati',
+    'privacy.1.body':
+      'Mahdi Allau, titolare del trattamento. Per qualsiasi richiesta relativa ai tuoi dati puoi scrivere all’indirizzo email indicato in fondo a questa pagina: rispondo io, direttamente.',
+    'privacy.2.title': 'Quali dati raccolgo',
+    'privacy.2.body':
+      'Solo quello che scrivi nel modulo: nome, indirizzo email e, se scegli di indicarli, nome dell’attività e fascia di budget, insieme al testo del messaggio. Non uso cookie di profilazione e non ci sono strumenti di analisi o tracciamento pubblicitario su questo sito.',
+    'privacy.3.title': 'Perché li raccolgo',
+    'privacy.3.body':
+      'Unicamente per risponderti e, se il progetto va avanti, per gestire il rapporto di lavoro. Non invio newsletter, non faccio invii promozionali e non cedo né vendo i dati a nessuno.',
+    'privacy.4.title': 'Dove finiscono',
+    'privacy.4.body':
+      'I messaggi sono salvati su Supabase, il servizio che ospita il database di questo sito, con server nell’Unione Europea. Vi accedo solo io, tramite un’area protetta da password.',
+    'privacy.5.title': 'Per quanto tempo',
+    'privacy.5.body':
+      'Conservo i messaggi finché servono a gestire la richiesta o il lavoro che ne è nato. Se una conversazione non porta a nulla, cancello il messaggio entro un paio d’anni.',
+    'privacy.6.title': 'I tuoi diritti',
+    'privacy.6.body':
+      'Puoi chiedermi in qualsiasi momento di vedere i dati che ho su di te, di correggerli o di cancellarli, e puoi opporti al trattamento. Basta una email: provvedo senza chiedere spiegazioni e ti confermo quando è fatto.',
+    'privacy.contactTitle': 'Per qualsiasi richiesta',
+    'contact.privacyNote': 'Inviando il modulo accetti che io usi questi dati per risponderti. Nessun altro uso: leggi',
+    'contact.privacyLink': 'l’informativa privacy',
+    'footer.privacy': 'Privacy',
+
     'notfound.eyebrow': 'Errore 404',
     'notfound.titleA': 'Questa pagina',
     'notfound.titleAccent': 'non esiste.',
@@ -535,6 +590,61 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.admin': 'Admin area',
     'footer.rights': 'All rights reserved.',
     'footer.builtWith': 'Built with Angular, Tailwind CSS and Supabase.',
+
+    // --- Document head ---
+    'seo.home.title': 'Mahdi Allau — Websites for restaurants and small businesses',
+    'seo.home.description':
+      'Websites, web applications and dashboards made to measure for restaurants and small businesses. With a panel to update the content yourself, whenever you want.',
+    'seo.about.title': 'About',
+    'seo.about.description':
+      'Full-stack web developer: web development, data analysis and embedded systems, applied today to sites for hospitality and small business.',
+    'seo.projects.title': 'Work',
+    'seo.projects.description':
+      'Analytics dashboards, IoT systems on ESP32 and Angular web applications: a selection of projects with the technologies and the results.',
+    'seo.services.title': 'Services',
+    'seo.services.description':
+      'Modern websites, restaurant sites with a self-managed menu, web applications and bespoke dashboards. Clear, itemised quotes.',
+    'seo.contact.title': 'Contact',
+    'seo.contact.description':
+      'Tell me about your project: I reply within one or two working days with a proposal on structure, timeline and price.',
+    'seo.privacy.title': 'Privacy notice',
+    'seo.privacy.description':
+      'What the contact form on this site collects, why, where it is stored and how to ask for it to be deleted.',
+    'seo.admin.title': 'Admin area',
+    'seo.admin.description': 'Private access for managing the site content.',
+    'seo.notfound.title': 'Page not found',
+    'seo.notfound.description':
+      'The page you were looking for doesn’t exist or has moved. From here you can go back home or take a look at the work.',
+
+    // --- Privacy ---
+    'privacy.eyebrow': 'Notice',
+    'privacy.title': 'How I handle your data.',
+    'privacy.accent': 'your data.',
+    'privacy.intro':
+      'This page explains, without needless formulas, what happens to the information you leave when you write through the contact form.',
+    'privacy.updated': 'Last updated',
+    'privacy.1.title': 'Who handles the data',
+    'privacy.1.body':
+      'Mahdi Allau, the data controller. For anything concerning your data you can write to the email address at the bottom of this page: I answer myself, directly.',
+    'privacy.2.title': 'What I collect',
+    'privacy.2.body':
+      'Only what you type into the form: name, email address and, if you choose to give them, business name and budget range, along with the text of your message. There are no profiling cookies, and no analytics or advertising trackers on this site.',
+    'privacy.3.title': 'Why I collect it',
+    'privacy.3.body':
+      'Solely to reply to you and, if the project goes ahead, to run the working relationship. I send no newsletters, no promotional mail, and I never share or sell the data to anyone.',
+    'privacy.4.title': 'Where it goes',
+    'privacy.4.body':
+      'Messages are stored on Supabase, the service hosting this site’s database, on servers in the European Union. Only I can read them, through a password-protected area.',
+    'privacy.5.title': 'For how long',
+    'privacy.5.body':
+      'I keep messages as long as they’re needed to handle the enquiry or the work that came from it. If a conversation leads nowhere, I delete the message within a couple of years.',
+    'privacy.6.title': 'Your rights',
+    'privacy.6.body':
+      'You can ask me at any time to see the data I hold about you, to correct it or to delete it, and you can object to the processing. An email is enough: I act on it without asking why, and confirm when it’s done.',
+    'privacy.contactTitle': 'For any request',
+    'contact.privacyNote': 'By sending the form you agree that I use this data to reply to you. Nothing else — read',
+    'contact.privacyLink': 'the privacy notice',
+    'footer.privacy': 'Privacy',
 
     'notfound.eyebrow': 'Error 404',
     'notfound.titleA': 'This page',

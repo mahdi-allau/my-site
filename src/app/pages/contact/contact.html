@@ -114,6 +114,13 @@
             </button>
             <p class="text-xs text-muted">{{ i18n.t('common.required') }}</p>
           </div>
+
+          <!-- Il modulo salva nome ed email: l'informativa va data qui, non
+               solo nascosta in fondo alla pagina. -->
+          <p class="mt-5 text-xs leading-relaxed text-muted">
+            {{ i18n.t('contact.privacyNote') }}
+            <a routerLink="/privacy" class="text-accent underline">{{ i18n.t('contact.privacyLink') }}</a>.
+          </p>
         </form>
       }
     </div>

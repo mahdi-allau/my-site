@@ -6,6 +6,7 @@ import { Navbar } from './layout/navbar/navbar';
 import { Footer } from './layout/footer/footer';
 import { Ambience } from './layout/ambience/ambience';
 import { I18nService } from './core/i18n/i18n.service';
+import { SeoService } from './core/seo/seo.service';
 
 @Component({
   selector: 'app-root',
@@ -27,4 +28,10 @@ export class App {
 
   /** L'area amministrativa ha una sua intestazione: navbar e footer si tolgono di mezzo. */
   protected readonly isAdminArea = computed(() => this.currentUrl().startsWith('/admin'));
+
+  constructor() {
+    // Va agganciato dopo `currentUrl`, così il primo NavigationEnd trova
+    // entrambi gli ascoltatori già in ascolto.
+    inject(SeoService).init();
+  }
 }

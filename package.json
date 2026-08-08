@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "seo:url": "node scripts/set-site-url.mjs"
   },
   "prettier": {
     "printWidth": 100,

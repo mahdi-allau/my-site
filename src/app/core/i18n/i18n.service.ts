@@ -10,6 +10,12 @@ export const LANGUAGES: ReadonlyArray<{ code: Lang; label: string; name: string 
 
 const STORAGE_KEY = 'ma.lang';
 
+/** Nome del parametro che porta la lingua nell'URL. */
+export const LANG_PARAM = 'lang';
+
+/** Lingua di riferimento: le sue pagine stanno all'URL senza parametro. */
+export const DEFAULT_LANG: Lang = 'it';
+
 /**
  * Traduzione a runtime.
  *
@@ -57,8 +63,19 @@ export class I18nService {
   }
 }
 
-/** Scelta salvata, altrimenti lingua del browser, altrimenti italiano. */
+/**
+ * Priorità: parametro nell'URL, poi scelta salvata, poi lingua del browser.
+ *
+ * L'URL viene per primo perché è quello che rende condivisibile un link:
+ * chi riceve `/services?lang=en` deve vedere la pagina in inglese anche se
+ * in passato aveva scelto l'italiano su questo sito.
+ */
 function detectInitialLang(): Lang {
+  const fromUrl = new URLSearchParams(location.search).get(LANG_PARAM);
+  if (fromUrl === 'it' || fromUrl === 'en') {
+    return fromUrl;
+  }
+
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved === 'it' || saved === 'en') {

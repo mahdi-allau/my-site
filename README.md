@@ -100,6 +100,53 @@ L'area amministrativa è solo in italiano: la usa una persona sola.
 
 ---
 
+## Farsi trovare (SEO)
+
+`SeoService` riscrive la testa del documento a ogni cambio di pagina o di
+lingua: titolo, descrizione, `canonical`, `hreflang`, Open Graph e dati
+strutturati Schema.org (`ProfessionalService`).
+
+**Le due lingue sono pagine distinte.** L'italiano sta all'URL nudo,
+l'inglese sullo stesso percorso con `?lang=en`:
+
+```
+/services          → italiano
+/services?lang=en  → inglese
+```
+
+Senza questo, avendo la lingua solo in memoria, Google avrebbe potuto
+indicizzarne una sola — e un link condiviso si sarebbe aperto nella lingua
+sbagliata.
+
+### Prima di pubblicare
+
+`robots.txt` e `sitemap.xml` hanno bisogno del dominio reale, che finché il
+sito non è online non si conosce. C'è un segnaposto vistoso e uno script che
+lo sostituisce:
+
+```bash
+npm run seo:url https://iltuodominio.it
+```
+
+Poi rifai la build. Lo script si può rieseguire se il dominio cambia.
+
+L'immagine di anteprima per social e messaggistica è `public/og-cover.png`.
+
+---
+
+## Privacy
+
+Il modulo di contatto salva nome, email e messaggio su Supabase, quindi il
+sito ha un'informativa: pagina `/privacy`, tradotta, con un rimando sotto il
+modulo — dove l'informazione va data, non solo in fondo alla pagina.
+
+Il testo descrive la situazione attuale: nessun cookie di profilazione,
+nessuno strumento di analisi, dati letti solo da te. **Se aggiungi statistiche,
+un pixel pubblicitario o una newsletter, l'informativa va aggiornata** (e in
+quel caso serve anche un banner di consenso, che oggi non serve).
+
+---
+
 ## Modello di sicurezza
 
 | Chi                    | Progetti e servizi | Messaggi di contatto        |

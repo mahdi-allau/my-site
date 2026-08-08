@@ -1,0 +1,8 @@
+# Il sito Ã¨ tutto indicizzabile tranne l'area riservata.
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+
+# Sostituisci il dominio con `npm run seo:url https://iltuodominio.it`
+Sitemap: https://IL-TUO-DOMINIO.it/sitemap.xml
