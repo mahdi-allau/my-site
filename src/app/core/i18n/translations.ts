@@ -9,6 +9,10 @@ import { Lang } from './i18n.service';
  * parola per parola sono salvati interi, e la parola da evidenziare sta in
  * una chiave `.accent` separata — così la traduzione può spostarla dove
  * serve nella frase.
+ *
+ * Voce: SARAH è uno studio, quindi tutto è in prima persona plurale. L'unica
+ * eccezione volontaria è l'informativa privacy, dove il titolare del
+ * trattamento è una persona fisica e va nominata come tale.
  */
 export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
   // ==================================================================
@@ -20,12 +24,13 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'lang.en': 'Inglese',
 
     'nav.home': 'Home',
-    'nav.about': 'Chi sono',
+    'nav.about': 'Chi siamo',
     'nav.projects': 'Progetti',
     'nav.services': 'Servizi',
     'nav.contact': 'Contatti',
     'nav.cta': 'Parliamone',
-    'nav.role': 'Sviluppo web',
+    'nav.role': 'Sviluppo web su misura',
+    'nav.logoAlt': 'SARAH — sviluppo web su misura',
     'nav.open': 'Apri il menù',
     'nav.close': 'Chiudi il menù',
     'nav.skip': 'Salta al contenuto',
@@ -35,11 +40,11 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'common.discover': 'Scopri',
     'common.required': 'I campi con * sono obbligatori.',
 
-    'home.hero.badge': 'Disponibile per nuovi progetti',
+    'home.hero.badge': 'Disponibili per nuovi progetti',
     'home.hero.title': 'Siti web su misura per ristoranti e piccole aziende.',
     'home.hero.accent': 'ristoranti',
     'home.hero.subtitle':
-      'Sono Mahdi Allau, sviluppatore. Progetto e realizzo siti, web application e dashboard: dal primo schizzo alla messa online, con un pannello che ti permette di aggiornare i contenuti da solo, quando vuoi.',
+      'Siamo SARAH, uno studio di ingegneri. Progettiamo e realizziamo siti, web application e dashboard: dal primo schizzo alla messa online, con un pannello che ti permette di aggiornare i contenuti da solo, quando vuoi.',
     'home.hero.ctaPrimary': 'Richiedi un preventivo',
     'home.hero.ctaSecondary': 'Guarda i progetti',
     'home.hero.stat1Label': 'Stack',
@@ -53,7 +58,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'preview.title': 'Dal foglio bianco al sito online.',
     'preview.accent': 'sito online',
     'preview.body':
-      'Ogni progetto parte dalla struttura, non dalla grafica: prima si decide cosa deve trovare il cliente e in che ordine, poi si veste. Quello che vedi qui accanto è il montaggio di una pagina, passo dopo passo.',
+      'Ogni progetto parte dalla struttura, non dalla grafica: prima decidiamo cosa deve trovare il cliente e in che ordine, poi lo vestiamo. Quello che vedi qui accanto è il montaggio di una pagina, passo dopo passo.',
     'preview.url': 'iltuoristorante.it',
     'preview.navHome': 'Home',
     'preview.navMenu': 'Menù',
@@ -68,7 +73,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'preview.step2': 'Contenuti',
     'preview.step3': 'Online',
 
-    'home.services.eyebrow': 'Cosa faccio',
+    'home.services.eyebrow': 'Cosa facciamo',
     'home.services.titleA': 'Dal sito vetrina',
     'home.services.titleB': 'al',
     'home.services.titleAccent': 'gestionale interno',
@@ -80,7 +85,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'home.projects.link': 'Tutti i progetti',
     'home.projects.empty': 'Nessun progetto pubblicato al momento.',
 
-    'home.process.eyebrow': 'Come lavoro',
+    'home.process.eyebrow': 'Come lavoriamo',
     'home.process.titleA': 'Quattro passi,',
     'home.process.titleAccent': 'nessuna sorpresa',
     'process.1.title': 'Ascolto',
@@ -88,7 +93,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'Una chiamata per capire l’attività, chi sono i clienti e cosa deve fare il sito. Senza gergo tecnico.',
     'process.2.title': 'Proposta',
     'process.2.body':
-      'Struttura delle pagine, tempi e costo chiaro. Se il progetto non ha senso, lo dico prima di iniziare.',
+      'Struttura delle pagine, tempi e costo chiaro. Se il progetto non ha senso, te lo diciamo prima di iniziare.',
     'process.3.title': 'Costruzione',
     'process.3.body':
       'Sviluppo per passi, con un’anteprima online da vedere e commentare durante il lavoro.',
@@ -120,29 +125,31 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'home.cta.titleB': 'che non ti',
     'home.cta.titleAccent': 'rappresenta',
     'home.cta.body':
-      'Raccontami cosa ti serve. Ti rispondo con una proposta concreta: struttura, tempi e costo, senza impegno.',
-    'home.cta.primary': 'Scrivimi',
+      'Raccontaci cosa ti serve. Ti rispondiamo con una proposta concreta: struttura, tempi e costo, senza impegno.',
+    'home.cta.primary': 'Scrivici',
     'home.cta.secondary': 'Vedi i servizi',
 
-    'about.eyebrow': 'Chi sono',
-    'about.title': 'Costruisco cose che devono funzionare il lunedì mattina.',
+    'about.eyebrow': 'Chi siamo',
+    'about.title': 'Costruiamo cose che devono funzionare il lunedì mattina.',
     'about.accent': 'il lunedì mattina.',
     'about.p1':
-      'Mi chiamo Mahdi Allau e sviluppo software. Vengo da un percorso tecnico che tocca tre mondi — il web, i dati e i sistemi embedded — e oggi metto insieme queste competenze per costruire siti e strumenti digitali per ristoranti e piccole aziende.',
+      'SARAH è uno studio di ingegneri. Veniamo da percorsi tecnici diversi che si toccano in tre punti — il web, i dati e i sistemi embedded — e mettiamo insieme queste competenze per costruire siti e strumenti digitali per ristoranti e piccole aziende.',
     'about.p2':
-      'Questo sito è insieme il mio portfolio e la vetrina della mia attività: è stato costruito da zero con lo stesso stack che uso per i clienti.',
+      'Lavorare in più persone cambia una cosa concreta per chi ci commissiona un lavoro: chi scrive l’interfaccia non è chi progetta il database, e ogni parte la segue chi la sa fare meglio. Questo sito è il nostro portfolio ed è costruito con lo stesso stack che usiamo per i clienti.',
     'about.ctaPrimary': 'Lavoriamo insieme',
-    'about.ctaSecondary': 'Cosa ho costruito',
+    'about.ctaSecondary': 'Cosa abbiamo costruito',
     'about.summary': 'In sintesi',
-    'about.roleLabel': 'Ruolo',
-    'about.roleValue': 'Sviluppatore web full-stack',
+    'about.roleLabel': 'Cosa siamo',
+    'about.roleValue': 'Studio di sviluppo web',
+    'about.founderLabel': 'Fondatore',
+    'about.founderValue': 'Mahdi Allau',
     'about.focusLabel': 'Specializzazione',
     'about.focusValue': 'Siti e web app per ristorazione e piccole imprese',
     'about.stackLabel': 'Stack principale',
     'about.stackValue': 'Angular, TypeScript, Tailwind CSS, Supabase, PostgreSQL',
     'about.otherLabel': 'Altri ambiti',
     'about.otherValue': 'Python e SQL per i dati, Arduino/ESP32 per l’IoT',
-    'about.path.eyebrow': 'Il percorso',
+    'about.path.eyebrow': 'Le competenze',
     'about.path.titleA': 'Tre ambiti,',
     'about.path.titleB': 'un modo di ragionare.',
     'about.area1.title': 'Sviluppo web',
@@ -153,13 +160,13 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'Raccolta, pulizia e modellazione dei dati con Python e SQL, per arrivare a dashboard che rispondono alle domande vere di un’attività invece di riempire pagine di grafici.',
     'about.area3.title': 'Sistemi embedded e IoT',
     'about.area3.body':
-      'Firmware su Arduino ed ESP32, lettura di sensori e regolazione con controllo PID. È la parte del mio percorso che mi ha insegnato a lavorare con vincoli stretti e a testare sul campo.',
+      'Firmware su Arduino ed ESP32, lettura di sensori e regolazione con controllo PID. È la parte del nostro percorso che ci ha insegnato a lavorare con vincoli stretti e a testare sul campo.',
     'about.method.eyebrow': 'Metodo',
     'about.method.titleA': 'Quattro cose su cui',
-    'about.method.titleB': 'non transigo.',
+    'about.method.titleB': 'non transigiamo.',
     'about.principle1.title': 'Prima il problema, poi la tecnologia',
     'about.principle1.body':
-      'Scelgo lo strumento dopo aver capito cosa serve. A volte la risposta giusta è una pagina statica, non un’applicazione.',
+      'Scegliamo lo strumento dopo aver capito cosa serve. A volte la risposta giusta è una pagina statica, non un’applicazione.',
     'about.principle2.title': 'Niente template riadattati',
     'about.principle2.body':
       'Ogni sito viene costruito partendo dal contenuto reale dell’attività. Si vede, e soprattutto si sente nella velocità di caricamento.',
@@ -168,7 +175,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'Il pannello di amministrazione fa parte del progetto: menù, foto e testi si aggiornano senza dover chiamare nessuno.',
     'about.principle4.title': 'Parlare chiaro',
     'about.principle4.body':
-      'Preventivi leggibili, tempi realistici e nessun gergo inutile. Se qualcosa non conviene farla, lo dico.',
+      'Preventivi leggibili, tempi realistici e nessun gergo inutile. Se qualcosa non conviene farla, te lo diciamo.',
     'about.skills.eyebrow': 'Competenze tecniche',
     'about.skills.title': 'Lo strumentario completo.',
     'skills.frontend': 'Frontend',
@@ -180,21 +187,22 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'projects.eyebrow': 'Portfolio',
     'projects.title': 'Progetti.',
     'projects.subtitle':
-      'Una selezione di lavori che raccontano come affronto un problema: dal dato grezzo alla dashboard, dal sensore all’interfaccia, dall’idea al sito online.',
+      'Una selezione di lavori che raccontano come affrontiamo un problema: dal dato grezzo alla dashboard, dal sensore all’interfaccia, dall’idea al sito online.',
     'projects.filterAll': 'Tutti',
     'projects.filterLabel': 'Filtra i progetti per categoria',
     'projects.emptyCategory': 'Nessun progetto in questa categoria.',
+    'projects.credit': 'Seguito da',
     'projects.ctaTitleA': 'Il prossimo progetto',
     'projects.ctaTitleB': 'potrebbe essere il',
     'projects.ctaAccent': 'tuo',
     'projects.ctaBody':
-      'Raccontami cosa ti serve: ti rispondo con una proposta chiara su struttura, tempi e costo.',
+      'Raccontaci cosa ti serve: ti rispondiamo con una proposta chiara su struttura, tempi e costo.',
     'projects.ctaButton': 'Parliamone',
     'projects.viewLive': 'Vedi il progetto',
     'projects.viewCode': 'Codice sorgente',
 
     'services.eyebrow': 'Servizi',
-    'services.title': 'Cosa posso costruire per te.',
+    'services.title': 'Cosa possiamo costruire per te.',
     'services.accent': 'per te.',
     'services.subtitle':
       'Dal sito vetrina che presenta l’attività fino allo strumento interno che ti fa risparmiare ore ogni settimana. Sempre su misura, mai un tema comprato e riadattato.',
@@ -206,7 +214,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'pricing.title': 'Prezzi chiari, prima di iniziare.',
     'pricing.accent': 'prima di iniziare.',
     'pricing.subtitle':
-      'So che la prima domanda è questa, e capisco che chiederlo metta a disagio. Ecco gli ordini di grandezza: il preventivo vero arriva dopo che abbiamo parlato, voce per voce, e da lì non si muove.',
+      'Sappiamo che la prima domanda è questa, e capiamo che chiederlo metta a disagio. Ecco gli ordini di grandezza: il preventivo vero arriva dopo che abbiamo parlato, voce per voce, e da lì non si muove.',
     'pricing.from': 'da',
     'pricing.vat': 'IVA esclusa',
     'pricing.popular': 'Il più richiesto',
@@ -240,40 +248,40 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'pricing.3.f3': 'Integrazioni con i sistemi che usate',
     'pricing.3.f4': 'Analisi iniziale e sviluppo per passi',
 
-    'pricing.guarantee.title': 'Il rischio è mio, non tuo.',
+    'pricing.guarantee.title': 'Il rischio è nostro, non tuo.',
     'pricing.guarantee.body':
-      'La prima proposta grafica te la faccio senza chiederti niente. Se non ti convince, ci salutiamo e non mi devi un euro. Pago io il tempo speso, perché se non sono capace di capire cosa vuoi non sei tu a doverlo finanziare.',
+      'La prima proposta grafica te la facciamo senza chiederti niente. Se non ti convince, ci salutiamo e non ci devi un euro. Il tempo speso lo paghiamo noi, perché se non siamo capaci di capire cosa vuoi non sei tu a doverlo finanziare.',
     'pricing.note':
       'Sono cifre indicative per orientarti, non un listino. Il dominio e l’hosting si pagano a parte, in genere poche decine di euro l’anno, intestati a te.',
 
     'services.faq.eyebrow': 'Domande frequenti',
-    'services.faq.title': 'Le cose che mi chiedono sempre.',
+    'services.faq.title': 'Le cose che ci chiedono sempre.',
     'services.faq.body':
-      'Se la tua domanda non è qui, scrivimi: rispondo anche solo per capire se posso esserti utile.',
+      'Se la tua domanda non è qui, scrivici: rispondiamo anche solo per capire se possiamo esserti utili.',
     'services.faq.cta': 'Fai la tua domanda',
     'faq.1.q': 'Quanto costa un sito?',
     'faq.1.a':
-      'Dipende da quante pagine servono e da cosa deve fare il sito. Dopo una prima chiacchierata invio un preventivo scritto con voce per voce, così sai esattamente cosa stai comprando.',
+      'Dipende da quante pagine servono e da cosa deve fare il sito. Dopo una prima chiacchierata inviamo un preventivo scritto voce per voce, così sai esattamente cosa stai comprando.',
     'faq.2.q': 'Posso aggiornare i contenuti da solo?',
     'faq.2.a':
       'Sì, è il punto. Ogni progetto include un pannello di amministrazione riservato dove modificare testi, foto e — per i ristoranti — il menù, senza toccare il codice.',
     'faq.3.q': 'Vi occupate anche del dominio e dell’hosting?',
     'faq.3.a':
-      'Sì. Posso registrare il dominio, configurare la pubblicazione e le caselle email, e lasciare tutto intestato a te: gli accessi restano tuoi.',
+      'Sì. Possiamo registrare il dominio, configurare la pubblicazione e le caselle email, e lasciare tutto intestato a te: gli accessi restano tuoi.',
     'faq.4.q': 'Quanto tempo serve?',
     'faq.4.a':
       'Un sito vetrina ben fatto richiede in genere qualche settimana, una web application di più. I tempi precisi finiscono nel preventivo, non li scopri strada facendo.',
 
     'contact.eyebrow': 'Contatti',
-    'contact.title': 'Raccontami il tuo progetto.',
+    'contact.title': 'Raccontaci il tuo progetto.',
     'contact.accent': 'progetto.',
     'contact.subtitle':
-      'Bastano due righe per iniziare. Ti rispondo con qualche domanda mirata e, se il progetto ha senso, con una proposta chiara su struttura, tempi e costo.',
+      'Bastano due righe per iniziare. Ti rispondiamo con qualche domanda mirata e, se il progetto ha senso, con una proposta chiara su struttura, tempi e costo.',
     'contact.name': 'Nome e cognome *',
     'contact.namePlaceholder': 'Come ti chiami?',
     'contact.nameError': 'Inserisci almeno 2 caratteri.',
     'contact.email': 'Email *',
-    'contact.emailPlaceholder': 'dove ti rispondo',
+    'contact.emailPlaceholder': 'dove ti rispondiamo',
     'contact.emailError': 'Controlla l’indirizzo email.',
     'contact.company': 'Attività',
     'contact.companyPlaceholder': 'Nome del locale o dell’azienda',
@@ -281,25 +289,25 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'contact.budgetNone': 'Preferisco non dirlo',
     'contact.message': 'Il progetto *',
     'contact.messagePlaceholder': 'Che attività hai, cosa ti serve e cosa non funziona nel sito attuale.',
-    'contact.messageError': 'Scrivi almeno 20 caratteri, così capisco di cosa si tratta.',
+    'contact.messageError': 'Scrivi almeno 20 caratteri, così capiamo di cosa si tratta.',
     'contact.submit': 'Invia il messaggio',
     'contact.sending': 'Invio in corso…',
     'contact.sentTitle': 'Messaggio ricevuto.',
-    'contact.sentBody': 'Grazie. Ti rispondo appena possibile, di solito entro un paio di giorni lavorativi.',
+    'contact.sentBody': 'Grazie. Ti rispondiamo appena possibile, di solito entro un paio di giorni lavorativi.',
     'contact.sentAgain': 'Invia un altro messaggio',
-    'contact.mailtoTitle': 'Sto aprendo il tuo client di posta.',
-    'contact.mailtoBody': 'Se non si è aperto nulla, scrivimi direttamente a',
+    'contact.mailtoTitle': 'Stiamo aprendo il tuo client di posta.',
+    'contact.mailtoBody': 'Se non si è aperto nulla, scrivici direttamente a',
     'contact.mailtoBack': 'Torna al modulo',
-    'contact.errorPrefix': 'Non sono riuscito a inviare il messaggio:',
-    'contact.errorSuffix': 'Puoi scrivermi direttamente a',
-    'contact.directTitle': 'Scrivimi direttamente',
+    'contact.errorPrefix': 'Non siamo riusciti a inviare il messaggio:',
+    'contact.errorSuffix': 'Puoi scriverci direttamente a',
+    'contact.directTitle': 'Scrivici direttamente',
     'contact.nextTitle': 'Cosa succede dopo',
-    'contact.next1': 'Leggo il messaggio e ti rispondo con qualche domanda per capire meglio.',
+    'contact.next1': 'Leggiamo il messaggio e ti rispondiamo con qualche domanda per capire meglio.',
     'contact.next2': 'Ci sentiamo per una chiamata di venti minuti, senza impegno.',
     'contact.next3': 'Ricevi un preventivo scritto con struttura, tempi e costo voce per voce.',
     'contact.replyTitle': 'Tempi di risposta',
     'contact.replyBody':
-      'Di norma rispondo entro uno o due giorni lavorativi. Se hai una scadenza stretta, scrivilo nel messaggio.',
+      'Di norma rispondiamo entro uno o due giorni lavorativi. Se hai una scadenza stretta, scrivilo nel messaggio.',
     'contact.budget1': 'Non lo so ancora',
     'contact.budget2': 'Meno di 1.000 €',
     'contact.budget3': '1.000 – 2.500 €',
@@ -307,7 +315,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'contact.budget5': 'Oltre 5.000 €',
 
     'footer.description':
-      'Sviluppo siti web, web application e dashboard su misura per ristoranti e piccole aziende. Codice scritto a mano, senza template preconfezionati.',
+      'Sviluppiamo siti web, web application e dashboard su misura per ristoranti e piccole aziende. Codice scritto a mano, senza template preconfezionati.',
     'footer.site': 'Il sito',
     'footer.contacts': 'Contatti',
     'footer.quote': 'Richiedi un preventivo',
@@ -316,12 +324,12 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.builtWith': 'Costruito con Angular, Tailwind CSS e Supabase.',
 
     // --- Testa del documento ---
-    'seo.home.title': 'Mahdi Allau — Siti web per ristoranti e piccole aziende',
+    'seo.home.title': 'SARAH — Siti web per ristoranti e piccole aziende',
     'seo.home.description':
       'Siti web, web application e dashboard su misura per ristoranti e piccole aziende. Con un pannello per aggiornare i contenuti da solo, quando vuoi.',
-    'seo.about.title': 'Chi sono',
+    'seo.about.title': 'Chi siamo',
     'seo.about.description':
-      'Sviluppatore web full-stack: sviluppo web, analisi dei dati e sistemi embedded, applicati oggi ai siti per la ristorazione e le piccole imprese.',
+      'Studio di ingegneri: sviluppo web, analisi dei dati e sistemi embedded, applicati ai siti per la ristorazione e le piccole imprese.',
     'seo.projects.title': 'Progetti',
     'seo.projects.description':
       'Dashboard analitiche, sistemi IoT su ESP32 e web application in Angular: una selezione di progetti con tecnologie e risultati.',
@@ -330,14 +338,15 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'Siti web moderni, siti per ristoranti con menù gestibile, web application e dashboard su misura. Preventivo chiaro, voce per voce.',
     'seo.contact.title': 'Contatti',
     'seo.contact.description':
-      'Raccontami il tuo progetto: rispondo entro uno o due giorni lavorativi con una proposta su struttura, tempi e costo.',
+      'Raccontaci il tuo progetto: rispondiamo entro uno o due giorni lavorativi con una proposta su struttura, tempi e costo.',
     'seo.privacy.title': 'Informativa privacy',
     'seo.privacy.description':
       'Quali dati raccoglie il modulo di contatto di questo sito, perché, dove vengono conservati e come chiederne la cancellazione.',
     'seo.admin.title': 'Area riservata',
     'seo.admin.description': 'Accesso riservato alla gestione dei contenuti del sito.',
+
     // --- Sito dimostrativo ---
-    'demo.banner': 'Progetto dimostrativo: l’Osteria del Tiglio non esiste, è un locale inventato per mostrare come lavoro.',
+    'demo.banner': 'Progetto dimostrativo: l’Osteria del Tiglio non esiste, è un locale inventato per mostrare come lavoriamo.',
     'demo.back': 'Torna al portfolio',
     'demo.formNotice': 'Questo modulo non invia niente: è una dimostrazione.',
     'demo.footer': 'Sito dimostrativo progettato e sviluppato da',
@@ -352,31 +361,31 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
 
     // --- Privacy ---
     'privacy.eyebrow': 'Informativa',
-    'privacy.title': 'Come tratto i tuoi dati.',
+    'privacy.title': 'Come trattiamo i tuoi dati.',
     'privacy.accent': 'i tuoi dati.',
     'privacy.intro':
-      'Questa pagina spiega, senza formule inutili, cosa succede alle informazioni che mi lasci quando scrivi tramite il modulo di contatto.',
+      'Questa pagina spiega, senza formule inutili, cosa succede alle informazioni che ci lasci quando scrivi tramite il modulo di contatto.',
     'privacy.updated': 'Ultimo aggiornamento',
     'privacy.1.title': 'Chi tratta i dati',
     'privacy.1.body':
-      'Mahdi Allau, titolare del trattamento. Per qualsiasi richiesta relativa ai tuoi dati puoi scrivere all’indirizzo email indicato in fondo a questa pagina: rispondo io, direttamente.',
-    'privacy.2.title': 'Quali dati raccolgo',
+      'SARAH è il nome con cui lavoriamo, ma non è una società registrata: il titolare del trattamento è quindi Mahdi Allau, persona fisica. Per qualsiasi richiesta relativa ai tuoi dati puoi scrivere all’indirizzo email in fondo a questa pagina.',
+    'privacy.2.title': 'Quali dati raccogliamo',
     'privacy.2.body':
-      'Solo quello che scrivi nel modulo: nome, indirizzo email e, se scegli di indicarli, nome dell’attività e fascia di budget, insieme al testo del messaggio. Non uso cookie di profilazione e non ci sono strumenti di analisi o tracciamento pubblicitario su questo sito.',
-    'privacy.3.title': 'Perché li raccolgo',
+      'Solo quello che scrivi nel modulo: nome, indirizzo email e, se scegli di indicarli, nome dell’attività e fascia di budget, insieme al testo del messaggio. Non usiamo cookie di profilazione e non ci sono strumenti di analisi o tracciamento pubblicitario su questo sito.',
+    'privacy.3.title': 'Perché li raccogliamo',
     'privacy.3.body':
-      'Unicamente per risponderti e, se il progetto va avanti, per gestire il rapporto di lavoro. Non invio newsletter, non faccio invii promozionali e non cedo né vendo i dati a nessuno.',
+      'Unicamente per risponderti e, se il progetto va avanti, per gestire il rapporto di lavoro. Non inviamo newsletter, non facciamo invii promozionali e non cediamo né vendiamo i dati a nessuno.',
     'privacy.4.title': 'Dove finiscono',
     'privacy.4.body':
-      'I messaggi sono salvati su Supabase, il servizio che ospita il database di questo sito, con server nell’Unione Europea. Vi accedo solo io, tramite un’area protetta da password.',
+      'I messaggi sono salvati su Supabase, il servizio che ospita il database di questo sito, con server nell’Unione Europea. Vi accede solo chi in SARAH gestisce le richieste, tramite un’area protetta da password.',
     'privacy.5.title': 'Per quanto tempo',
     'privacy.5.body':
-      'Conservo i messaggi finché servono a gestire la richiesta o il lavoro che ne è nato. Se una conversazione non porta a nulla, cancello il messaggio entro un paio d’anni.',
+      'Conserviamo i messaggi finché servono a gestire la richiesta o il lavoro che ne è nato. Se una conversazione non porta a nulla, cancelliamo il messaggio entro un paio d’anni.',
     'privacy.6.title': 'I tuoi diritti',
     'privacy.6.body':
-      'Puoi chiedermi in qualsiasi momento di vedere i dati che ho su di te, di correggerli o di cancellarli, e puoi opporti al trattamento. Basta una email: provvedo senza chiedere spiegazioni e ti confermo quando è fatto.',
+      'Puoi chiederci in qualsiasi momento di vedere i dati che abbiamo su di te, di correggerli o di cancellarli, e puoi opporti al trattamento. Basta una email: provvediamo senza chiedere spiegazioni e ti confermiamo quando è fatto.',
     'privacy.contactTitle': 'Per qualsiasi richiesta',
-    'contact.privacyNote': 'Inviando il modulo accetti che io usi questi dati per risponderti. Nessun altro uso: leggi',
+    'contact.privacyNote': 'Inviando il modulo accetti che usiamo questi dati per risponderti. Nessun altro uso: leggi',
     'contact.privacyLink': 'l’informativa privacy',
     'footer.privacy': 'Privacy',
 
@@ -398,12 +407,13 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'lang.en': 'English',
 
     'nav.home': 'Home',
-    'nav.about': 'About',
+    'nav.about': 'About us',
     'nav.projects': 'Work',
     'nav.services': 'Services',
     'nav.contact': 'Contact',
     'nav.cta': 'Let’s talk',
-    'nav.role': 'Web development',
+    'nav.role': 'Bespoke web development',
+    'nav.logoAlt': 'SARAH — bespoke web development',
     'nav.open': 'Open menu',
     'nav.close': 'Close menu',
     'nav.skip': 'Skip to content',
@@ -417,7 +427,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'home.hero.title': 'Websites built to measure for restaurants and small businesses.',
     'home.hero.accent': 'restaurants',
     'home.hero.subtitle':
-      'I’m Mahdi Allau, a developer. I design and build websites, web applications and dashboards — from the first sketch to going live, with a panel that lets you update the content yourself, whenever you want.',
+      'We’re SARAH, a studio of engineers. We design and build websites, web applications and dashboards — from the first sketch to going live, with a panel that lets you update the content yourself, whenever you want.',
     'home.hero.ctaPrimary': 'Request a quote',
     'home.hero.ctaSecondary': 'See the work',
     'home.hero.stat1Label': 'Stack',
@@ -446,7 +456,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'preview.step2': 'Content',
     'preview.step3': 'Live',
 
-    'home.services.eyebrow': 'What I do',
+    'home.services.eyebrow': 'What we do',
     'home.services.titleA': 'From the shop window',
     'home.services.titleB': 'to the',
     'home.services.titleAccent': 'tool you run on',
@@ -458,7 +468,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'home.projects.link': 'All projects',
     'home.projects.empty': 'No projects published yet.',
 
-    'home.process.eyebrow': 'How I work',
+    'home.process.eyebrow': 'How we work',
     'home.process.titleA': 'Four steps,',
     'home.process.titleAccent': 'no surprises',
     'process.1.title': 'Listening',
@@ -466,7 +476,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'A call to understand the business, who your customers are and what the site has to do. No technical jargon.',
     'process.2.title': 'Proposal',
     'process.2.body':
-      'Page structure, timeline and a clear price. If the project doesn’t make sense, I say so before we start.',
+      'Page structure, timeline and a clear price. If the project doesn’t make sense, we say so before we start.',
     'process.3.title': 'Building',
     'process.3.body':
       'Development in steps, with a live preview you can look at and comment on while the work happens.',
@@ -498,29 +508,31 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'home.cta.titleB': 'that doesn’t',
     'home.cta.titleAccent': 'represent you',
     'home.cta.body':
-      'Tell me what you need. I’ll come back with something concrete: structure, timeline and price, no strings attached.',
+      'Tell us what you need. We’ll come back with something concrete: structure, timeline and price, no strings attached.',
     'home.cta.primary': 'Get in touch',
     'home.cta.secondary': 'See the services',
 
-    'about.eyebrow': 'About',
-    'about.title': 'I build things that have to work on Monday morning.',
+    'about.eyebrow': 'About us',
+    'about.title': 'We build things that have to work on Monday morning.',
     'about.accent': 'on Monday morning.',
     'about.p1':
-      'My name is Mahdi Allau and I build software. I come from a technical path that spans three worlds — the web, data, and embedded systems — and today I bring those together to build websites and digital tools for restaurants and small businesses.',
+      'SARAH is a studio of engineers. We come from different technical backgrounds that meet at three points — the web, data, and embedded systems — and we bring those together to build websites and digital tools for restaurants and small businesses.',
     'about.p2':
-      'This site is both my portfolio and the shop window for my work: it was built from scratch with the same stack I use for clients.',
+      'Being more than one person changes something concrete for whoever hires us: the person writing the interface isn’t the person designing the database, and each part is handled by whoever does it best. This site is our portfolio, built with the same stack we use for clients.',
     'about.ctaPrimary': 'Let’s work together',
-    'about.ctaSecondary': 'What I’ve built',
+    'about.ctaSecondary': 'What we’ve built',
     'about.summary': 'At a glance',
-    'about.roleLabel': 'Role',
-    'about.roleValue': 'Full-stack web developer',
+    'about.roleLabel': 'What we are',
+    'about.roleValue': 'A web development studio',
+    'about.founderLabel': 'Founder',
+    'about.founderValue': 'Mahdi Allau',
     'about.focusLabel': 'Focus',
     'about.focusValue': 'Sites and web apps for hospitality and small business',
     'about.stackLabel': 'Main stack',
     'about.stackValue': 'Angular, TypeScript, Tailwind CSS, Supabase, PostgreSQL',
     'about.otherLabel': 'Also',
     'about.otherValue': 'Python and SQL for data, Arduino/ESP32 for IoT',
-    'about.path.eyebrow': 'The path',
+    'about.path.eyebrow': 'What we know',
     'about.path.titleA': 'Three fields,',
     'about.path.titleB': 'one way of thinking.',
     'about.area1.title': 'Web development',
@@ -531,13 +543,13 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'Collecting, cleaning and modelling data with Python and SQL, to reach dashboards that answer a business’s real questions instead of filling pages with charts.',
     'about.area3.title': 'Embedded systems and IoT',
     'about.area3.body':
-      'Firmware on Arduino and ESP32, sensor readings and PID control loops. This is the part of my path that taught me to work under tight constraints and to test in the field.',
+      'Firmware on Arduino and ESP32, sensor readings and PID control loops. This is the part of our background that taught us to work under tight constraints and to test in the field.',
     'about.method.eyebrow': 'Method',
-    'about.method.titleA': 'Four things I',
+    'about.method.titleA': 'Four things we',
     'about.method.titleB': 'won’t compromise on.',
     'about.principle1.title': 'The problem first, the technology after',
     'about.principle1.body':
-      'I pick the tool once I understand what’s needed. Sometimes the right answer is a static page, not an application.',
+      'We pick the tool once we understand what’s needed. Sometimes the right answer is a static page, not an application.',
     'about.principle2.title': 'No repurposed templates',
     'about.principle2.body':
       'Every site is built around the real content of the business. You can see it — and above all you can feel it in the loading speed.',
@@ -546,7 +558,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'The admin panel is part of the project: menu, photos and text get updated without having to call anyone.',
     'about.principle4.title': 'Plain speaking',
     'about.principle4.body':
-      'Readable quotes, realistic timelines and no needless jargon. If something isn’t worth doing, I’ll say so.',
+      'Readable quotes, realistic timelines and no needless jargon. If something isn’t worth doing, we’ll say so.',
     'about.skills.eyebrow': 'Technical skills',
     'about.skills.title': 'The full toolkit.',
     'skills.frontend': 'Frontend',
@@ -558,21 +570,22 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'projects.eyebrow': 'Portfolio',
     'projects.title': 'Work.',
     'projects.subtitle':
-      'A selection of projects that show how I approach a problem: from raw data to dashboard, from sensor to interface, from idea to live site.',
+      'A selection of projects that show how we approach a problem: from raw data to dashboard, from sensor to interface, from idea to live site.',
     'projects.filterAll': 'All',
     'projects.filterLabel': 'Filter projects by category',
     'projects.emptyCategory': 'No projects in this category.',
+    'projects.credit': 'Led by',
     'projects.ctaTitleA': 'The next project',
     'projects.ctaTitleB': 'could be',
     'projects.ctaAccent': 'yours',
     'projects.ctaBody':
-      'Tell me what you need: I’ll come back with a clear proposal on structure, timeline and price.',
+      'Tell us what you need: we’ll come back with a clear proposal on structure, timeline and price.',
     'projects.ctaButton': 'Let’s talk',
     'projects.viewLive': 'View the project',
     'projects.viewCode': 'Source code',
 
     'services.eyebrow': 'Services',
-    'services.title': 'What I can build for you.',
+    'services.title': 'What we can build for you.',
     'services.accent': 'for you.',
     'services.subtitle':
       'From the shop-window site that introduces the business to the internal tool that saves you hours every week. Always made to measure, never a bought theme reworked.',
@@ -584,7 +597,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'pricing.title': 'Clear prices, before we start.',
     'pricing.accent': 'before we start.',
     'pricing.subtitle':
-      'I know this is the first question, and I know asking it feels awkward. Here are the orders of magnitude: the real quote comes after we’ve talked, itemised — and it doesn’t move after that.',
+      'We know this is the first question, and we know asking it feels awkward. Here are the orders of magnitude: the real quote comes after we’ve talked, itemised — and it doesn’t move after that.',
     'pricing.from': 'from',
     'pricing.vat': 'excl. VAT',
     'pricing.popular': 'Most requested',
@@ -618,40 +631,40 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'pricing.3.f3': 'Integration with the systems you use',
     'pricing.3.f4': 'Initial analysis and step-by-step delivery',
 
-    'pricing.guarantee.title': 'The risk is mine, not yours.',
+    'pricing.guarantee.title': 'The risk is ours, not yours.',
     'pricing.guarantee.body':
-      'I’ll make you the first design proposal without asking for anything. If it doesn’t convince you, we shake hands and you owe me nothing. I cover the time spent, because if I can’t work out what you want, you shouldn’t be the one paying for it.',
+      'We’ll make you the first design proposal without asking for anything. If it doesn’t convince you, we shake hands and you owe us nothing. We cover the time spent, because if we can’t work out what you want, you shouldn’t be the one paying for it.',
     'pricing.note':
       'These are indicative figures to orient you, not a price list. Domain and hosting are paid separately — usually a few tens of euros a year, registered in your name.',
 
     'services.faq.eyebrow': 'Frequently asked',
     'services.faq.title': 'The things people always ask.',
     'services.faq.body':
-      'If your question isn’t here, write to me: I’ll reply even just to work out whether I can be useful.',
+      'If your question isn’t here, write to us: we’ll reply even just to work out whether we can be useful.',
     'services.faq.cta': 'Ask your question',
     'faq.1.q': 'How much does a website cost?',
     'faq.1.a':
-      'It depends on how many pages you need and what the site has to do. After a first conversation I send a written quote, itemised, so you know exactly what you’re buying.',
+      'It depends on how many pages you need and what the site has to do. After a first conversation we send a written quote, itemised, so you know exactly what you’re buying.',
     'faq.2.q': 'Can I update the content myself?',
     'faq.2.a':
       'Yes — that’s the point. Every project includes a private admin panel where you can edit text, photos and, for restaurants, the menu, without touching any code.',
     'faq.3.q': 'Do you handle the domain and hosting too?',
     'faq.3.a':
-      'Yes. I can register the domain, set up publishing and email accounts, and leave everything registered in your name: the credentials stay yours.',
+      'Yes. We can register the domain, set up publishing and email accounts, and leave everything registered in your name: the credentials stay yours.',
     'faq.4.q': 'How long does it take?',
     'faq.4.a':
       'A well-made shop-window site usually takes a few weeks; a web application takes longer. Exact timings go in the quote — you don’t discover them along the way.',
 
     'contact.eyebrow': 'Contact',
-    'contact.title': 'Tell me about your project.',
+    'contact.title': 'Tell us about your project.',
     'contact.accent': 'project.',
     'contact.subtitle':
-      'Two lines are enough to start. I’ll reply with a few pointed questions and, if the project makes sense, a clear proposal on structure, timeline and price.',
+      'Two lines are enough to start. We’ll reply with a few pointed questions and, if the project makes sense, a clear proposal on structure, timeline and price.',
     'contact.name': 'Full name *',
     'contact.namePlaceholder': 'What’s your name?',
     'contact.nameError': 'Please enter at least 2 characters.',
     'contact.email': 'Email *',
-    'contact.emailPlaceholder': 'where I should reply',
+    'contact.emailPlaceholder': 'where we should reply',
     'contact.emailError': 'Please check the email address.',
     'contact.company': 'Business',
     'contact.companyPlaceholder': 'Name of the venue or company',
@@ -659,25 +672,25 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'contact.budgetNone': 'I’d rather not say',
     'contact.message': 'The project *',
     'contact.messagePlaceholder': 'What your business is, what you need, and what isn’t working on your current site.',
-    'contact.messageError': 'Please write at least 20 characters so I understand what it’s about.',
+    'contact.messageError': 'Please write at least 20 characters so we understand what it’s about.',
     'contact.submit': 'Send message',
     'contact.sending': 'Sending…',
     'contact.sentTitle': 'Message received.',
-    'contact.sentBody': 'Thank you. I’ll reply as soon as I can, usually within a couple of working days.',
+    'contact.sentBody': 'Thank you. We’ll reply as soon as we can, usually within a couple of working days.',
     'contact.sentAgain': 'Send another message',
     'contact.mailtoTitle': 'Opening your email client.',
-    'contact.mailtoBody': 'If nothing opened, write to me directly at',
+    'contact.mailtoBody': 'If nothing opened, write to us directly at',
     'contact.mailtoBack': 'Back to the form',
-    'contact.errorPrefix': 'I couldn’t send the message:',
-    'contact.errorSuffix': 'You can write to me directly at',
-    'contact.directTitle': 'Write to me directly',
+    'contact.errorPrefix': 'We couldn’t send the message:',
+    'contact.errorSuffix': 'You can write to us directly at',
+    'contact.directTitle': 'Write to us directly',
     'contact.nextTitle': 'What happens next',
-    'contact.next1': 'I read your message and reply with a few questions to understand it better.',
+    'contact.next1': 'We read your message and reply with a few questions to understand it better.',
     'contact.next2': 'We have a twenty-minute call, no obligation.',
     'contact.next3': 'You get a written quote with structure, timeline and itemised price.',
     'contact.replyTitle': 'Response time',
     'contact.replyBody':
-      'I normally reply within one or two working days. If you’re on a tight deadline, say so in the message.',
+      'We normally reply within one or two working days. If you’re on a tight deadline, say so in the message.',
     'contact.budget1': 'I don’t know yet',
     'contact.budget2': 'Under €1,000',
     'contact.budget3': '€1,000 – 2,500',
@@ -685,7 +698,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'contact.budget5': 'Over €5,000',
 
     'footer.description':
-      'I build websites, web applications and dashboards made to measure for restaurants and small businesses. Hand-written code, no off-the-shelf templates.',
+      'We build websites, web applications and dashboards made to measure for restaurants and small businesses. Hand-written code, no off-the-shelf templates.',
     'footer.site': 'The site',
     'footer.contacts': 'Contact',
     'footer.quote': 'Request a quote',
@@ -694,12 +707,12 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.builtWith': 'Built with Angular, Tailwind CSS and Supabase.',
 
     // --- Document head ---
-    'seo.home.title': 'Mahdi Allau — Websites for restaurants and small businesses',
+    'seo.home.title': 'SARAH — Websites for restaurants and small businesses',
     'seo.home.description':
       'Websites, web applications and dashboards made to measure for restaurants and small businesses. With a panel to update the content yourself, whenever you want.',
-    'seo.about.title': 'About',
+    'seo.about.title': 'About us',
     'seo.about.description':
-      'Full-stack web developer: web development, data analysis and embedded systems, applied today to sites for hospitality and small business.',
+      'A studio of engineers: web development, data analysis and embedded systems, applied to sites for hospitality and small business.',
     'seo.projects.title': 'Work',
     'seo.projects.description':
       'Analytics dashboards, IoT systems on ESP32 and Angular web applications: a selection of projects with the technologies and the results.',
@@ -708,14 +721,15 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'Modern websites, restaurant sites with a self-managed menu, web applications and bespoke dashboards. Clear, itemised quotes.',
     'seo.contact.title': 'Contact',
     'seo.contact.description':
-      'Tell me about your project: I reply within one or two working days with a proposal on structure, timeline and price.',
+      'Tell us about your project: we reply within one or two working days with a proposal on structure, timeline and price.',
     'seo.privacy.title': 'Privacy notice',
     'seo.privacy.description':
       'What the contact form on this site collects, why, where it is stored and how to ask for it to be deleted.',
     'seo.admin.title': 'Admin area',
     'seo.admin.description': 'Private access for managing the site content.',
+
     // --- Demo site ---
-    'demo.banner': 'Demo project: Osteria del Tiglio doesn’t exist — it’s an invented restaurant, built to show how I work.',
+    'demo.banner': 'Demo project: Osteria del Tiglio doesn’t exist — it’s an invented restaurant, built to show how we work.',
     'demo.back': 'Back to the portfolio',
     'demo.formNotice': 'This form doesn’t send anything: it’s a demonstration.',
     'demo.footer': 'Demo site designed and built by',
@@ -730,31 +744,31 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
 
     // --- Privacy ---
     'privacy.eyebrow': 'Notice',
-    'privacy.title': 'How I handle your data.',
+    'privacy.title': 'How we handle your data.',
     'privacy.accent': 'your data.',
     'privacy.intro':
       'This page explains, without needless formulas, what happens to the information you leave when you write through the contact form.',
     'privacy.updated': 'Last updated',
     'privacy.1.title': 'Who handles the data',
     'privacy.1.body':
-      'Mahdi Allau, the data controller. For anything concerning your data you can write to the email address at the bottom of this page: I answer myself, directly.',
-    'privacy.2.title': 'What I collect',
+      'SARAH is the name we work under, but it isn’t a registered company: the data controller is therefore Mahdi Allau, a natural person. For anything concerning your data you can write to the email address at the bottom of this page.',
+    'privacy.2.title': 'What we collect',
     'privacy.2.body':
       'Only what you type into the form: name, email address and, if you choose to give them, business name and budget range, along with the text of your message. There are no profiling cookies, and no analytics or advertising trackers on this site.',
-    'privacy.3.title': 'Why I collect it',
+    'privacy.3.title': 'Why we collect it',
     'privacy.3.body':
-      'Solely to reply to you and, if the project goes ahead, to run the working relationship. I send no newsletters, no promotional mail, and I never share or sell the data to anyone.',
+      'Solely to reply to you and, if the project goes ahead, to run the working relationship. We send no newsletters, no promotional mail, and we never share or sell the data to anyone.',
     'privacy.4.title': 'Where it goes',
     'privacy.4.body':
-      'Messages are stored on Supabase, the service hosting this site’s database, on servers in the European Union. Only I can read them, through a password-protected area.',
+      'Messages are stored on Supabase, the service hosting this site’s database, on servers in the European Union. Only the people at SARAH who handle enquiries can read them, through a password-protected area.',
     'privacy.5.title': 'For how long',
     'privacy.5.body':
-      'I keep messages as long as they’re needed to handle the enquiry or the work that came from it. If a conversation leads nowhere, I delete the message within a couple of years.',
+      'We keep messages as long as they’re needed to handle the enquiry or the work that came from it. If a conversation leads nowhere, we delete the message within a couple of years.',
     'privacy.6.title': 'Your rights',
     'privacy.6.body':
-      'You can ask me at any time to see the data I hold about you, to correct it or to delete it, and you can object to the processing. An email is enough: I act on it without asking why, and confirm when it’s done.',
+      'You can ask us at any time to see the data we hold about you, to correct it or to delete it, and you can object to the processing. An email is enough: we act on it without asking why, and confirm when it’s done.',
     'privacy.contactTitle': 'For any request',
-    'contact.privacyNote': 'By sending the form you agree that I use this data to reply to you. Nothing else — read',
+    'contact.privacyNote': 'By sending the form you agree that we use this data to reply to you. Nothing else — read',
     'contact.privacyLink': 'the privacy notice',
     'footer.privacy': 'Privacy',
 
@@ -762,8 +776,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'notfound.titleA': 'This page',
     'notfound.titleAccent': 'doesn’t exist.',
     'notfound.body':
-      'The link may be old, or there’s a typo in the address. From here you can go back home or take a look at the work.',
-    'notfound.home': 'Back to home',
+      'Maybe the link is old, or there’s a typo in the address. From here you can go back home or take a look at the work.',
+    'notfound.home': 'Back home',
     'notfound.projects': 'See the work',
   },
 };

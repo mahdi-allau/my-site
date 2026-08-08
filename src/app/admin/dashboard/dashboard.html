@@ -3,10 +3,7 @@
   <header class="sticky top-0 z-30 border-b border-line-soft bg-sand-100/85 backdrop-blur-xl">
     <div class="container-page flex h-16 items-center justify-between gap-4">
       <div class="flex items-center gap-3">
-        <span
-          class="grid h-9 w-9 place-items-center rounded-lg rounded-bl-none bg-forest-800 font-display text-lg text-sand-100"
-          aria-hidden="true"
-        >M</span>
+        <app-logo [markHeight]="34" [showWordmark]="false" />
         <div class="leading-tight">
           <p class="text-sm font-semibold text-heading">Dashboard</p>
           <p class="text-xs text-muted">{{ userEmail() }}</p>
@@ -171,6 +168,11 @@
               <div>
                 <label class="label" for="p-live">URL progetto online</label>
                 <input id="p-live" type="url" class="field" formControlName="liveUrl" />
+              </div>
+              <div>
+                <label class="label" for="p-credit">Seguito da</label>
+                <input id="p-credit" type="text" class="field" formControlName="credit"
+                       placeholder="Chi ha seguito il progetto" />
               </div>
               <div>
                 <label class="label" for="p-repo">URL repository</label>

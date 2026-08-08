@@ -84,7 +84,7 @@ export class SeoService {
 
     const pageTitle = this.i18n.t(`seo.${key}.title`);
     const description = this.i18n.t(`seo.${key}.description`);
-    const siteName = 'Mahdi Allau';
+    const siteName = 'SARAH';
     const fullTitle = key === 'home' ? pageTitle : `${pageTitle} · ${siteName}`;
 
     this.title.setTitle(fullTitle);
@@ -173,19 +173,25 @@ export class SeoService {
   }
 
   /**
-   * Dati strutturati: è la stessa cosa che prometto ai clienti nella sezione
-   * "Il ritorno", quindi questo sito deve darne l'esempio.
+   * Dati strutturati: è la stessa cosa che promettiamo ai clienti nella
+   * sezione "Il ritorno", quindi questo sito deve darne l'esempio.
+   *
+   * `Organization` e non `Person`: SARAH è uno studio. Il fondatore resta
+   * dichiarato, perché è il nome che compare nell'informativa privacy come
+   * titolare del trattamento e i due devono coincidere.
    */
   private setStructuredData(origin: string, lang: Lang, description: string): void {
     const graph = {
       '@context': 'https://schema.org',
       '@graph': [
         {
-          '@type': 'ProfessionalService',
+          '@type': ['Organization', 'ProfessionalService'],
           '@id': `${origin}/#business`,
-          name: 'Mahdi Allau',
+          name: 'SARAH',
+          alternateName: 'SARAH — sviluppo web su misura',
           description,
           url: origin,
+          logo: `${origin}/logo-full.png`,
           image: `${origin}/og-cover.png`,
           email: `mailto:${environment.contactEmail}`,
           areaServed: { '@type': 'Country', name: 'Italia' },
@@ -211,7 +217,7 @@ export class SeoService {
           '@type': 'WebSite',
           '@id': `${origin}/#website`,
           url: origin,
-          name: 'Mahdi Allau',
+          name: 'SARAH',
           inLanguage: lang,
           publisher: { '@id': `${origin}/#business` },
         },

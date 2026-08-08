@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MagneticDirective } from '../../shared/motion/magnetic.directive';
+import { Logo } from '../../shared/logo/logo';
 import { LangSwitch } from '../../shared/lang-switch/lang-switch';
 import { I18nService } from '../../core/i18n/i18n.service';
 
@@ -22,7 +23,7 @@ interface NavItem {
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, RouterLinkActive, MagneticDirective, LangSwitch],
+  imports: [RouterLink, RouterLinkActive, MagneticDirective, LangSwitch, Logo],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })

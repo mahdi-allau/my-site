@@ -2,13 +2,8 @@
   <div class="container-page py-20">
     <div class="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
       <div>
-        <div class="flex items-center gap-3.5">
-          <span
-            class="grid h-10 w-10 place-items-center rounded-xl rounded-bl-none bg-sand-100 font-display text-lg text-forest-950"
-            aria-hidden="true"
-          >M</span>
-          <span class="text-[0.95rem] font-semibold tracking-tight text-heading">Mahdi Allau</span>
-        </div>
+        <!-- Fascia verde: serve la versione chiara del marchio -->
+        <app-logo tone="dark" [markHeight]="52" [alt]="i18n.t('nav.logoAlt')" />
         <p class="mt-5 max-w-sm text-sm leading-relaxed text-body">
           {{ i18n.t('footer.description') }}
         </p>
@@ -61,7 +56,7 @@
     <hr class="hairline mt-16" />
 
     <div class="flex flex-col gap-3 pt-8 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
-      <p>© {{ year }} Mahdi Allau. {{ i18n.t('footer.rights') }}</p>
+      <p>© {{ year }} SARAH. {{ i18n.t('footer.rights') }}</p>
       <p>{{ i18n.t('footer.builtWith') }}</p>
     </div>
   </div>

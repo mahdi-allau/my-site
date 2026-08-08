@@ -5,12 +5,13 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
 import { ContentService } from '../../core/content.service';
 import { ContactMessage, Project } from '../../core/models';
+import { Logo } from '../../shared/logo/logo';
 
 type Tab = 'messages' | 'projects';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [ReactiveFormsModule, RouterLink, DatePipe],
+  imports: [ReactiveFormsModule, RouterLink, DatePipe, Logo],
   templateUrl: './dashboard.html',
 })
 export class Dashboard {
@@ -51,6 +52,7 @@ export class Dashboard {
     imageUrl: [''],
     repoUrl: [''],
     liveUrl: [''],
+    credit: [''],
   });
 
   constructor() {
@@ -144,6 +146,7 @@ export class Dashboard {
       imageUrl: '',
       repoUrl: '',
       liveUrl: '',
+      credit: '',
     });
     this.formOpen.set(true);
   }
@@ -164,6 +167,7 @@ export class Dashboard {
       imageUrl: project.imageUrl ?? '',
       repoUrl: project.repoUrl ?? '',
       liveUrl: project.liveUrl ?? '',
+      credit: project.credit ?? '',
     });
     this.formOpen.set(true);
   }
@@ -199,6 +203,7 @@ export class Dashboard {
         imageUrl: value.imageUrl.trim() || null,
         repoUrl: value.repoUrl.trim() || null,
         liveUrl: value.liveUrl.trim() || null,
+        credit: value.credit.trim() || null,
       });
 
       this.closeForm();

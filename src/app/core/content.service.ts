@@ -30,6 +30,7 @@ type ProjectRow = {
   image_url: string | null;
   repo_url: string | null;
   live_url: string | null;
+  credit: string | null;
   year: number | null;
   featured: boolean | null;
   sort_order: number | null;
@@ -232,6 +233,7 @@ export class ContentService {
       image_url: draft.imageUrl,
       repo_url: draft.repoUrl,
       live_url: draft.liveUrl,
+      credit: draft.credit,
       year: draft.year,
       featured: draft.featured,
       sort_order: draft.sortOrder,
@@ -288,6 +290,7 @@ function toProject(row: ProjectRow, lang: Lang): Project {
     imageUrl: row.image_url,
     repoUrl: row.repo_url,
     liveUrl: row.live_url,
+    credit: row.credit,
     year: row.year,
     featured: row.featured ?? false,
     sortOrder: row.sort_order ?? 0,

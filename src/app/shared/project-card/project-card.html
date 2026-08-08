@@ -8,7 +8,13 @@
     }
   </div>
 
-  <h3 class="display mt-6 text-[1.75rem] leading-tight text-heading transition-colors duration-500 group-hover:text-accent">
+  @if (project().credit) {
+    <p class="mt-2.5 text-xs text-muted">
+      {{ i18n.t('projects.credit') }} <span class="text-body">{{ project().credit }}</span>
+    </p>
+  }
+
+  <h3 class="display mt-5 text-[1.75rem] leading-tight text-heading transition-colors duration-500 group-hover:text-accent">
     {{ project().title }}
   </h3>
 

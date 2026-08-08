@@ -14,6 +14,8 @@ export interface Project {
   imageUrl: string | null;
   repoUrl: string | null;
   liveUrl: string | null;
+  /** Chi ha seguito il progetto dentro lo studio. */
+  credit: string | null;
   year: number | null;
   featured: boolean;
   sortOrder: number;
