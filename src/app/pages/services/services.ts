@@ -22,8 +22,19 @@ export class Services {
   protected readonly loading = signal(true);
   protected readonly faq = [1, 2, 3, 4];
 
+  /** Pacchetti: chiavi in `translations.ts`, il secondo è quello evidenziato. */
+  protected readonly packages = [
+    { id: 1, features: [1, 2, 3, 4], highlight: false },
+    { id: 2, features: [1, 2, 3, 4, 5], highlight: true },
+    { id: 3, features: [1, 2, 3, 4], highlight: false },
+  ];
+
   protected readonly headline = computed(() =>
     accentWords(this.i18n.t('services.title'), this.i18n.t('services.accent')),
+  );
+
+  protected readonly pricingHeadline = computed(() =>
+    accentWords(this.i18n.t('pricing.title'), this.i18n.t('pricing.accent')),
   );
 
   constructor() {

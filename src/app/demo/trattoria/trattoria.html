@@ -1,0 +1,290 @@
+<!-- ===================== Dichiarazione: locale inventato ===================== -->
+<aside class="disclaimer">
+  <div class="wrap">
+    <span>{{ i18n.t('demo.banner') }}</span>
+    <a routerLink="/projects">{{ i18n.t('demo.back') }}</a>
+  </div>
+</aside>
+
+<!-- ============================== Barra ============================== -->
+<header class="bar">
+  <div class="wrap">
+    <a href="#top" class="brand" (click)="closeMenu()">
+      <span class="brand-mark" aria-hidden="true">T</span>
+      <span>
+        <span class="brand-name">Osteria del Tiglio</span>
+        <span class="brand-sub">Dal 1908 · Val Seriana</span>
+      </span>
+    </a>
+
+    <nav aria-label="Navigazione del sito">
+      @for (link of navLinks; track link.href) {
+        <a [href]="link.href">{{ link.label }}</a>
+      }
+    </nav>
+
+    <a href="#prenota" class="btn-wine bar-cta">Prenota</a>
+
+    <button
+      type="button"
+      class="burger"
+      [attr.aria-expanded]="menuOpen()"
+      aria-label="Apri il menù di navigazione"
+      (click)="toggleMenu()"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-5 w-5" aria-hidden="true">
+        @if (menuOpen()) {
+          <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" />
+        } @else {
+          <path d="M4 8h16M4 16h12" stroke-linecap="round" />
+        }
+      </svg>
+    </button>
+  </div>
+
+  @if (menuOpen()) {
+    <div class="mobile-menu">
+      <div class="wrap" style="padding-block: 1rem 1.5rem">
+        @for (link of navLinks; track link.href) {
+          <a [href]="link.href" (click)="closeMenu()">{{ link.label }}</a>
+        }
+        <a href="#prenota" class="btn-wine" style="margin-top: 1rem; width: 100%" (click)="closeMenu()">
+          Prenota un tavolo
+        </a>
+      </div>
+    </div>
+  }
+</header>
+
+<!-- ============================== Hero ============================== -->
+<section id="top" class="hero">
+  <div class="wrap">
+    <span class="eyebrow-t">Cucina di valle · Bergamo</span>
+
+    <h1 class="serif">
+      Si mangia come<br />
+      <em>a casa della nonna.</em>
+    </h1>
+
+    <p style="max-width: 40rem; margin: 2rem auto 0; font-size: 1.125rem; line-height: 1.7">
+      Tre generazioni nella stessa sala, lo stesso forno a legna del 1908 e la pasta
+      tirata a mano ogni mattina. Nessuna rivisitazione: solo i piatti della valle,
+      fatti bene.
+    </p>
+
+    <div style="margin-top: 2.75rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center">
+      <a href="#prenota" class="btn-wine">Prenota un tavolo</a>
+      <a href="#menu" class="btn-line">Guarda il menù</a>
+    </div>
+
+    <p style="margin-top: 2rem; font-size: 0.8125rem; letter-spacing: 0.08em">
+      Aperto oggi · 12:00 — 14:30 · 19:00 — 22:30
+    </p>
+  </div>
+</section>
+
+<!-- ============================== Storia ============================== -->
+<section id="storia" class="section" style="scroll-margin-top: 5rem">
+  <div class="wrap">
+    <div style="display: grid; gap: 3.5rem; align-items: center" class="storia-grid">
+      <div>
+        <span class="eyebrow-t">La storia</span>
+        <h2 appReveal class="serif" style="font-size: clamp(2rem, 5vw, 3.25rem); margin-top: 1.5rem">
+          Un’osteria, quattro tavoli<br />e un forno mai spento.
+        </h2>
+        <p appReveal [revealDelay]="90" style="margin-top: 1.75rem; line-height: 1.8">
+          Aprì nel 1908 come posto di sosta per chi scendeva a valle con il carro.
+          Di quel tempo restano il forno, il pavimento in graniglia e l’abitudine di
+          cucinare quello che c’è, non quello che va di moda.
+        </p>
+        <p appReveal [revealDelay]="150" style="margin-top: 1.25rem; line-height: 1.8">
+          Oggi in cucina c’è Marta, terza generazione, che ha imparato guardando la nonna
+          e ha aggiunto una cosa sola: il quaderno dove segna cosa arriva ogni mattina dai
+          produttori. Il menù cambia di conseguenza.
+        </p>
+      </div>
+
+      <!-- align-items: start, altrimenti la griglia stira le tessere oltre
+           l'altezza dell'illustrazione e lascia una fascia vuota -->
+      <div appReveal="right" style="display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; align-items: start">
+        <div class="tile"><div class="tile-art"><app-dish-art name="oven" /></div></div>
+        <div class="tile" style="margin-top: 2.5rem"><div class="tile-art"><app-dish-art name="bread" /></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== Menù ============================== -->
+<section id="menu" class="section section-wine" style="scroll-margin-top: 5rem">
+  <div class="wrap">
+    <div style="text-align: center">
+      <span class="eyebrow-t">Il menù</span>
+      <h2 appReveal class="serif" style="font-size: clamp(2rem, 5vw, 3.25rem); margin-top: 1.5rem">
+        Cambia con quello che arriva.
+      </h2>
+      <p appReveal [revealDelay]="90" style="max-width: 34rem; margin: 1.5rem auto 0; line-height: 1.75">
+        Questo è il menù di questa settimana. Per allergie e intolleranze diccelo quando
+        prenoti: la cucina si organizza.
+      </p>
+    </div>
+
+    <div style="margin-top: 4rem; display: grid; gap: 3.5rem 5rem" class="menu-grid">
+      @for (section of menu; track section.title; let i = $index) {
+        <div appReveal [revealDelay]="i * 90">
+          <h3 class="serif" style="font-size: 1.9rem">{{ section.title }}</h3>
+          <hr class="rule" style="margin-top: 1rem; background: color-mix(in srgb, #f7f1e4 30%, transparent)" />
+
+          <div style="margin-top: 0.5rem">
+            @for (dish of section.dishes; track dish.name) {
+              <div class="dish">
+                <span class="dish-name">{{ dish.name }}</span>
+                <span class="dish-price">{{ dish.price }} €</span>
+                <span class="dish-desc">{{ dish.description }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <p style="margin-top: 3.5rem; text-align: center; font-size: 0.875rem">
+      Coperto 2 €. Il pane e i grissini sono fatti in casa.
+    </p>
+  </div>
+</section>
+
+<!-- ============================== Le sale ============================== -->
+<section id="sale" class="section" style="scroll-margin-top: 5rem">
+  <div class="wrap">
+    <div style="max-width: 36rem">
+      <span class="eyebrow-t">Le sale</span>
+      <h2 appReveal class="serif" style="font-size: clamp(2rem, 5vw, 3.25rem); margin-top: 1.5rem">
+        Quaranta coperti,<br />nessuna fretta.
+      </h2>
+    </div>
+
+    <div style="margin-top: 3.5rem; display: grid; gap: 1.5rem" class="gallery-grid">
+      @for (item of gallery; track item.caption; let i = $index) {
+        <figure appReveal="scale" [revealDelay]="i * 80" class="tile" style="margin: 0">
+          <div class="tile-art"><app-dish-art [name]="item.art" /></div>
+          <figcaption class="tile-caption">{{ item.caption }}</figcaption>
+        </figure>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ============================== Dove siamo ============================== -->
+<section id="dove" class="section section-warm" style="scroll-margin-top: 5rem">
+  <div class="wrap">
+    <div style="display: grid; gap: 3.5rem" class="storia-grid">
+      <div>
+        <span class="eyebrow-t">Dove siamo</span>
+        <h2 appReveal class="serif" style="font-size: clamp(2rem, 5vw, 3.25rem); margin-top: 1.5rem">
+          In piazza, sotto il tiglio.
+        </h2>
+
+        <address appReveal [revealDelay]="90" style="font-style: normal; margin-top: 2rem; line-height: 1.9">
+          Piazza del Tiglio 4<br />
+          24020 Val Seriana (BG)<br />
+          <span style="opacity: 0.7">Telefono: 035 000 0000</span>
+        </address>
+
+        <p style="margin-top: 1.5rem; font-size: 0.875rem; line-height: 1.7">
+          Parcheggio libero in piazza. Sala accessibile, due gradini all’ingresso del dehors.
+        </p>
+      </div>
+
+      <div appReveal="right">
+        <h3 class="serif" style="font-size: 1.6rem">Orari</h3>
+        <hr class="rule" style="margin-top: 1rem" />
+        <dl style="margin-top: 0.5rem">
+          @for (row of hours; track row.days) {
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; padding-block: 0.85rem; border-bottom: 1px dashed color-mix(in srgb, #241a15 16%, transparent)">
+              <dt style="font-weight: 600; color: var(--ink)">{{ row.days }}</dt>
+              <dd style="margin: 0">{{ row.time }}</dd>
+            </div>
+          }
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== Prenotazione ============================== -->
+<section id="prenota" class="section section-wine" style="scroll-margin-top: 5rem">
+  <div class="wrap" style="max-width: 44rem">
+    <div style="text-align: center">
+      <span class="eyebrow-t">Prenota</span>
+      <h2 class="serif" style="font-size: clamp(2rem, 5vw, 3.25rem); margin-top: 1.5rem">
+        Tieniti un tavolo.
+      </h2>
+      <p style="margin-top: 1.5rem; line-height: 1.75">
+        Rispondiamo entro poche ore. Per gruppi sopra le otto persone conviene chiamare.
+      </p>
+    </div>
+
+    @if (booked()) {
+      <div style="margin-top: 3rem; text-align: center; border: 1px solid color-mix(in srgb, #b38b48 60%, transparent); border-radius: 1rem; padding: 3rem 2rem">
+        <h3 class="serif" style="font-size: 1.8rem">Richiesta inviata.</h3>
+        <p style="margin-top: 1rem; line-height: 1.7">
+          {{ i18n.t('demo.formNotice') }}
+        </p>
+      </div>
+    } @else {
+      <form (submit)="fakeSubmit($event)" style="margin-top: 3rem; display: grid; gap: 1.25rem">
+        <div style="display: grid; gap: 1.25rem; grid-template-columns: repeat(2, minmax(0, 1fr))">
+          <div>
+            <label class="label-t" for="t-nome">Nome</label>
+            <input id="t-nome" class="field-t" type="text" required placeholder="Come ti chiami" />
+          </div>
+          <div>
+            <label class="label-t" for="t-tel">Telefono</label>
+            <input id="t-tel" class="field-t" type="tel" required placeholder="Per confermarti" />
+          </div>
+          <div>
+            <label class="label-t" for="t-data">Giorno</label>
+            <input id="t-data" class="field-t" type="date" required />
+          </div>
+          <div>
+            <label class="label-t" for="t-persone">Persone</label>
+            <select id="t-persone" class="field-t">
+              <option>1</option><option>2</option><option>3</option><option>4</option>
+              <option>5</option><option>6</option><option>7</option><option>8 o più</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="label-t" for="t-note">Allergie o richieste</label>
+          <textarea id="t-note" class="field-t" rows="3" placeholder="Facoltativo"></textarea>
+        </div>
+
+        <button type="submit" class="btn-cream" style="margin-top: 0.5rem">Invia la richiesta</button>
+
+        <p style="font-size: 0.75rem; text-align: center; opacity: 0.75">
+          {{ i18n.t('demo.formNotice') }}
+        </p>
+      </form>
+    }
+  </div>
+</section>
+
+<!-- ============================== Piede ============================== -->
+<footer class="foot">
+  <div class="wrap" style="display: grid; gap: 2rem; text-align: center">
+    <div>
+      <span class="brand-name" style="color: var(--cream); font-size: 1.4rem">Osteria del Tiglio</span>
+      <p style="margin-top: 0.75rem; line-height: 1.7">
+        Piazza del Tiglio 4 · Val Seriana (BG) · 035 000 0000
+      </p>
+    </div>
+
+    <hr class="rule" style="background: color-mix(in srgb, #f7f1e4 20%, transparent)" />
+
+    <p style="line-height: 1.8">
+      {{ i18n.t('demo.footer') }}
+      <a routerLink="/">Mahdi Allau</a>.
+    </p>
+  </div>
+</footer>

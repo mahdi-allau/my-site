@@ -10,55 +10,64 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>https://IL-TUO-DOMINIO.it/</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://IL-TUO-DOMINIO.it/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://IL-TUO-DOMINIO.it/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://IL-TUO-DOMINIO.it/"/>
+    <loc>https://iltuodominio.it/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://IL-TUO-DOMINIO.it/services</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://IL-TUO-DOMINIO.it/services"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://IL-TUO-DOMINIO.it/services?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://IL-TUO-DOMINIO.it/services"/>
+    <loc>https://iltuodominio.it/services</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/services"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/services?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/services"/>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://IL-TUO-DOMINIO.it/projects</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://IL-TUO-DOMINIO.it/projects"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://IL-TUO-DOMINIO.it/projects?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://IL-TUO-DOMINIO.it/projects"/>
+    <loc>https://iltuodominio.it/projects</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/projects"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/projects?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/projects"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://IL-TUO-DOMINIO.it/about</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://IL-TUO-DOMINIO.it/about"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://IL-TUO-DOMINIO.it/about?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://IL-TUO-DOMINIO.it/about"/>
+    <loc>https://iltuodominio.it/about</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/about?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/about"/>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://IL-TUO-DOMINIO.it/contact</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://IL-TUO-DOMINIO.it/contact"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://IL-TUO-DOMINIO.it/contact?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://IL-TUO-DOMINIO.it/contact"/>
+    <loc>https://iltuodominio.it/contact</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/contact?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/contact"/>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://IL-TUO-DOMINIO.it/privacy</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://IL-TUO-DOMINIO.it/privacy"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://IL-TUO-DOMINIO.it/privacy?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://IL-TUO-DOMINIO.it/privacy"/>
+    <loc>https://iltuodominio.it/demo/trattoria</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/demo/trattoria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/demo/trattoria?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/demo/trattoria"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://iltuodominio.it/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/privacy?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/privacy"/>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

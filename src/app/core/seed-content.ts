@@ -23,6 +23,8 @@ interface SeedProject {
   highlights: List;
   year: number;
   sortOrder: number;
+  /** Percorso interno del progetto visitabile, quando esiste. */
+  liveUrl?: string;
 }
 
 interface SeedService {
@@ -37,6 +39,49 @@ interface SeedService {
 }
 
 const PROJECTS: SeedProject[] = [
+  {
+    // Primo della lista di proposito: è l'unico progetto che dimostra
+    // esattamente ciò che il sito vende, ed è visitabile.
+    id: 'seed-trattoria',
+    slug: 'osteria-del-tiglio',
+    liveUrl: '/demo/trattoria',
+    title: {
+      it: 'Osteria del Tiglio — sito per ristorante',
+      en: 'Osteria del Tiglio — restaurant website',
+    },
+    category: {
+      it: 'Siti web per ristoranti',
+      en: 'Restaurant websites',
+    },
+    summary: {
+      it: 'Sito completo per una trattoria di valle: menù, storia, sale, orari e richiesta di prenotazione. Progetto dimostrativo, visitabile per intero.',
+      en: 'A complete site for a valley trattoria: menu, story, rooms, opening hours and booking requests. A demo project you can visit in full.',
+    },
+    description: {
+      it: 'Un locale inventato per mostrare come lavoro su un progetto vero, dal marchio alla messa online. Identità visiva costruita apposta — vino e crema, niente a che vedere con questo sito — menù organizzato per portate e leggibile sul telefono, sezione prenotazioni e orari sempre in evidenza. Le illustrazioni sono disegnate a mano in SVG, pensate per essere sostituite dalle fotografie del locale senza rifare il layout.',
+      en: 'An invented venue, built to show how I work on a real project, from the brand to going live. A visual identity made for it — wine and cream, nothing like this site — a menu organised by course and readable on a phone, a booking section and opening hours always in view. The illustrations are hand-drawn SVG, made to be swapped for the venue’s own photographs without redoing the layout.',
+    },
+    technologies: {
+      it: ['Angular', 'TypeScript', 'CSS', 'SVG', 'Design responsive'],
+      en: ['Angular', 'TypeScript', 'CSS', 'SVG', 'Responsive design'],
+    },
+    highlights: {
+      it: [
+        'Identità visiva propria, distinta da quella del portfolio',
+        'Menù per portate, leggibile con una mano sul telefono',
+        'Prenotazione, orari e indirizzo raggiungibili da ogni punto',
+        'Illustrazioni SVG sostituibili con foto vere senza toccare il layout',
+      ],
+      en: [
+        'Its own visual identity, distinct from the portfolio’s',
+        'Menu by course, readable one-handed on a phone',
+        'Booking, hours and address reachable from anywhere on the page',
+        'SVG illustrations swappable for real photos without touching the layout',
+      ],
+    },
+    year: 2026,
+    sortOrder: 0,
+  },
   {
     id: 'seed-dashboard',
     slug: 'dashboard-dati',
@@ -303,7 +348,7 @@ export function seedProjects(lang: Lang): Project[] {
     highlights: project.highlights[lang],
     imageUrl: null,
     repoUrl: null,
-    liveUrl: null,
+    liveUrl: project.liveUrl ?? null,
     year: project.year,
     featured: true,
     sortOrder: project.sortOrder,

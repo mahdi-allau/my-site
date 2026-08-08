@@ -5,4 +5,4 @@ Disallow: /admin
 Disallow: /admin/
 
 # Sostituisci il dominio con `npm run seo:url https://iltuodominio.it`
-Sitemap: https://IL-TUO-DOMINIO.it/sitemap.xml
+Sitemap: https://iltuodominio.it/sitemap.xml

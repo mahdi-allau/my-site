@@ -115,6 +115,13 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    /* Le animazioni d'ingresso laterali traslano gli elementi di alcuni
+       pixel prima di comparire, e su schermi stretti questo faceva scorrere
+       la pagina di lato. Va messo qui e non solo sul body: a scorrere è
+       l'elemento html.
+       `clip` e non `hidden` perché `hidden` renderebbe html un contenitore
+       di scorrimento e romperebbe la barra in `position: sticky`. */
+    overflow-x: clip;
   }
 
   body {
@@ -125,7 +132,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    /* `hidden` come ripiego per i browser senza `clip` (Safari < 16). */
     overflow-x: hidden;
+    overflow-x: clip;
   }
 
   ::selection {
@@ -291,6 +300,14 @@
 
   .card:hover {
     border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+    box-shadow: var(--shadow-lift);
+  }
+
+  /* Pacchetto consigliato: bordo pieno e appoggio più marcato,
+     così l'occhio ci cade sopra senza bisogno di colori squillanti. */
+  .card.is-featured {
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    background: color-mix(in srgb, var(--accent) 4%, var(--surface));
     box-shadow: var(--shadow-lift);
   }
 

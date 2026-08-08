@@ -38,6 +38,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/privacy/privacy').then((m) => m.Privacy),
   },
   {
+    path: 'demo/trattoria',
+    data: { seo: 'demoTrattoria' },
+    loadComponent: () => import('./demo/trattoria/trattoria').then((m) => m.Trattoria),
+  },
+  {
     path: 'admin/login',
     data: { seo: 'admin' },
     loadComponent: () => import('./admin/login/login').then((m) => m.Login),

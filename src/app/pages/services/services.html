@@ -70,6 +70,109 @@
   </div>
 </section>
 
+<!-- Pacchetti e prezzi -->
+<section id="prezzi" class="relative scroll-mt-24 py-28 md:py-36">
+  <hr class="hairline absolute inset-x-0 top-0" />
+
+  <div class="container-page">
+    <div class="max-w-2xl">
+      <span appReveal class="eyebrow">{{ i18n.t('pricing.eyebrow') }}</span>
+      <h2 appReveal [revealDelay]="90" class="display mt-6 text-[2.5rem] sm:text-6xl">
+        @for (word of pricingHeadline(); track $index) {
+          <span [class.headline-accent]="word.accent">{{ word.text }}</span>
+          {{ ' ' }}
+        }
+      </h2>
+      <p appReveal [revealDelay]="180" class="mt-7 text-[0.9375rem] leading-relaxed text-body">
+        {{ i18n.t('pricing.subtitle') }}
+      </p>
+    </div>
+
+    <div class="mt-16 grid gap-6 lg:grid-cols-3">
+      @for (pack of packages; track pack.id; let i = $index) {
+        <div appReveal [revealDelay]="i * 110" class="flex">
+          <div
+            appTilt
+            [tiltStrength]="2"
+            class="card relative flex w-full flex-col p-9"
+            [class.is-featured]="pack.highlight"
+          >
+            @if (pack.highlight) {
+              <span class="absolute -top-3 left-9 rounded-full bg-accent px-4 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-surface">
+                {{ i18n.t('pricing.popular') }}
+              </span>
+            }
+
+            <h3 class="display text-2xl text-heading">{{ i18n.t('pricing.' + pack.id + '.name') }}</h3>
+            <p class="mt-1.5 text-[0.9375rem] text-muted">{{ i18n.t('pricing.' + pack.id + '.for') }}</p>
+
+            <p class="mt-7 flex items-baseline gap-2">
+              <span class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">
+                {{ i18n.t('pricing.from') }}
+              </span>
+              <span class="display text-5xl text-heading">{{ i18n.t('pricing.' + pack.id + '.price') }}</span>
+              <span class="display text-3xl text-accent">€</span>
+            </p>
+            <p class="mt-1.5 text-xs text-muted">
+              {{ i18n.t('pricing.vat') }} · {{ i18n.t('pricing.' + pack.id + '.time') }}
+            </p>
+
+            <hr class="hairline my-7" />
+
+            <!-- flex-1: spinge il pulsante in fondo, così i tre pacchetti
+                 hanno il bottone allineato anche con voci di numero diverso -->
+            <ul class="flex-1 space-y-3.5">
+              @for (feature of pack.features; track feature) {
+                <li class="flex gap-3.5 text-[0.9375rem] leading-relaxed text-body">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                       class="mt-1 h-4 w-4 shrink-0 text-accent" aria-hidden="true">
+                    <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <span>{{ i18n.t('pricing.' + pack.id + '.f' + feature) }}</span>
+                </li>
+              }
+            </ul>
+
+            <a routerLink="/contact" class="btn mt-9 w-full"
+               [class.btn-primary]="pack.highlight"
+               [class.btn-ghost]="!pack.highlight">
+              {{ i18n.t('pricing.cta') }}
+            </a>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Garanzia: toglie il rischio dalla parte del cliente -->
+    <div appReveal="scale" class="mt-8">
+      <div class="card overflow-hidden p-9 md:p-12">
+        <div class="grid gap-8 md:grid-cols-[auto_1fr] md:items-start">
+          <span class="grid h-14 w-14 shrink-0 place-items-center rounded-2xl rounded-bl-none border border-line bg-surface-alt text-accent">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 class="h-7 w-7" aria-hidden="true">
+              <path d="M12 3l7 3v5.5c0 4.2-2.9 7.9-7 9.5-4.1-1.6-7-5.3-7-9.5V6z"
+                    stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <div>
+            <h3 class="display text-2xl text-heading sm:text-3xl">
+              {{ i18n.t('pricing.guarantee.title') }}
+            </h3>
+            <p class="mt-4 max-w-3xl text-[0.9375rem] leading-relaxed text-body">
+              {{ i18n.t('pricing.guarantee.body') }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p appReveal class="mt-8 max-w-3xl text-xs leading-relaxed text-muted">
+      {{ i18n.t('pricing.note') }}
+    </p>
+  </div>
+</section>
+
 <!-- Domande frequenti -->
 <section class="band-dark on-dark py-28 md:py-36">
   <div class="container-page">

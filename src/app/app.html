@@ -5,9 +5,9 @@
   {{ i18n.t('nav.skip') }}
 </a>
 
-<app-ambience />
+@if (!isBareLayout()) {
+  <app-ambience />
 
-@if (!isAdminArea()) {
   <!-- Sipario d'ingresso: si solleva da solo, nessuno stato da gestire -->
   <div class="curtain" aria-hidden="true">
     <span class="curtain-mark">M</span>
@@ -20,6 +20,6 @@
   <router-outlet />
 </main>
 
-@if (!isAdminArea()) {
+@if (!isBareLayout()) {
   <app-footer />
 }

@@ -26,8 +26,15 @@ export class App {
     { initialValue: this.router.url },
   );
 
-  /** L'area amministrativa ha una sua intestazione: navbar e footer si tolgono di mezzo. */
-  protected readonly isAdminArea = computed(() => this.currentUrl().startsWith('/admin'));
+  /**
+   * Pagine che si presentano da sole, senza il guscio del portfolio:
+   * l'area amministrativa ha una sua intestazione, e i siti dimostrativi
+   * devono sembrare il sito di quel locale, non una pagina di questo sito.
+   */
+  protected readonly isBareLayout = computed(() => {
+    const url = this.currentUrl();
+    return url.startsWith('/admin') || url.startsWith('/demo');
+  });
 
   constructor() {
     // Va agganciato dopo `currentUrl`, così il primo NavigationEnd trova

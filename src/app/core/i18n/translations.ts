@@ -200,6 +200,52 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'Dal sito vetrina che presenta l’attività fino allo strumento interno che ti fa risparmiare ore ogni settimana. Sempre su misura, mai un tema comprato e riadattato.',
     'services.includes': 'Cosa comprende',
     'services.empty': 'Nessun servizio pubblicato al momento.',
+
+    // --- Pacchetti e prezzi ---
+    'pricing.eyebrow': 'Quanto costa',
+    'pricing.title': 'Prezzi chiari, prima di iniziare.',
+    'pricing.accent': 'prima di iniziare.',
+    'pricing.subtitle':
+      'So che la prima domanda è questa, e capisco che chiederlo metta a disagio. Ecco gli ordini di grandezza: il preventivo vero arriva dopo che abbiamo parlato, voce per voce, e da lì non si muove.',
+    'pricing.from': 'da',
+    'pricing.vat': 'IVA esclusa',
+    'pricing.popular': 'Il più richiesto',
+    'pricing.cta': 'Chiedi un preventivo',
+
+    'pricing.1.name': 'Vetrina',
+    'pricing.1.for': 'Per chi non ha ancora un sito',
+    'pricing.1.price': '690',
+    'pricing.1.time': '2–3 settimane',
+    'pricing.1.f1': 'Sito di una pagina, curato nel dettaglio',
+    'pricing.1.f2': 'Menù, orari, dove siete e contatti',
+    'pricing.1.f3': 'Ottimizzato per il telefono',
+    'pricing.1.f4': 'Pubblicazione e configurazione del dominio',
+
+    'pricing.2.name': 'Ristorante',
+    'pricing.2.for': 'Per chi vuole gestirlo da solo',
+    'pricing.2.price': '1.400',
+    'pricing.2.time': '3–5 settimane',
+    'pricing.2.f1': 'Tutto quello del pacchetto Vetrina',
+    'pricing.2.f2': 'Pannello per cambiare menù e foto da solo',
+    'pricing.2.f3': 'Galleria fotografica e pagine multiple',
+    'pricing.2.f4': 'Richiesta di prenotazione via modulo e WhatsApp',
+    'pricing.2.f5': 'Base SEO locale: farti trovare nella tua zona',
+
+    'pricing.3.name': 'Su misura',
+    'pricing.3.for': 'Per chi ha un’esigenza specifica',
+    'pricing.3.price': '2.500',
+    'pricing.3.time': 'da concordare',
+    'pricing.3.f1': 'Web application o gestionale interno',
+    'pricing.3.f2': 'Dashboard sui dati che già producete',
+    'pricing.3.f3': 'Integrazioni con i sistemi che usate',
+    'pricing.3.f4': 'Analisi iniziale e sviluppo per passi',
+
+    'pricing.guarantee.title': 'Il rischio è mio, non tuo.',
+    'pricing.guarantee.body':
+      'La prima proposta grafica te la faccio senza chiederti niente. Se non ti convince, ci salutiamo e non mi devi un euro. Pago io il tempo speso, perché se non sono capace di capire cosa vuoi non sei tu a doverlo finanziare.',
+    'pricing.note':
+      'Sono cifre indicative per orientarti, non un listino. Il dominio e l’hosting si pagano a parte, in genere poche decine di euro l’anno, intestati a te.',
+
     'services.faq.eyebrow': 'Domande frequenti',
     'services.faq.title': 'Le cose che mi chiedono sempre.',
     'services.faq.body':
@@ -290,6 +336,16 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'Quali dati raccoglie il modulo di contatto di questo sito, perché, dove vengono conservati e come chiederne la cancellazione.',
     'seo.admin.title': 'Area riservata',
     'seo.admin.description': 'Accesso riservato alla gestione dei contenuti del sito.',
+    // --- Sito dimostrativo ---
+    'demo.banner': 'Progetto dimostrativo: l’Osteria del Tiglio non esiste, è un locale inventato per mostrare come lavoro.',
+    'demo.back': 'Torna al portfolio',
+    'demo.formNotice': 'Questo modulo non invia niente: è una dimostrazione.',
+    'demo.footer': 'Sito dimostrativo progettato e sviluppato da',
+
+    'seo.demoTrattoria.title': 'Osteria del Tiglio — sito dimostrativo',
+    'seo.demoTrattoria.description':
+      'Esempio di sito per un ristorante: menù, storia, orari, galleria e richiesta di prenotazione. Locale inventato, costruito per mostrare il lavoro.',
+
     'seo.notfound.title': 'Pagina non trovata',
     'seo.notfound.description':
       'La pagina che cercavi non esiste o è stata spostata. Da qui puoi tornare alla home o guardare i progetti realizzati.',
@@ -522,6 +578,52 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'From the shop-window site that introduces the business to the internal tool that saves you hours every week. Always made to measure, never a bought theme reworked.',
     'services.includes': 'What’s included',
     'services.empty': 'No services published yet.',
+
+    // --- Packages and pricing ---
+    'pricing.eyebrow': 'What it costs',
+    'pricing.title': 'Clear prices, before we start.',
+    'pricing.accent': 'before we start.',
+    'pricing.subtitle':
+      'I know this is the first question, and I know asking it feels awkward. Here are the orders of magnitude: the real quote comes after we’ve talked, itemised — and it doesn’t move after that.',
+    'pricing.from': 'from',
+    'pricing.vat': 'excl. VAT',
+    'pricing.popular': 'Most requested',
+    'pricing.cta': 'Ask for a quote',
+
+    'pricing.1.name': 'Showcase',
+    'pricing.1.for': 'For those without a site yet',
+    'pricing.1.price': '690',
+    'pricing.1.time': '2–3 weeks',
+    'pricing.1.f1': 'A single page, carefully made',
+    'pricing.1.f2': 'Menu, opening hours, location and contacts',
+    'pricing.1.f3': 'Built for the phone first',
+    'pricing.1.f4': 'Publishing and domain setup',
+
+    'pricing.2.name': 'Restaurant',
+    'pricing.2.for': 'For those who want to run it themselves',
+    'pricing.2.price': '1,400',
+    'pricing.2.time': '3–5 weeks',
+    'pricing.2.f1': 'Everything in the Showcase package',
+    'pricing.2.f2': 'A panel to change the menu and photos yourself',
+    'pricing.2.f3': 'Photo gallery and multiple pages',
+    'pricing.2.f4': 'Booking requests by form and WhatsApp',
+    'pricing.2.f5': 'Local SEO groundwork, so people nearby find you',
+
+    'pricing.3.name': 'Bespoke',
+    'pricing.3.for': 'For a specific need',
+    'pricing.3.price': '2,500',
+    'pricing.3.time': 'to be agreed',
+    'pricing.3.f1': 'Web application or internal tool',
+    'pricing.3.f2': 'Dashboards on the data you already produce',
+    'pricing.3.f3': 'Integration with the systems you use',
+    'pricing.3.f4': 'Initial analysis and step-by-step delivery',
+
+    'pricing.guarantee.title': 'The risk is mine, not yours.',
+    'pricing.guarantee.body':
+      'I’ll make you the first design proposal without asking for anything. If it doesn’t convince you, we shake hands and you owe me nothing. I cover the time spent, because if I can’t work out what you want, you shouldn’t be the one paying for it.',
+    'pricing.note':
+      'These are indicative figures to orient you, not a price list. Domain and hosting are paid separately — usually a few tens of euros a year, registered in your name.',
+
     'services.faq.eyebrow': 'Frequently asked',
     'services.faq.title': 'The things people always ask.',
     'services.faq.body':
@@ -612,6 +714,16 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'What the contact form on this site collects, why, where it is stored and how to ask for it to be deleted.',
     'seo.admin.title': 'Admin area',
     'seo.admin.description': 'Private access for managing the site content.',
+    // --- Demo site ---
+    'demo.banner': 'Demo project: Osteria del Tiglio doesn’t exist — it’s an invented restaurant, built to show how I work.',
+    'demo.back': 'Back to the portfolio',
+    'demo.formNotice': 'This form doesn’t send anything: it’s a demonstration.',
+    'demo.footer': 'Demo site designed and built by',
+
+    'seo.demoTrattoria.title': 'Osteria del Tiglio — demo site',
+    'seo.demoTrattoria.description':
+      'An example restaurant site: menu, story, opening hours, gallery and booking request. An invented venue, built to show the work.',
+
     'seo.notfound.title': 'Page not found',
     'seo.notfound.description':
       'The page you were looking for doesn’t exist or has moved. From here you can go back home or take a look at the work.',
