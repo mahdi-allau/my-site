@@ -47,12 +47,16 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'Siamo SARAH, uno studio di ingegneri. Progettiamo e realizziamo siti, web application e dashboard: dal primo schizzo alla messa online, con un pannello che ti permette di aggiornare i contenuti da solo, quando vuoi.',
     'home.hero.ctaPrimary': 'Richiedi un preventivo',
     'home.hero.ctaSecondary': 'Guarda i progetti',
-    'home.hero.stat1Label': 'Stack',
-    'home.hero.stat1Value': 'Angular · TypeScript · Supabase',
-    'home.hero.stat2Label': 'Approccio',
-    'home.hero.stat2Value': 'Codice scritto a mano',
-    'home.hero.stat3Label': 'Incluso',
-    'home.hero.stat3Value': 'Pannello di gestione',
+
+    // Riga che scorre sotto l'hero: dice cosa c'è dentro un sito, invece
+    // di ripetere a chi è rivolto.
+    'home.includes.prefix': 'In ogni sito che consegniamo',
+    'home.includes.1': 'il menù che aggiorni da solo',
+    'home.includes.2': 'le richieste di prenotazione',
+    'home.includes.3': 'la galleria del locale',
+    'home.includes.4': 'orari, mappa e come arrivare',
+    'home.includes.5': 'telefono e WhatsApp a un tocco',
+    'home.includes.6': 'il pannello di gestione, tuo',
 
     'preview.eyebrow': 'Come nasce',
     'preview.title': 'Dal foglio bianco al sito online.',
@@ -430,12 +434,16 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'We’re SARAH, a studio of engineers. We design and build websites, web applications and dashboards — from the first sketch to going live, with a panel that lets you update the content yourself, whenever you want.',
     'home.hero.ctaPrimary': 'Request a quote',
     'home.hero.ctaSecondary': 'See the work',
-    'home.hero.stat1Label': 'Stack',
-    'home.hero.stat1Value': 'Angular · TypeScript · Supabase',
-    'home.hero.stat2Label': 'Approach',
-    'home.hero.stat2Value': 'Hand-written code',
-    'home.hero.stat3Label': 'Included',
-    'home.hero.stat3Value': 'Admin panel',
+
+    // Line that cycles under the hero: what a site contains, rather than
+    // repeating who it is for.
+    'home.includes.prefix': 'In every site we hand over',
+    'home.includes.1': 'a menu you update yourself',
+    'home.includes.2': 'booking requests',
+    'home.includes.3': 'the venue gallery',
+    'home.includes.4': 'hours, map and directions',
+    'home.includes.5': 'phone and WhatsApp in one tap',
+    'home.includes.6': 'the admin panel, yours',
 
     'preview.eyebrow': 'How it’s made',
     'preview.title': 'From blank page to live site.',

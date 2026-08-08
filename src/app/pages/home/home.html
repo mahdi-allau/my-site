@@ -28,20 +28,15 @@
       </div>
     </div>
 
-    <dl appReveal [revealDelay]="1150" class="mt-20 grid max-w-4xl overflow-hidden rounded-2xl border border-line-soft bg-surface shadow-sm sm:grid-cols-3">
-      <div class="border-line-soft px-7 py-6 sm:border-r">
-        <dt class="text-[0.6875rem] uppercase tracking-[0.22em] text-muted">{{ i18n.t('home.hero.stat1Label') }}</dt>
-        <dd class="mt-2 text-[0.95rem] font-medium text-heading">{{ i18n.t('home.hero.stat1Value') }}</dd>
-      </div>
-      <div class="border-line-soft px-7 py-6 sm:border-r">
-        <dt class="text-[0.6875rem] uppercase tracking-[0.22em] text-muted">{{ i18n.t('home.hero.stat2Label') }}</dt>
-        <dd class="mt-2 text-[0.95rem] font-medium text-heading">{{ i18n.t('home.hero.stat2Value') }}</dd>
-      </div>
-      <div class="px-7 py-6">
-        <dt class="text-[0.6875rem] uppercase tracking-[0.22em] text-muted">{{ i18n.t('home.hero.stat3Label') }}</dt>
-        <dd class="mt-2 text-[0.95rem] font-medium text-heading">{{ i18n.t('home.hero.stat3Value') }}</dd>
-      </div>
-    </dl>
+    <!-- Al posto dei tre riquadri: una riga che scorre da sola e dice cosa
+         c'è dentro un sito, invece di ripetere quello che l'hero ha già detto. -->
+    <app-rotating-line
+      appReveal
+      [revealDelay]="1150"
+      class="mt-20 block"
+      [prefix]="i18n.t('home.includes.prefix')"
+      [items]="includes()"
+    />
   </div>
 
   <div class="scroll-hint absolute bottom-8 left-1/2 hidden -translate-x-1/2 lg:block" aria-hidden="true">

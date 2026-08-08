@@ -10,6 +10,7 @@ import { SitePreview } from '../../shared/site-preview/site-preview';
 import { RevealDirective } from '../../shared/motion/reveal.directive';
 import { TiltDirective } from '../../shared/motion/tilt.directive';
 import { MagneticDirective } from '../../shared/motion/magnetic.directive';
+import { RotatingLine } from '../../shared/rotating-line/rotating-line';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,7 @@ import { MagneticDirective } from '../../shared/motion/magnetic.directive';
     RevealDirective,
     TiltDirective,
     MagneticDirective,
+    RotatingLine,
   ],
   templateUrl: './home.html',
 })
@@ -47,6 +49,11 @@ export class Home {
   });
 
   protected readonly topServices = computed(() => this.services().slice(0, 4));
+
+  /** Voci della riga che scorre sotto l'hero. */
+  protected readonly includes = computed(() =>
+    [1, 2, 3, 4, 5, 6].map((n) => this.i18n.t(`home.includes.${n}`)),
+  );
 
   constructor() {
     // Rileggendo `lang()` l'effetto si ripete al cambio lingua: i contenuti
