@@ -10,18 +10,19 @@
           <span class="text-[0.95rem] font-semibold tracking-tight text-heading">Mahdi Allau</span>
         </div>
         <p class="mt-5 max-w-sm text-sm leading-relaxed text-body">
-          Sviluppo siti web, web application e dashboard su misura per ristoranti e piccole aziende.
-          Codice scritto a mano, senza template preconfezionati.
+          {{ i18n.t('footer.description') }}
         </p>
       </div>
 
-      <nav aria-label="Link del sito">
-        <h2 class="text-[0.6875rem] font-semibold uppercase tracking-[0.24em] text-accent">Il sito</h2>
+      <nav [attr.aria-label]="i18n.t('footer.site')">
+        <h2 class="text-[0.6875rem] font-semibold uppercase tracking-[0.24em] text-accent">
+          {{ i18n.t('footer.site') }}
+        </h2>
         <ul class="mt-5 space-y-3">
           @for (link of siteLinks; track link.path) {
             <li>
               <a [routerLink]="link.path" class="text-sm text-body transition-colors duration-300 hover:text-accent">
-                {{ link.label }}
+                {{ i18n.t(link.key) }}
               </a>
             </li>
           }
@@ -29,7 +30,9 @@
       </nav>
 
       <div>
-        <h2 class="text-[0.6875rem] font-semibold uppercase tracking-[0.24em] text-accent">Contatti</h2>
+        <h2 class="text-[0.6875rem] font-semibold uppercase tracking-[0.24em] text-accent">
+          {{ i18n.t('footer.contacts') }}
+        </h2>
         <ul class="mt-5 space-y-3">
           <li>
             <a [href]="'mailto:' + email" class="text-sm text-body transition-colors duration-300 hover:text-accent">
@@ -38,12 +41,12 @@
           </li>
           <li>
             <a routerLink="/contact" class="text-sm text-body transition-colors duration-300 hover:text-accent">
-              Richiedi un preventivo
+              {{ i18n.t('footer.quote') }}
             </a>
           </li>
           <li>
             <a routerLink="/admin/login" class="text-sm text-muted transition-colors duration-300 hover:text-accent">
-              Area riservata
+              {{ i18n.t('footer.admin') }}
             </a>
           </li>
         </ul>
@@ -53,8 +56,8 @@
     <hr class="hairline mt-16" />
 
     <div class="flex flex-col gap-3 pt-8 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
-      <p>© {{ year }} Mahdi Allau. Tutti i diritti riservati.</p>
-      <p>Costruito con Angular, Tailwind CSS e Supabase.</p>
+      <p>© {{ year }} Mahdi Allau. {{ i18n.t('footer.rights') }}</p>
+      <p>{{ i18n.t('footer.builtWith') }}</p>
     </div>
   </div>
 </footer>

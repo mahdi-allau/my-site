@@ -7,42 +7,39 @@
           <span class="ping-soft absolute inline-flex h-full w-full rounded-full bg-forest-500"></span>
           <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-forest-600"></span>
         </span>
-        Disponibile per nuovi progetti
+        {{ i18n.t('home.hero.badge') }}
       </span>
 
       <h1 class="display mt-8 text-[3rem] leading-[0.98] sm:text-7xl lg:text-[5.75rem]">
-        @for (word of headline; track $index; let i = $index) {
-          <span class="word" [style.--i]="i" [class.headline-accent]="word === accentWord">{{ word }}</span>
+        @for (word of headline(); track $index; let i = $index) {
+          <span class="word" [style.--i]="i" [class.headline-accent]="word.accent">{{ word.text }}</span>
           <!-- lo spazio fra le parole va fuori dallo span animato -->
           {{ ' ' }}
         }
       </h1>
 
       <p appReveal [revealDelay]="850" class="mt-9 max-w-2xl text-lg leading-relaxed text-body sm:text-xl">
-        Sono Mahdi Allau, sviluppatore. Progetto e realizzo siti, web application e
-        dashboard: dal primo schizzo alla messa online, con un pannello che ti permette
-        di aggiornare i contenuti da solo, quando vuoi.
+        {{ i18n.t('home.hero.subtitle') }}
       </p>
 
       <div appReveal [revealDelay]="1000" class="mt-11 flex flex-wrap items-center gap-4">
-        <a routerLink="/contact" appMagnetic class="btn btn-primary">Richiedi un preventivo</a>
-        <a routerLink="/projects" appMagnetic class="btn btn-ghost">Guarda i progetti</a>
+        <a routerLink="/contact" appMagnetic class="btn btn-primary">{{ i18n.t('home.hero.ctaPrimary') }}</a>
+        <a routerLink="/projects" appMagnetic class="btn btn-ghost">{{ i18n.t('home.hero.ctaSecondary') }}</a>
       </div>
     </div>
 
-    <!-- Indicatori -->
     <dl appReveal [revealDelay]="1150" class="mt-20 grid max-w-4xl overflow-hidden rounded-2xl border border-line-soft bg-surface shadow-sm sm:grid-cols-3">
       <div class="border-line-soft px-7 py-6 sm:border-r">
-        <dt class="text-[0.6875rem] uppercase tracking-[0.22em] text-muted">Stack</dt>
-        <dd class="mt-2 text-[0.95rem] font-medium text-heading">Angular · TypeScript · Supabase</dd>
+        <dt class="text-[0.6875rem] uppercase tracking-[0.22em] text-muted">{{ i18n.t('home.hero.stat1Label') }}</dt>
+        <dd class="mt-2 text-[0.95rem] font-medium text-heading">{{ i18n.t('home.hero.stat1Value') }}</dd>
       </div>
       <div class="border-line-soft px-7 py-6 sm:border-r">
-        <dt class="text-[0.6875rem] uppercase tracking-[0.22em] text-muted">Approccio</dt>
-        <dd class="mt-2 text-[0.95rem] font-medium text-heading">Codice scritto a mano</dd>
+        <dt class="text-[0.6875rem] uppercase tracking-[0.22em] text-muted">{{ i18n.t('home.hero.stat2Label') }}</dt>
+        <dd class="mt-2 text-[0.95rem] font-medium text-heading">{{ i18n.t('home.hero.stat2Value') }}</dd>
       </div>
       <div class="px-7 py-6">
-        <dt class="text-[0.6875rem] uppercase tracking-[0.22em] text-muted">Incluso</dt>
-        <dd class="mt-2 text-[0.95rem] font-medium text-heading">Pannello di gestione</dd>
+        <dt class="text-[0.6875rem] uppercase tracking-[0.22em] text-muted">{{ i18n.t('home.hero.stat3Label') }}</dt>
+        <dd class="mt-2 text-[0.95rem] font-medium text-heading">{{ i18n.t('home.hero.stat3Value') }}</dd>
       </div>
     </dl>
   </div>
@@ -52,23 +49,43 @@
   </div>
 </section>
 
-<!-- ========================= NASTRO TECNOLOGIE ========================= -->
-<section class="marquee band-dark on-dark relative overflow-hidden py-7">
-  <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-forest-950 to-transparent" aria-hidden="true"></div>
-  <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-forest-950 to-transparent" aria-hidden="true"></div>
+<!-- ==================== ANTEPRIMA ANIMATA — fascia verde ==================== -->
+<section class="band-dark on-dark py-24 md:py-32">
+  <div class="container-page grid items-center gap-16 lg:grid-cols-[0.95fr_1.05fr]">
+    <div>
+      <span appReveal class="eyebrow">{{ i18n.t('preview.eyebrow') }}</span>
+      <h2 appReveal [revealDelay]="90" class="display mt-6 text-[2.5rem] sm:text-5xl">
+        {{ i18n.t('preview.title') }}
+      </h2>
+      <p appReveal [revealDelay]="180" class="mt-7 max-w-lg text-[0.9375rem] leading-relaxed text-body">
+        {{ i18n.t('preview.body') }}
+      </p>
 
-  <div class="marquee-track" aria-hidden="true">
-    @for (pass of [0, 1]; track pass) {
-      @for (tech of marquee; track $index) {
-        <span class="flex shrink-0 items-center gap-8 px-8">
-          <span class="font-display text-2xl text-sand-100/70">{{ tech }}</span>
-          <span class="h-1.5 w-1.5 rotate-45 bg-forest-400/60"></span>
-        </span>
-      }
-    }
+      <ol appReveal [revealDelay]="260" class="mt-9 flex flex-wrap items-center gap-x-4 gap-y-3 text-sm">
+        <li class="flex items-center gap-2.5">
+          <span class="grid h-6 w-6 place-items-center rounded-full border border-accent text-[0.65rem] font-semibold text-accent">1</span>
+          <span class="text-body">{{ i18n.t('preview.step1') }}</span>
+        </li>
+        <span class="h-px w-6 bg-line" aria-hidden="true"></span>
+        <li class="flex items-center gap-2.5">
+          <span class="grid h-6 w-6 place-items-center rounded-full border border-accent text-[0.65rem] font-semibold text-accent">2</span>
+          <span class="text-body">{{ i18n.t('preview.step2') }}</span>
+        </li>
+        <span class="h-px w-6 bg-line" aria-hidden="true"></span>
+        <li class="flex items-center gap-2.5">
+          <span class="grid h-6 w-6 place-items-center rounded-full border border-accent text-[0.65rem] font-semibold text-accent">3</span>
+          <span class="text-body">{{ i18n.t('preview.step3') }}</span>
+        </li>
+      </ol>
+    </div>
+
+    <div appReveal="scale" [revealDelay]="150">
+      <app-site-preview />
+      <p class="mt-6 text-center text-xs uppercase tracking-[0.2em] text-muted">
+        {{ i18n.t('preview.caption') }}
+      </p>
+    </div>
   </div>
-
-  <p class="sr-only">Tecnologie utilizzate: {{ marquee.join(', ') }}.</p>
 </section>
 
 <!-- ============================= SERVIZI ============================= -->
@@ -76,13 +93,15 @@
   <div class="container-page">
     <div class="flex flex-wrap items-end justify-between gap-8">
       <div class="max-w-2xl">
-        <span appReveal class="eyebrow">Cosa faccio</span>
+        <span appReveal class="eyebrow">{{ i18n.t('home.services.eyebrow') }}</span>
         <h2 appReveal [revealDelay]="90" class="display mt-6 text-[2.5rem] sm:text-6xl">
-          Dal sito vetrina<br />al <span class="headline-accent">gestionale interno</span>.
+          {{ i18n.t('home.services.titleA') }}<br />
+          {{ i18n.t('home.services.titleB') }}
+          <span class="headline-accent">{{ i18n.t('home.services.titleAccent') }}</span>.
         </h2>
       </div>
       <a appReveal [revealDelay]="180" routerLink="/services" class="link-arrow">
-        <span>Tutti i servizi</span><span>→</span>
+        <span>{{ i18n.t('home.services.link') }}</span><span>→</span>
       </a>
     </div>
 
@@ -96,11 +115,11 @@
             <h3 class="display mt-7 text-2xl text-heading">{{ service.title }}</h3>
             <p class="mt-2.5 font-display text-lg italic text-accent">{{ service.tagline }}</p>
             <p class="mt-4 text-[0.9375rem] leading-relaxed text-body">{{ service.description }}</p>
-            <span class="link-arrow mt-7"><span>Scopri</span><span>→</span></span>
+            <span class="link-arrow mt-7"><span>{{ i18n.t('common.discover') }}</span><span>→</span></span>
           </a>
         </div>
       } @empty {
-        <p class="text-muted">Caricamento dei servizi…</p>
+        <p class="text-muted">{{ i18n.t('common.loading') }}</p>
       }
     </div>
   </div>
@@ -113,13 +132,14 @@
   <div class="container-page">
     <div class="flex flex-wrap items-end justify-between gap-8">
       <div class="max-w-2xl">
-        <span appReveal class="eyebrow">Portfolio</span>
+        <span appReveal class="eyebrow">{{ i18n.t('home.projects.eyebrow') }}</span>
         <h2 appReveal [revealDelay]="90" class="display mt-6 text-[2.5rem] sm:text-6xl">
-          Progetti <span class="headline-accent">in evidenza</span>.
+          {{ i18n.t('home.projects.titleA') }}
+          <span class="headline-accent">{{ i18n.t('home.projects.titleAccent') }}</span>.
         </h2>
       </div>
       <a appReveal [revealDelay]="180" routerLink="/projects" class="link-arrow">
-        <span>Tutti i progetti</span><span>→</span>
+        <span>{{ i18n.t('home.projects.link') }}</span><span>→</span>
       </a>
     </div>
 
@@ -129,11 +149,9 @@
           <app-project-card [project]="project" />
         </div>
       } @empty {
-        @if (loading()) {
-          <p class="text-muted">Caricamento dei progetti…</p>
-        } @else {
-          <p class="text-muted">Nessun progetto pubblicato al momento.</p>
-        }
+        <p class="text-muted">
+          {{ loading() ? i18n.t('common.loading') : i18n.t('home.projects.empty') }}
+        </p>
       }
     </div>
   </div>
@@ -143,19 +161,20 @@
 <section class="band-dark on-dark py-28 md:py-36">
   <div class="container-page">
     <div class="max-w-2xl">
-      <span appReveal class="eyebrow">Come lavoro</span>
+      <span appReveal class="eyebrow">{{ i18n.t('home.process.eyebrow') }}</span>
       <h2 appReveal [revealDelay]="90" class="display mt-6 text-[2.5rem] sm:text-6xl">
-        Quattro passi,<br /><span class="headline-accent">nessuna sorpresa</span>.
+        {{ i18n.t('home.process.titleA') }}<br />
+        <span class="headline-accent">{{ i18n.t('home.process.titleAccent') }}</span>.
       </h2>
     </div>
 
     <ol class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      @for (phase of process; track phase.step; let i = $index) {
+      @for (step of steps; track step; let i = $index) {
         <li appReveal [revealDelay]="i * 110">
           <div appTilt class="card h-full p-8">
-            <span class="numeral">{{ phase.step }}</span>
-            <h3 class="mt-6 text-lg font-semibold text-heading">{{ phase.title }}</h3>
-            <p class="mt-3 text-[0.9375rem] leading-relaxed text-body">{{ phase.body }}</p>
+            <span class="numeral">0{{ step }}</span>
+            <h3 class="mt-6 text-lg font-semibold text-heading">{{ i18n.t('process.' + step + '.title') }}</h3>
+            <p class="mt-3 text-[0.9375rem] leading-relaxed text-body">{{ i18n.t('process.' + step + '.body') }}</p>
           </div>
         </li>
       }
@@ -163,37 +182,38 @@
   </div>
 </section>
 
-<!-- ============================== STACK ============================== -->
+<!-- ============================= BENEFICI ============================= -->
 <section class="py-28 md:py-36">
   <div class="container-page">
-    <div class="grid gap-16 lg:grid-cols-[0.85fr_1.15fr]">
-      <div>
-        <span appReveal class="eyebrow">Competenze</span>
+    <div class="grid gap-16 lg:grid-cols-[0.9fr_1.1fr]">
+      <div class="lg:sticky lg:top-32 lg:self-start">
+        <span appReveal class="eyebrow">{{ i18n.t('benefits.eyebrow') }}</span>
         <h2 appReveal [revealDelay]="90" class="display mt-6 text-[2.5rem] sm:text-6xl">
-          Tecnologie che uso <span class="headline-accent">davvero</span>.
+          {{ i18n.t('benefits.titleA') }}<br />
+          {{ i18n.t('benefits.titleB') }}
+          <span class="headline-accent">{{ i18n.t('benefits.titleAccent') }}</span>.
         </h2>
         <p appReveal [revealDelay]="180" class="mt-7 max-w-md text-[0.9375rem] leading-relaxed text-body">
-          Non un elenco di parole chiave: sono gli strumenti con cui ho costruito i
-          progetti qui sopra, dal firmware su microcontrollore all’interfaccia web.
+          {{ i18n.t('benefits.body') }}
         </p>
-        <a appReveal [revealDelay]="260" routerLink="/about" class="link-arrow mt-9">
-          <span>Il mio percorso</span><span>→</span>
+        <a appReveal [revealDelay]="260" routerLink="/contact" appMagnetic class="btn btn-primary mt-9">
+          {{ i18n.t('benefits.cta') }}
         </a>
       </div>
 
-      <div class="space-y-9">
-        @for (group of skillGroups; track group.label; let i = $index) {
-          <div appReveal="right" [revealDelay]="i * 90">
-            <div class="ornament mb-4">
-              <span aria-hidden="true"></span>
-            </div>
-            <h3 class="text-[0.6875rem] font-semibold uppercase tracking-[0.24em] text-accent">
-              {{ group.label }}
-            </h3>
-            <div class="mt-4 flex flex-wrap gap-2.5">
-              @for (item of group.items; track item) {
-                <span class="chip">{{ item }}</span>
-              }
+      <div class="space-y-5">
+        @for (step of steps; track step; let i = $index) {
+          <div appReveal="right" [revealDelay]="i * 100">
+            <div appTilt [tiltStrength]="3" class="card flex gap-6 p-8">
+              <span class="numeral shrink-0">0{{ step }}</span>
+              <div>
+                <h3 class="display text-xl text-heading sm:text-2xl">
+                  {{ i18n.t('benefits.' + step + '.title') }}
+                </h3>
+                <p class="mt-3 text-[0.9375rem] leading-relaxed text-body">
+                  {{ i18n.t('benefits.' + step + '.body') }}
+                </p>
+              </div>
             </div>
           </div>
         }
@@ -202,7 +222,7 @@
   </div>
 </section>
 
-<!-- ==================== CTA — fascia verde ad arco ==================== -->
+<!-- ==================== CTA — fascia verde ==================== -->
 <section class="band-dark on-dark relative overflow-hidden py-28 md:py-36">
   <div class="container-page">
     <div appReveal="scale" class="text-center">
@@ -211,16 +231,16 @@
       </div>
 
       <h2 class="display mx-auto max-w-3xl text-[2.5rem] sm:text-6xl">
-        Hai un’attività e un sito<br class="hidden sm:block" />
-        che non ti <span class="headline-accent">rappresenta</span>?
+        {{ i18n.t('home.cta.titleA') }}<br class="hidden sm:block" />
+        {{ i18n.t('home.cta.titleB') }}
+        <span class="headline-accent">{{ i18n.t('home.cta.titleAccent') }}</span>?
       </h2>
       <p class="mx-auto mt-7 max-w-xl text-[1.0625rem] leading-relaxed text-body">
-        Raccontami cosa ti serve. Ti rispondo con una proposta concreta:
-        struttura, tempi e costo, senza impegno.
+        {{ i18n.t('home.cta.body') }}
       </p>
       <div class="mt-11 flex flex-wrap justify-center gap-4">
-        <a routerLink="/contact" appMagnetic class="btn btn-primary">Scrivimi</a>
-        <a routerLink="/services" appMagnetic class="btn btn-ghost">Vedi i servizi</a>
+        <a routerLink="/contact" appMagnetic class="btn btn-primary">{{ i18n.t('home.cta.primary') }}</a>
+        <a routerLink="/services" appMagnetic class="btn btn-ghost">{{ i18n.t('home.cta.secondary') }}</a>
       </div>
     </div>
   </div>

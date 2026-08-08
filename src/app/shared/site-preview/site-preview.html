@@ -1,0 +1,70 @@
+<div class="preview" aria-hidden="true">
+  <!-- Finestra desktop -->
+  <div class="window">
+    <div class="chrome">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="omnibox">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="lock">
+          <rect x="5" y="11" width="14" height="9" rx="2" />
+          <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+        </svg>
+        <span class="url">{{ i18n.t('preview.url') }}</span>
+        <span class="caret"></span>
+      </span>
+    </div>
+
+    <div class="viewport">
+      <!-- barra di navigazione del sito montato -->
+      <div class="row nav" style="--d: 0">
+        <span class="brand"></span>
+        <span class="links">
+          <span>{{ i18n.t('preview.navHome') }}</span>
+          <span>{{ i18n.t('preview.navMenu') }}</span>
+          <span>{{ i18n.t('preview.navBook') }}</span>
+        </span>
+      </div>
+
+      <!-- blocco principale -->
+      <div class="hero" style="--d: 0.35">
+        <span class="hero-line">{{ i18n.t('preview.heroLine') }}</span>
+        <span class="hero-sub"></span>
+      </div>
+
+      <!-- righe del menù -->
+      <div class="dishes">
+        <div class="dish" style="--d: 0.8">
+          <span class="thumb"></span>
+          <span class="lines"><b>{{ i18n.t('preview.dish1') }}</b><i></i></span>
+          <span class="price"></span>
+        </div>
+        <div class="dish" style="--d: 1.05">
+          <span class="thumb"></span>
+          <span class="lines"><b>{{ i18n.t('preview.dish2') }}</b><i></i></span>
+          <span class="price"></span>
+        </div>
+        <div class="dish" style="--d: 1.3">
+          <span class="thumb"></span>
+          <span class="lines"><b>{{ i18n.t('preview.dish3') }}</b><i></i></span>
+          <span class="price"></span>
+        </div>
+      </div>
+
+      <div class="book" style="--d: 1.7">{{ i18n.t('preview.cta') }}</div>
+    </div>
+  </div>
+
+  <!-- Versione telefono -->
+  <div class="phone" style="--d: 2">
+    <span class="notch"></span>
+    <div class="phone-screen">
+      <span class="p-bar"></span>
+      <span class="p-hero"></span>
+      <span class="p-row"></span>
+      <span class="p-row short"></span>
+      <span class="p-row"></span>
+      <span class="p-btn"></span>
+    </div>
+  </div>
+</div>

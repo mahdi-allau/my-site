@@ -2,38 +2,39 @@
      `on-dark` le fa ereditare i colori chiari, altrimenti resterebbe
      scritta in verde scuro su verde scuro. -->
 <header #header class="site-header" [class.on-dark]="menuOpen()">
-  <nav class="container-page flex h-20 items-center justify-between gap-8" aria-label="Navigazione principale">
+  <nav class="container-page flex h-20 items-center justify-between gap-6" aria-label="Menu">
     <a routerLink="/" (click)="closeMenu()" class="group flex items-center gap-3.5">
       <span class="mark" aria-hidden="true">M</span>
       <span class="flex flex-col leading-tight">
         <span class="text-[0.95rem] font-semibold tracking-tight text-heading">Mahdi Allau</span>
-        <span class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">Sviluppo web</span>
+        <span class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">{{ i18n.t('nav.role') }}</span>
       </span>
     </a>
 
     <!-- Desktop -->
-    <div class="hidden items-center gap-8 md:flex">
+    <div class="hidden items-center gap-8 lg:flex">
       @for (link of links; track link.path) {
         <a
           [routerLink]="link.path"
           routerLinkActive="is-active"
           [routerLinkActiveOptions]="{ exact: link.path === '/' }"
           class="nav-link"
-        >{{ link.label }}</a>
+        >{{ i18n.t(link.key) }}</a>
       }
     </div>
 
-    <div class="hidden md:block">
-      <a routerLink="/contact" appMagnetic class="btn btn-primary btn-sm">Parliamone</a>
+    <div class="hidden items-center gap-4 lg:flex">
+      <app-lang-switch />
+      <a routerLink="/contact" appMagnetic class="btn btn-primary btn-sm">{{ i18n.t('nav.cta') }}</a>
     </div>
 
     <!-- Mobile -->
     <button
       type="button"
-      class="relative z-[41] grid h-11 w-11 place-items-center rounded-xl border border-line text-heading transition-colors hover:border-accent md:hidden"
+      class="relative z-[41] grid h-11 w-11 place-items-center rounded-xl border border-line text-heading transition-colors hover:border-accent lg:hidden"
       [attr.aria-expanded]="menuOpen()"
       aria-controls="menu-mobile"
-      [attr.aria-label]="menuOpen() ? 'Chiudi il menù' : 'Apri il menù'"
+      [attr.aria-label]="menuOpen() ? i18n.t('nav.close') : i18n.t('nav.open')"
       (click)="toggleMenu()"
     >
       @if (menuOpen()) {
@@ -53,7 +54,7 @@
 
 <!-- Menù mobile a tutto schermo -->
 @if (menuOpen()) {
-  <div id="menu-mobile" class="overlay on-dark md:hidden">
+  <div id="menu-mobile" class="overlay on-dark lg:hidden">
     <div class="container-page">
       @for (link of links; track link.path; let i = $index) {
         <a
@@ -63,13 +64,20 @@
           (click)="closeMenu()"
           class="overlay-link"
           [style.--i]="i"
-        >{{ link.label }}</a>
+        >{{ i18n.t(link.key) }}</a>
       }
 
       <div class="overlay-foot mt-10">
-        <a routerLink="/contact" (click)="closeMenu()" class="btn btn-primary w-full">Parliamone</a>
+        <a routerLink="/contact" (click)="closeMenu()" class="btn btn-primary w-full">
+          {{ i18n.t('nav.cta') }}
+        </a>
+
+        <div class="mt-8">
+          <app-lang-switch [onDark]="true" />
+        </div>
+
         <p class="mt-8 text-xs uppercase tracking-[0.25em] text-muted">
-          Siti web per ristoranti e piccole aziende
+          {{ i18n.t('nav.mobileTagline') }}
         </p>
       </div>
     </div>

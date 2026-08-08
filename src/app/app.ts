@@ -5,6 +5,7 @@ import { filter, map } from 'rxjs';
 import { Navbar } from './layout/navbar/navbar';
 import { Footer } from './layout/footer/footer';
 import { Ambience } from './layout/ambience/ambience';
+import { I18nService } from './core/i18n/i18n.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { Ambience } from './layout/ambience/ambience';
 })
 export class App {
   private readonly router = inject(Router);
+  protected readonly i18n = inject(I18nService);
 
   private readonly currentUrl = toSignal(
     this.router.events.pipe(

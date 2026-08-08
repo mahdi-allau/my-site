@@ -43,13 +43,13 @@
       <div class="mt-7 flex flex-wrap gap-6 border-t border-line-soft pt-6">
         @if (project().liveUrl) {
           <a [href]="project().liveUrl" target="_blank" rel="noopener noreferrer" class="link-arrow">
-            <span>Vedi il progetto</span><span>→</span>
+            <span>{{ i18n.t('projects.viewLive') }}</span><span>→</span>
           </a>
         }
         @if (project().repoUrl) {
           <a [href]="project().repoUrl" target="_blank" rel="noopener noreferrer"
              class="link-arrow link-arrow-muted">
-            <span>Codice sorgente</span><span>→</span>
+            <span>{{ i18n.t('projects.viewCode') }}</span><span>→</span>
           </a>
         }
       </div>

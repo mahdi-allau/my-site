@@ -1,7 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from '../../../environments/environment';
 import { ContentService } from '../../core/content.service';
+import { I18nService } from '../../core/i18n/i18n.service';
+import { accentWords } from '../../core/i18n/accent-words';
 import { RevealDirective } from '../../shared/motion/reveal.directive';
 import { TiltDirective } from '../../shared/motion/tilt.directive';
 import { MagneticDirective } from '../../shared/motion/magnetic.directive';
@@ -16,18 +18,19 @@ type FormState = 'idle' | 'sending' | 'sent' | 'mailto' | 'error';
 export class Contact {
   private readonly fb = inject(FormBuilder);
   private readonly content = inject(ContentService);
+  protected readonly i18n = inject(I18nService);
 
   protected readonly email = environment.contactEmail;
   protected readonly state = signal<FormState>('idle');
   protected readonly errorMessage = signal('');
+  protected readonly steps = [1, 2, 3];
 
-  protected readonly budgets = [
-    'Non lo so ancora',
-    'Meno di 1.000 €',
-    '1.000 – 2.500 €',
-    '2.500 – 5.000 €',
-    'Oltre 5.000 €',
-  ];
+  protected readonly headline = computed(() =>
+    accentWords(this.i18n.t('contact.title'), this.i18n.t('contact.accent')),
+  );
+
+  /** Le fasce di budget sono etichette tradotte; il valore salvato è la chiave. */
+  protected readonly budgets = ['contact.budget1', 'contact.budget2', 'contact.budget3', 'contact.budget4', 'contact.budget5'];
 
   protected readonly form = this.fb.nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
@@ -65,7 +68,8 @@ export class Contact {
       name: value.name,
       email: value.email,
       company: value.company,
-      budget: value.budget,
+      // Nel messaggio finisce l'etichetta leggibile, non la chiave.
+      budget: value.budget ? this.i18n.t(value.budget) : '',
       message: value.message,
     });
 

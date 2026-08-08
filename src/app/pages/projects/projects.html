@@ -1,13 +1,12 @@
 <section class="relative overflow-hidden">
   <div class="container-page relative z-10 pb-16 pt-28 md:pt-36">
     <div class="max-w-3xl">
-      <span class="eyebrow">Portfolio</span>
+      <span class="eyebrow">{{ i18n.t('projects.eyebrow') }}</span>
       <h1 class="display mt-7 text-[3.5rem] sm:text-7xl lg:text-8xl">
-        <span class="word" style="--i: 0">Progetti.</span>
+        <span class="word" style="--i: 0">{{ i18n.t('projects.title') }}</span>
       </h1>
       <p appReveal [revealDelay]="260" class="mt-8 max-w-2xl text-lg leading-relaxed text-body">
-        Una selezione di lavori che raccontano come affronto un problema: dal dato grezzo
-        alla dashboard, dal sensore all’interfaccia, dall’idea al sito online.
+        {{ i18n.t('projects.subtitle') }}
       </p>
     </div>
   </div>
@@ -18,7 +17,7 @@
 
   <div class="container-page pt-16">
     @if (categories().length > 2) {
-      <div appReveal class="flex flex-wrap gap-2.5" role="group" aria-label="Filtra i progetti per categoria">
+      <div appReveal class="flex flex-wrap gap-2.5" role="group" [attr.aria-label]="i18n.t('projects.filterLabel')">
         @for (category of categories(); track category) {
           <button
             type="button"
@@ -26,7 +25,7 @@
             [attr.aria-pressed]="activeCategory() === category"
             [class]="chipClass(category)"
           >
-            {{ category }}
+            {{ label(category) }}
           </button>
         }
       </div>
@@ -40,11 +39,7 @@
       } @empty {
         <div class="card p-14 text-center lg:col-span-2">
           <p class="text-muted">
-            @if (loading()) {
-              Caricamento dei progetti…
-            } @else {
-              Nessun progetto in questa categoria.
-            }
+            {{ loading() ? i18n.t('common.loading') : i18n.t('projects.emptyCategory') }}
           </p>
         </div>
       }
@@ -55,14 +50,16 @@
         <div class="glow left-1/2 top-[-8rem] h-80 w-80 -translate-x-1/2 bg-forest-500/15" aria-hidden="true"></div>
         <div class="relative z-10">
           <h2 class="display text-[2rem] sm:text-5xl">
-            Il prossimo progetto<br class="hidden sm:block" />
-            potrebbe essere il <span class="headline-accent">tuo</span>.
+            {{ i18n.t('projects.ctaTitleA') }}<br class="hidden sm:block" />
+            {{ i18n.t('projects.ctaTitleB') }}
+            <span class="headline-accent">{{ i18n.t('projects.ctaAccent') }}</span>.
           </h2>
           <p class="mx-auto mt-6 max-w-xl text-[0.9375rem] leading-relaxed text-body">
-            Raccontami cosa ti serve: ti rispondo con una proposta chiara su struttura,
-            tempi e costo.
+            {{ i18n.t('projects.ctaBody') }}
           </p>
-          <a routerLink="/contact" appMagnetic class="btn btn-primary mt-10">Parliamone</a>
+          <a routerLink="/contact" appMagnetic class="btn btn-primary mt-10">
+            {{ i18n.t('projects.ctaButton') }}
+          </a>
         </div>
       </div>
     </div>

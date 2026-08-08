@@ -77,6 +77,29 @@ Da quel momento `/admin/login` funziona e `/admin` mostra messaggi e progetti.
 
 ---
 
+## Lingue
+
+Il sito pubblico è in **italiano e inglese**, con il selettore a bandiere nella
+barra in alto. La lingua è un signal, quindi il cambio è istantaneo: niente
+build separate, niente ricaricamento della pagina, un solo sito da pubblicare.
+
+Alla prima visita la lingua viene scelta da quella del browser (italiano per i
+browser italiani, inglese per tutti gli altri) e da lì in poi vale la scelta
+dell'utente, salvata in `localStorage`.
+
+| Dove sta il testo | File |
+| ----------------- | ---- |
+| Interfaccia e testi fissi | `src/app/core/i18n/translations.ts` |
+| Progetti e servizi (senza database) | `src/app/core/seed-content.ts` |
+| Progetti e servizi (su Supabase) | colonne `*_en` delle tabelle |
+
+Le colonne inglesi sul database sono **facoltative**: se una resta vuota, la
+versione inglese del sito mostra l'italiano invece di una casella vuota.
+
+L'area amministrativa è solo in italiano: la usa una persona sola.
+
+---
+
 ## Modello di sicurezza
 
 | Chi                    | Progetti e servizi | Messaggi di contatto        |

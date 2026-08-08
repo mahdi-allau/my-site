@@ -1,16 +1,15 @@
 <section class="relative overflow-hidden">
   <div class="container-page relative z-10 pb-16 pt-28 md:pt-36">
     <div class="max-w-3xl">
-      <span class="eyebrow">Servizi</span>
+      <span class="eyebrow">{{ i18n.t('services.eyebrow') }}</span>
       <h1 class="display mt-7 text-[3rem] sm:text-7xl">
-        <span class="word" style="--i: 0">Cosa</span>
-        <span class="word" style="--i: 1">posso</span>
-        <span class="word" style="--i: 2">costruire</span>
-        <span class="word headline-accent" style="--i: 3">per te.</span>
+        @for (word of headline(); track $index; let i = $index) {
+          <span class="word" [style.--i]="i" [class.headline-accent]="word.accent">{{ word.text }}</span>
+          {{ ' ' }}
+        }
       </h1>
       <p appReveal [revealDelay]="450" class="mt-8 max-w-2xl text-lg leading-relaxed text-body">
-        Dal sito vetrina che presenta l’attività fino allo strumento interno che ti fa
-        risparmiare ore ogni settimana. Sempre su misura, mai un tema comprato e riadattato.
+        {{ i18n.t('services.subtitle') }}
       </p>
     </div>
   </div>
@@ -31,7 +30,7 @@
                 </span>
                 <div>
                   <h2 class="display text-[1.75rem] text-heading sm:text-4xl">{{ service.title }}</h2>
-                  <p class="mt-2 text-sm font-medium text-accent">{{ service.tagline }}</p>
+                  <p class="mt-2 font-display text-lg italic text-accent">{{ service.tagline }}</p>
                 </div>
               </div>
 
@@ -43,7 +42,7 @@
             @if (service.deliverables.length) {
               <div class="rounded-2xl border border-line-soft bg-surface-alt p-7">
                 <h3 class="text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-muted">
-                  Cosa comprende
+                  {{ i18n.t('services.includes') }}
                 </h3>
                 <ul class="mt-5 space-y-3.5">
                   @for (item of service.deliverables; track item) {
@@ -64,11 +63,7 @@
     } @empty {
       <div class="card p-14 text-center">
         <p class="text-muted">
-          @if (loading()) {
-            Caricamento dei servizi…
-          } @else {
-            Nessun servizio pubblicato al momento.
-          }
+          {{ loading() ? i18n.t('common.loading') : i18n.t('services.empty') }}
         </p>
       </div>
     }
@@ -76,30 +71,27 @@
 </section>
 
 <!-- Domande frequenti -->
-<section class="relative py-28 md:py-36">
-  <hr class="hairline absolute inset-x-0 top-0" />
-
+<section class="band-dark on-dark py-28 md:py-36">
   <div class="container-page">
     <div class="grid gap-16 lg:grid-cols-[0.8fr_1.2fr]">
       <div>
-        <span appReveal class="eyebrow">Domande frequenti</span>
+        <span appReveal class="eyebrow">{{ i18n.t('services.faq.eyebrow') }}</span>
         <h2 appReveal [revealDelay]="90" class="display mt-6 text-[2.5rem] sm:text-6xl">
-          Le cose che mi chiedono sempre.
+          {{ i18n.t('services.faq.title') }}
         </h2>
         <p appReveal [revealDelay]="180" class="mt-7 max-w-sm text-[0.9375rem] leading-relaxed text-body">
-          Se la tua domanda non è qui, scrivimi: rispondo anche solo per capire se posso
-          esserti utile.
+          {{ i18n.t('services.faq.body') }}
         </p>
         <a appReveal [revealDelay]="260" routerLink="/contact" appMagnetic class="btn btn-primary mt-9">
-          Fai la tua domanda
+          {{ i18n.t('services.faq.cta') }}
         </a>
       </div>
 
       <div class="space-y-4">
-        @for (item of faq; track item.question; let i = $index) {
+        @for (item of faq; track item; let i = $index) {
           <details appReveal="right" [revealDelay]="i * 90" class="card group p-7 [&_summary::-webkit-details-marker]:hidden">
             <summary class="flex cursor-pointer items-center justify-between gap-6 text-base font-semibold text-heading transition-colors duration-300 group-open:text-accent">
-              {{ item.question }}
+              {{ i18n.t('faq.' + item + '.q') }}
               <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-accent transition-transform duration-500 group-open:rotate-45">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
                      class="h-4 w-4" aria-hidden="true">
@@ -107,7 +99,9 @@
                 </svg>
               </span>
             </summary>
-            <p class="mt-5 max-w-2xl text-[0.9375rem] leading-relaxed text-body">{{ item.answer }}</p>
+            <p class="mt-5 max-w-2xl text-[0.9375rem] leading-relaxed text-body">
+              {{ i18n.t('faq.' + item + '.a') }}
+            </p>
           </details>
         }
       </div>

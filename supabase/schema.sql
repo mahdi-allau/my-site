@@ -33,6 +33,13 @@ create table if not exists public.projects (
   description  text        not null default '',
   technologies text[]      not null default '{}',
   highlights   text[]      not null default '{}',
+  -- Traduzione inglese: se una colonna resta vuota il sito mostra l'italiano
+  title_en        text,
+  category_en     text,
+  summary_en      text,
+  description_en  text,
+  technologies_en text[],
+  highlights_en   text[],
   image_url    text,
   repo_url     text,
   live_url     text,
@@ -50,6 +57,11 @@ create table if not exists public.services (
   tagline      text        not null default '',
   description  text        not null default '',
   deliverables text[]      not null default '{}',
+  -- Traduzione inglese, facoltativa come per i progetti
+  title_en        text,
+  tagline_en      text,
+  description_en  text,
+  deliverables_en text[],
   icon         text        not null default 'spark',
   sort_order   integer     not null default 0,
   created_at   timestamptz not null default now(),
@@ -311,3 +323,102 @@ values
     'spark', 5
   )
 on conflict (slug) do nothing;
+
+-- ---------------------------------------------------------------------
+-- 6. Traduzione inglese dei contenuti iniziali
+--    Corrisponde a src/app/core/seed-content.ts.
+-- ---------------------------------------------------------------------
+
+update public.projects set
+  title_en = 'Analytics dashboard for operational data',
+  category_en = 'Data & Business Intelligence',
+  summary_en = 'A data pipeline and monitoring dashboard to read how a business is doing without opening a spreadsheet.',
+  description_en = 'An end-to-end data project: ingestion and cleaning in Python, modelling on PostgreSQL with SQL queries tuned for the recurring aggregations, and presentation in Power BI with live indicators.',
+  technologies_en = array['Python', 'SQL', 'PostgreSQL', 'Power BI'],
+  highlights_en = array[
+    'Raw data ingestion and normalisation in Python',
+    'Relational model on PostgreSQL with views for the key metrics',
+    'Power BI dashboard with indicators and period filters'
+  ]
+where slug = 'dashboard-dati';
+
+update public.projects set
+  title_en = 'IoT temperature and humidity control system',
+  category_en = 'IoT & Embedded systems',
+  summary_en = 'An ESP32-based controller that reads environmental sensors and holds the readings within range using a PID loop.',
+  description_en = 'Firmware on Arduino/ESP32 for continuous temperature and humidity readings, with a PID control loop tuned to avoid oscillation and overshoot.',
+  technologies_en = array['Arduino', 'ESP32', 'PID', 'Temperature/humidity sensors', 'C++'],
+  highlights_en = array[
+    'PID tuning for a stable response',
+    'Periodic sensor sampling with noise filtering',
+    'Wi-Fi telemetry for remote monitoring'
+  ]
+where slug = 'iot-controllo-ambientale';
+
+update public.projects set
+  title_en = 'Business management web application',
+  category_en = 'Web development',
+  summary_en = 'An Angular application with a private area, records and PostgreSQL persistence: the base of a bespoke management tool.',
+  description_en = 'A single page application in Angular and TypeScript, with guarded routing, typed forms and client-side validation.',
+  technologies_en = array['Angular', 'TypeScript', 'PostgreSQL'],
+  highlights_en = array[
+    'Standalone component architecture with guarded routing',
+    'Typed forms with validation and immediate feedback',
+    'Normalised PostgreSQL schema and parameterised queries'
+  ]
+where slug = 'web-application-gestionale';
+
+update public.services set
+  title_en = 'Modern websites',
+  tagline_en = 'Fast, readable, finished with care.',
+  description_en = 'Sites built by hand, with no off-the-shelf theme: fast loading, semantic structure, text that reads well on every screen and real attention to accessibility.',
+  deliverables_en = array[
+    'Bespoke design, not a reworked template',
+    'Performance tuning and technical SEO groundwork',
+    'Responsive care from mobile to desktop'
+  ]
+where slug = 'siti-web-moderni';
+
+update public.services set
+  title_en = 'Websites for restaurants',
+  tagline_en = 'Menu, opening hours and bookings, always current.',
+  description_en = 'The site puts front and centre what customers actually look for: the current menu, where you are, when you are open and how to book.',
+  deliverables_en = array[
+    'Menu you manage yourself from the admin panel',
+    'Photo gallery, opening hours and embedded map',
+    'Quick contact: phone, WhatsApp, booking request'
+  ]
+where slug = 'siti-web-per-ristoranti';
+
+update public.services set
+  title_en = 'Web applications',
+  tagline_en = 'Internal tools that replace the spreadsheets.',
+  description_en = 'Lightweight management tools and bespoke applications for day-to-day work: records, orders, shifts, stock.',
+  deliverables_en = array[
+    'Authentication and role management',
+    'A data model designed around your actual process',
+    'An interface built for daily use, not for the demo'
+  ]
+where slug = 'web-application';
+
+update public.services set
+  title_en = 'Dashboards and reporting',
+  tagline_en = 'Your numbers, read in thirty seconds.',
+  description_en = 'I take the data you already produce and turn it into a clear dashboard. No manual exports every Monday morning.',
+  deliverables_en = array[
+    'Integration of your existing data sources',
+    'Indicators and charts on the metrics that matter',
+    'Automatic refresh and access from any device'
+  ]
+where slug = 'dashboard';
+
+update public.services set
+  title_en = 'Custom digital solutions',
+  tagline_en = 'For when you need something that does not exist yet.',
+  description_en = 'Automations, integrations between systems, hardware/software prototypes. We start with a short, concrete analysis and build only what is genuinely needed.',
+  deliverables_en = array[
+    'Initial analysis and a no-obligation proposal',
+    'Development in steps, with something usable early',
+    'Documentation and a proper handover'
+  ]
+where slug = 'soluzioni-digitali-personalizzate';

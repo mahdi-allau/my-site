@@ -1,13 +1,15 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../../core/content.service';
 import { Project } from '../../core/models';
+import { I18nService } from '../../core/i18n/i18n.service';
 import { ProjectCard } from '../../shared/project-card/project-card';
 import { RevealDirective } from '../../shared/motion/reveal.directive';
 import { TiltDirective } from '../../shared/motion/tilt.directive';
 import { MagneticDirective } from '../../shared/motion/magnetic.directive';
 
-const ALL = 'Tutti';
+/** Sentinella del filtro "tutte le categorie": non è una categoria reale. */
+const ALL = '__all__';
 
 @Component({
   selector: 'app-projects',
@@ -16,11 +18,12 @@ const ALL = 'Tutti';
 })
 export class Projects {
   private readonly content = inject(ContentService);
+  protected readonly i18n = inject(I18nService);
 
   protected readonly projects = signal<Project[]>([]);
   protected readonly loading = signal(true);
   protected readonly activeCategory = signal(ALL);
-  protected readonly allLabel = ALL;
+  protected readonly allValue = ALL;
 
   protected readonly categories = computed(() => {
     const found = new Set(this.projects().map((project) => project.category).filter(Boolean));
@@ -36,7 +39,16 @@ export class Projects {
   });
 
   constructor() {
-    void this.load();
+    effect(() => {
+      this.i18n.lang();
+      // Le categorie sono tradotte: un filtro attivo non varrebbe più.
+      this.activeCategory.set(ALL);
+      void this.load();
+    });
+  }
+
+  protected label(category: string): string {
+    return category === ALL ? this.i18n.t('projects.filterAll') : category;
   }
 
   protected select(category: string): void {
@@ -44,7 +56,7 @@ export class Projects {
   }
 
   protected chipClass(category: string): string {
-    const base = 'chip chip-selectable cursor-pointer';
+    const base = 'chip chip-selectable';
     return this.activeCategory() === category ? `${base} chip-active` : base;
   }
 

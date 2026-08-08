@@ -12,15 +12,17 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MagneticDirective } from '../../shared/motion/magnetic.directive';
+import { LangSwitch } from '../../shared/lang-switch/lang-switch';
+import { I18nService } from '../../core/i18n/i18n.service';
 
 interface NavItem {
-  label: string;
+  key: string;
   path: string;
 }
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, RouterLinkActive, MagneticDirective],
+  imports: [RouterLink, RouterLinkActive, MagneticDirective, LangSwitch],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
@@ -31,11 +33,13 @@ export class Navbar implements OnInit, OnDestroy {
   private readonly header = viewChild.required<ElementRef<HTMLElement>>('header');
   private readonly progress = viewChild.required<ElementRef<HTMLElement>>('progress');
 
+  protected readonly i18n = inject(I18nService);
+
   protected readonly links: NavItem[] = [
-    { label: 'Home', path: '/' },
-    { label: 'Chi sono', path: '/about' },
-    { label: 'Progetti', path: '/projects' },
-    { label: 'Servizi', path: '/services' },
+    { key: 'nav.home', path: '/' },
+    { key: 'nav.about', path: '/about' },
+    { key: 'nav.projects', path: '/projects' },
+    { key: 'nav.services', path: '/services' },
   ];
 
   protected readonly menuOpen = signal(false);

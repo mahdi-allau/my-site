@@ -1,8 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { ContactDraft, ContactMessage, Project, ProjectDraft, ServiceOffer } from './models';
-import { SEED_PROJECTS, SEED_SERVICES } from './seed-content';
+import { seedProjects, seedServices } from './seed-content';
 import { SupabaseService } from './supabase.service';
+import { I18nService, Lang } from './i18n/i18n.service';
 
 /** Esito dell'invio del form contatti. */
 export type ContactResult =
@@ -10,6 +11,7 @@ export type ContactResult =
   | { ok: true; mode: 'mailto'; href: string }
   | { ok: false; error: string };
 
+/** Le colonne `*_en` sono facoltative: se vuote si ricade sull'italiano. */
 type ProjectRow = {
   id: string;
   slug: string;
@@ -19,6 +21,12 @@ type ProjectRow = {
   description: string | null;
   technologies: string[] | null;
   highlights: string[] | null;
+  title_en: string | null;
+  category_en: string | null;
+  summary_en: string | null;
+  description_en: string | null;
+  technologies_en: string[] | null;
+  highlights_en: string[] | null;
   image_url: string | null;
   repo_url: string | null;
   live_url: string | null;
@@ -34,6 +42,10 @@ type ServiceRow = {
   tagline: string | null;
   description: string | null;
   deliverables: string[] | null;
+  title_en: string | null;
+  tagline_en: string | null;
+  description_en: string | null;
+  deliverables_en: string[] | null;
   icon: string | null;
   sort_order: number | null;
 };
@@ -59,6 +71,7 @@ type MessageRow = {
 @Injectable({ providedIn: 'root' })
 export class ContentService {
   private readonly supabase = inject(SupabaseService);
+  private readonly i18n = inject(I18nService);
 
   get usesRemoteData(): boolean {
     return this.supabase.isConfigured;
@@ -69,8 +82,10 @@ export class ContentService {
   // ------------------------------------------------------------------
 
   async listProjects(): Promise<Project[]> {
+    const lang = this.i18n.lang();
+
     if (!this.supabase.isConfigured) {
-      return SEED_PROJECTS;
+      return seedProjects(lang);
     }
 
     try {
@@ -81,18 +96,20 @@ export class ContentService {
         .order('sort_order', { ascending: true });
 
       if (error || !data?.length) {
-        return SEED_PROJECTS;
+        return seedProjects(lang);
       }
 
-      return (data as ProjectRow[]).map(toProject);
+      return (data as ProjectRow[]).map((row) => toProject(row, lang));
     } catch {
-      return SEED_PROJECTS;
+      return seedProjects(lang);
     }
   }
 
   async listServices(): Promise<ServiceOffer[]> {
+    const lang = this.i18n.lang();
+
     if (!this.supabase.isConfigured) {
-      return SEED_SERVICES;
+      return seedServices(lang);
     }
 
     try {
@@ -103,12 +120,12 @@ export class ContentService {
         .order('sort_order', { ascending: true });
 
       if (error || !data?.length) {
-        return SEED_SERVICES;
+        return seedServices(lang);
       }
 
-      return (data as ServiceRow[]).map(toService);
+      return (data as ServiceRow[]).map((row) => toService(row, lang));
     } catch {
-      return SEED_SERVICES;
+      return seedServices(lang);
     }
   }
 
@@ -166,7 +183,8 @@ export class ContentService {
       throw new Error(error.message);
     }
 
-    return (data as ProjectRow[]).map(toProject);
+    // La dashboard lavora sempre sull'originale italiano.
+    return (data as ProjectRow[]).map((row) => toProject(row, 'it'));
   }
 
   async listMessages(): Promise<ContactMessage[]> {
@@ -242,16 +260,31 @@ export class ContentService {
 // Mapper snake_case -> camelCase
 // --------------------------------------------------------------------
 
-function toProject(row: ProjectRow): Project {
+/** Sceglie la traduzione richiesta; se manca o è vuota torna l'italiano. */
+function pick(it: string | null, en: string | null, lang: Lang): string {
+  if (lang === 'en' && en && en.trim().length > 0) {
+    return en;
+  }
+  return it ?? '';
+}
+
+function pickList(it: string[] | null, en: string[] | null, lang: Lang): string[] {
+  if (lang === 'en' && en && en.length > 0) {
+    return en;
+  }
+  return it ?? [];
+}
+
+function toProject(row: ProjectRow, lang: Lang): Project {
   return {
     id: row.id,
     slug: row.slug,
-    title: row.title,
-    category: row.category ?? '',
-    summary: row.summary ?? '',
-    description: row.description ?? '',
-    technologies: row.technologies ?? [],
-    highlights: row.highlights ?? [],
+    title: pick(row.title, row.title_en, lang),
+    category: pick(row.category, row.category_en, lang),
+    summary: pick(row.summary, row.summary_en, lang),
+    description: pick(row.description, row.description_en, lang),
+    technologies: pickList(row.technologies, row.technologies_en, lang),
+    highlights: pickList(row.highlights, row.highlights_en, lang),
     imageUrl: row.image_url,
     repoUrl: row.repo_url,
     liveUrl: row.live_url,
@@ -269,16 +302,16 @@ const SERVICE_ICONS: ReadonlyArray<ServiceOffer['icon']> = [
   'spark',
 ];
 
-function toService(row: ServiceRow): ServiceOffer {
+function toService(row: ServiceRow, lang: Lang): ServiceOffer {
   const icon = SERVICE_ICONS.find((allowed) => allowed === row.icon) ?? 'spark';
 
   return {
     id: row.id,
     slug: row.slug,
-    title: row.title,
-    tagline: row.tagline ?? '',
-    description: row.description ?? '',
-    deliverables: row.deliverables ?? [],
+    title: pick(row.title, row.title_en, lang),
+    tagline: pick(row.tagline, row.tagline_en, lang),
+    description: pick(row.description, row.description_en, lang),
+    deliverables: pickList(row.deliverables, row.deliverables_en, lang),
     icon,
     sortOrder: row.sort_order ?? 0,
   };

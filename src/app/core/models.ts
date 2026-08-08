@@ -52,7 +52,8 @@ export interface ContactDraft {
 }
 
 export interface SkillGroup {
-  label: string;
+  /** Chiave di traduzione dell'etichetta del gruppo. */
+  labelKey: string;
   items: string[];
 }
 

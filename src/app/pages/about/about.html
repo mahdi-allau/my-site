@@ -2,55 +2,50 @@
   <div class="container-page relative z-10 pb-16 pt-28 md:pt-36">
     <div class="grid gap-14 lg:grid-cols-[1.35fr_1fr] lg:items-center">
       <div>
-        <span class="eyebrow">Chi sono</span>
+        <span class="eyebrow">{{ i18n.t('about.eyebrow') }}</span>
         <h1 class="display mt-7 text-[2.75rem] leading-[1.02] sm:text-6xl lg:text-7xl">
-          <span class="word" style="--i: 0">Costruisco</span>
-          <span class="word" style="--i: 1">cose</span>
-          <span class="word" style="--i: 2">che</span>
-          <span class="word" style="--i: 3">devono</span>
-          <span class="word" style="--i: 4">funzionare</span>
-          <span class="word headline-accent" style="--i: 5">il lunedì mattina.</span>
+          @for (word of headline(); track $index; let i = $index) {
+            <span class="word" [style.--i]="i" [class.headline-accent]="word.accent">{{ word.text }}</span>
+            {{ ' ' }}
+          }
         </h1>
-        <p appReveal [revealDelay]="600" class="mt-9 max-w-2xl text-lg leading-relaxed text-muted">
-          Mi chiamo Mahdi Allau e sviluppo software. Vengo da un percorso tecnico che tocca
-          tre mondi — il web, i dati e i sistemi embedded — e oggi metto insieme queste
-          competenze per costruire siti e strumenti digitali per ristoranti e piccole aziende.
+        <p appReveal [revealDelay]="600" class="mt-9 max-w-2xl text-lg leading-relaxed text-body">
+          {{ i18n.t('about.p1') }}
         </p>
-        <p appReveal [revealDelay]="700" class="mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted">
-          Questo sito è insieme il mio portfolio e la vetrina della mia attività: è stato
-          costruito da zero con lo stesso stack che uso per i clienti.
+        <p appReveal [revealDelay]="700" class="mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-body">
+          {{ i18n.t('about.p2') }}
         </p>
 
         <div appReveal [revealDelay]="800" class="mt-11 flex flex-wrap gap-4">
-          <a routerLink="/contact" appMagnetic class="btn btn-primary">Lavoriamo insieme</a>
-          <a routerLink="/projects" appMagnetic class="btn btn-ghost">Cosa ho costruito</a>
+          <a routerLink="/contact" appMagnetic class="btn btn-primary">{{ i18n.t('about.ctaPrimary') }}</a>
+          <a routerLink="/projects" appMagnetic class="btn btn-ghost">{{ i18n.t('about.ctaSecondary') }}</a>
         </div>
       </div>
 
       <div appReveal="right" [revealDelay]="400">
         <div appTilt class="card p-9">
           <h2 class="text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-accent">
-            In sintesi
+            {{ i18n.t('about.summary') }}
           </h2>
           <dl class="mt-7 space-y-6">
             <div>
-              <dt class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">Ruolo</dt>
-              <dd class="mt-1.5 text-heading">Sviluppatore web full-stack</dd>
+              <dt class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">{{ i18n.t('about.roleLabel') }}</dt>
+              <dd class="mt-1.5 text-heading">{{ i18n.t('about.roleValue') }}</dd>
             </div>
             <hr class="hairline" />
             <div>
-              <dt class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">Specializzazione</dt>
-              <dd class="mt-1.5 text-heading">Siti e web app per ristorazione e piccole imprese</dd>
+              <dt class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">{{ i18n.t('about.focusLabel') }}</dt>
+              <dd class="mt-1.5 text-heading">{{ i18n.t('about.focusValue') }}</dd>
             </div>
             <hr class="hairline" />
             <div>
-              <dt class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">Stack principale</dt>
-              <dd class="mt-1.5 text-heading">Angular, TypeScript, Tailwind CSS, Supabase, PostgreSQL</dd>
+              <dt class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">{{ i18n.t('about.stackLabel') }}</dt>
+              <dd class="mt-1.5 text-heading">{{ i18n.t('about.stackValue') }}</dd>
             </div>
             <hr class="hairline" />
             <div>
-              <dt class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">Altri ambiti</dt>
-              <dd class="mt-1.5 text-heading">Python e SQL per i dati, Arduino/ESP32 per l’IoT</dd>
+              <dt class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">{{ i18n.t('about.otherLabel') }}</dt>
+              <dd class="mt-1.5 text-heading">{{ i18n.t('about.otherValue') }}</dd>
             </div>
           </dl>
         </div>
@@ -60,27 +55,27 @@
 </section>
 
 <!-- Aree di lavoro -->
-<section class="relative py-28 md:py-36">
-  <hr class="hairline absolute inset-x-0 top-0" />
-
+<section class="band-dark on-dark py-28 md:py-36">
   <div class="container-page">
     <div class="max-w-2xl">
-      <span appReveal class="eyebrow">Il percorso</span>
+      <span appReveal class="eyebrow">{{ i18n.t('about.path.eyebrow') }}</span>
       <h2 appReveal [revealDelay]="90" class="display mt-6 text-[2.5rem] sm:text-6xl">
-        Tre ambiti,<br />un modo di ragionare.
+        {{ i18n.t('about.path.titleA') }}<br />{{ i18n.t('about.path.titleB') }}
       </h2>
     </div>
 
     <div class="mt-16 space-y-5">
-      @for (area of areas; track area.title; let i = $index) {
+      @for (area of areas; track area; let i = $index) {
         <div appReveal [revealDelay]="i * 110">
           <div appTilt [tiltStrength]="2.5" class="card grid gap-8 p-9 md:grid-cols-[auto_1fr] md:items-start md:p-11">
-            <span class="numeral">0{{ i + 1 }}</span>
+            <span class="numeral">0{{ area }}</span>
             <div>
-              <h3 class="display text-2xl text-heading sm:text-3xl">{{ area.title }}</h3>
-              <p class="mt-4 max-w-3xl text-[0.9375rem] leading-relaxed text-muted">{{ area.body }}</p>
+              <h3 class="display text-2xl text-heading sm:text-3xl">{{ i18n.t('about.area' + area + '.title') }}</h3>
+              <p class="mt-4 max-w-3xl text-[0.9375rem] leading-relaxed text-body">
+                {{ i18n.t('about.area' + area + '.body') }}
+              </p>
               <div class="mt-6 flex flex-wrap gap-2.5">
-                @for (tech of area.stack; track tech) {
+                @for (tech of areaStacks[area]; track tech) {
                   <span class="chip">{{ tech }}</span>
                 }
               </div>
@@ -93,23 +88,25 @@
 </section>
 
 <!-- Principi -->
-<section class="relative py-28 md:py-36">
-  <hr class="hairline absolute inset-x-0 top-0" />
-
+<section class="py-28 md:py-36">
   <div class="container-page">
     <div class="max-w-2xl">
-      <span appReveal class="eyebrow">Metodo</span>
+      <span appReveal class="eyebrow">{{ i18n.t('about.method.eyebrow') }}</span>
       <h2 appReveal [revealDelay]="90" class="display mt-6 text-[2.5rem] sm:text-6xl">
-        Quattro cose su cui<br />non transigo.
+        {{ i18n.t('about.method.titleA') }}<br />{{ i18n.t('about.method.titleB') }}
       </h2>
     </div>
 
     <div class="mt-16 grid gap-6 sm:grid-cols-2">
-      @for (principle of principles; track principle.title; let i = $index) {
+      @for (principle of principles; track principle; let i = $index) {
         <div appReveal="scale" [revealDelay]="i * 100">
           <div appTilt class="card h-full p-9">
-            <h3 class="display text-xl text-heading sm:text-2xl">{{ principle.title }}</h3>
-            <p class="mt-4 text-[0.9375rem] leading-relaxed text-muted">{{ principle.body }}</p>
+            <h3 class="display text-xl text-heading sm:text-2xl">
+              {{ i18n.t('about.principle' + principle + '.title') }}
+            </h3>
+            <p class="mt-4 text-[0.9375rem] leading-relaxed text-body">
+              {{ i18n.t('about.principle' + principle + '.body') }}
+            </p>
           </div>
         </div>
       }
@@ -123,18 +120,18 @@
 
   <div class="container-page">
     <div class="max-w-2xl">
-      <span appReveal class="eyebrow">Competenze tecniche</span>
+      <span appReveal class="eyebrow">{{ i18n.t('about.skills.eyebrow') }}</span>
       <h2 appReveal [revealDelay]="90" class="display mt-6 text-[2.5rem] sm:text-6xl">
-        Lo strumentario completo.
+        {{ i18n.t('about.skills.title') }}
       </h2>
     </div>
 
     <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      @for (group of skillGroups; track group.label; let i = $index) {
+      @for (group of skillGroups; track group.labelKey; let i = $index) {
         <div appReveal [revealDelay]="i * 90">
           <div appTilt class="card h-full p-8">
             <h3 class="text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-accent">
-              {{ group.label }}
+              {{ i18n.t(group.labelKey) }}
             </h3>
             <div class="mt-5 flex flex-wrap gap-2.5">
               @for (item of group.items; track item) {
