@@ -1,0 +1,134 @@
+<app-demo-shell
+  [title]="i18n.t('demo.iot.title')"
+  [subtitle]="i18n.t('demo.iot.subtitle')"
+>
+  <!-- Letture -->
+  <div class="readouts">
+    <div class="panel readout" [attr.data-status]="status()">
+      <p class="r-label">{{ i18n.t('demo.iot.temperature') }}</p>
+      <p class="r-value">{{ format(temperature()) }}<span class="unit">°C</span></p>
+      <p class="r-sub">
+        {{ i18n.t('demo.iot.target') }} {{ format(setpoint(), 1) }}°C ·
+        {{ i18n.t('demo.iot.error') }} {{ format(error(), 1) }}°C
+      </p>
+    </div>
+
+    <div class="panel readout">
+      <p class="r-label">{{ i18n.t('demo.iot.humidity') }}</p>
+      <p class="r-value">{{ format(humidity(), 0) }}<span class="unit">%</span></p>
+      <p class="r-sub">{{ i18n.t('demo.iot.humidityNote') }}</p>
+    </div>
+
+    <div class="panel readout">
+      <p class="r-label">{{ i18n.t('demo.iot.power') }}</p>
+      <p class="r-value">{{ format(power(), 0) }}<span class="unit">%</span></p>
+      <div class="power-track" aria-hidden="true">
+        <div class="power-fill" [style.width.%]="power()"></div>
+      </div>
+    </div>
+
+    <div class="panel readout">
+      <p class="r-label">{{ i18n.t('demo.iot.state') }}</p>
+      <p class="badge" [attr.data-status]="status()">{{ i18n.t('demo.iot.status.' + status()) }}</p>
+      @if (doorOpen()) {
+        <p class="r-sub warn">{{ i18n.t('demo.iot.doorOpen') }}</p>
+      }
+    </div>
+  </div>
+
+  <!-- Grafico -->
+  <div class="panel chart">
+    <div class="panel-head">
+      <h2>{{ i18n.t('demo.iot.chart') }}</h2>
+      <div class="legend">
+        <span class="key measure"></span>{{ i18n.t('demo.iot.legendTemp') }}
+        <span class="key target"></span>{{ i18n.t('demo.iot.legendTarget') }}
+      </div>
+    </div>
+
+    <svg viewBox="0 0 600 180" preserveAspectRatio="none" role="img"
+         [attr.aria-label]="i18n.t('demo.iot.chart')">
+      @for (tick of ticks(); track tick.value) {
+        <line x1="0" [attr.y1]="tick.y" x2="600" [attr.y2]="tick.y"
+              stroke="#e1e7e4" stroke-width="1" vector-effect="non-scaling-stroke" />
+      }
+
+      <!-- Ambiente e setpoint -->
+      <line x1="0" [attr.y1]="ambientY()" x2="600" [attr.y2]="ambientY()"
+            stroke="#cbd5d0" stroke-width="1" stroke-dasharray="2 4"
+            vector-effect="non-scaling-stroke" />
+      <line x1="0" [attr.y1]="setpointY()" x2="600" [attr.y2]="setpointY()"
+            stroke="#b4541f" stroke-width="1.5" stroke-dasharray="6 4"
+            vector-effect="non-scaling-stroke" />
+
+      <path [attr.d]="trendPath()" fill="none" stroke="#2c6b4f" stroke-width="2"
+            stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+    </svg>
+
+    <div class="scale" aria-hidden="true">
+      @for (tick of ticks(); track tick.value) {
+        <span [style.top.%]="(tick.y / 180) * 100">{{ tick.value }}°</span>
+      }
+    </div>
+  </div>
+
+  <!-- Comandi -->
+  <div class="controls">
+    <div class="panel">
+      <div class="panel-head"><h2>{{ i18n.t('demo.iot.setpointTitle') }}</h2></div>
+
+      <label class="ctl-label" for="sp">
+        {{ i18n.t('demo.iot.target') }}
+        <strong>{{ format(setpoint(), 1) }} °C</strong>
+      </label>
+      <input id="sp" type="range" min="1" max="12" step="0.5"
+             [value]="setpoint()" (input)="onSetpoint($event)" />
+
+      <div class="ctl-actions">
+        <button type="button" class="btn-app" (click)="openDoor()">
+          {{ i18n.t('demo.iot.openDoor') }}
+        </button>
+        <button type="button" class="btn-ghost-app" (click)="toggleRun()">
+          {{ running() ? i18n.t('demo.iot.pause') : i18n.t('demo.iot.resume') }}
+        </button>
+        <button type="button" class="btn-ghost-app" (click)="restart()">
+          {{ i18n.t('demo.iot.restart') }}
+        </button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>{{ i18n.t('demo.iot.gainsTitle') }}</h2>
+        <span class="panel-note">{{ i18n.t('demo.iot.gainsNote') }}</span>
+      </div>
+
+      <div class="presets">
+        @for (name of presetNames; track name) {
+          <button type="button" (click)="applyPreset(name)"
+                  [class.is-on]="preset() === name"
+                  [attr.aria-pressed]="preset() === name">
+            {{ i18n.t('demo.iot.preset.' + name) }}
+          </button>
+        }
+      </div>
+
+      <label class="ctl-label" for="kp">Kp <strong>{{ format(gains().kp, 0) }}</strong></label>
+      <!-- I massimi coprono anche il preset più spinto: se un cursore si
+           fermasse prima, mostrerebbe un valore diverso da quello che il
+           regolatore sta davvero usando. -->
+      <input id="kp" type="range" min="0" max="100" step="1"
+             [value]="gains().kp" (input)="onGain('kp', $event)" />
+
+      <label class="ctl-label" for="ki">Ki <strong>{{ format(gains().ki, 2) }}</strong></label>
+      <input id="ki" type="range" min="0" max="16" step="0.05"
+             [value]="gains().ki" (input)="onGain('ki', $event)" />
+
+      <label class="ctl-label" for="kd">Kd <strong>{{ format(gains().kd, 0) }}</strong></label>
+      <input id="kd" type="range" min="0" max="40" step="1"
+             [value]="gains().kd" (input)="onGain('kd', $event)" />
+    </div>
+  </div>
+
+  <p class="footnote">{{ i18n.t('demo.iot.footnote') }}</p>
+</app-demo-shell>

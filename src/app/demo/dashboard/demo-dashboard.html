@@ -1,0 +1,121 @@
+<app-demo-shell
+  [title]="i18n.t('demo.dash.title')"
+  [subtitle]="i18n.t('demo.dash.subtitle')"
+>
+  <!-- Filtro periodo: ricalcola indicatori, grafici e classifica -->
+  <div class="toolbar">
+    <div class="segmented" role="group" [attr.aria-label]="i18n.t('demo.dash.periodLabel')">
+      @for (days of periods; track days) {
+        <button
+          type="button"
+          (click)="select(days)"
+          [class.is-on]="period() === days"
+          [attr.aria-pressed]="period() === days"
+        >
+          {{ i18n.t('demo.dash.period' + days) }}
+        </button>
+      }
+    </div>
+
+    <p class="compare">{{ i18n.t('demo.dash.compare') }}</p>
+  </div>
+
+  <!-- Indicatori -->
+  <div class="kpis">
+    @for (kpi of kpis(); track kpi.labelKey) {
+      <div class="panel kpi">
+        <p class="kpi-label">{{ i18n.t(kpi.labelKey) }}</p>
+        <p class="kpi-value">{{ kpi.value }}</p>
+
+        @if (kpi.delta !== null) {
+          <p class="kpi-delta" [class.down]="kpi.delta < 0">
+            <span aria-hidden="true">{{ kpi.delta >= 0 ? '▲' : '▼' }}</span>
+            {{ deltaLabel(kpi.delta) }}
+          </p>
+        } @else if (kpi.hint) {
+          <p class="kpi-hint">{{ kpi.hint }}</p>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Andamento -->
+  <div class="panel chart">
+    <div class="panel-head">
+      <h2>{{ i18n.t('demo.dash.trend') }}</h2>
+      <span class="panel-note">{{ i18n.t('demo.dash.trendNote') }}</span>
+    </div>
+
+    <svg class="trend" viewBox="0 0 720 200" preserveAspectRatio="none" role="img"
+         [attr.aria-label]="i18n.t('demo.dash.trend')">
+      <defs>
+        <linearGradient id="fillGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2c6b4f" stop-opacity=".22" />
+          <stop offset="100%" stop-color="#2c6b4f" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+
+      <path [attr.d]="areaPath()" fill="url(#fillGrad)" />
+      <path [attr.d]="linePath()" fill="none" stroke="#2c6b4f" stroke-width="2"
+            stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+    </svg>
+
+    <div class="axis">
+      @for (label of axisLabels(); track $index) {
+        <span>{{ label }}</span>
+      }
+    </div>
+  </div>
+
+  <div class="split">
+    <!-- Media per giorno della settimana -->
+    <div class="panel">
+      <div class="panel-head">
+        <h2>{{ i18n.t('demo.dash.weekday') }}</h2>
+      </div>
+
+      <div class="bars">
+        @for (day of weekdays(); track day.label) {
+          <div class="bar-col">
+            <div class="bar-track">
+              <div class="bar" [style.height.%]="day.height" [class.closed]="day.closed"></div>
+            </div>
+            <span class="bar-label">{{ day.label }}</span>
+            <span class="bar-value">
+              {{ day.closed ? i18n.t('demo.dash.closed') : money(day.average) }}
+            </span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Classifica dei piatti -->
+    <div class="panel">
+      <div class="panel-head">
+        <h2>{{ i18n.t('demo.dash.dishes') }}</h2>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{{ i18n.t('demo.dash.dish') }}</th>
+            <th class="right">{{ i18n.t('demo.dash.share') }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (dish of dishes(); track dish.name) {
+            <tr>
+              <td>
+                <span class="dish-name">{{ dish.name }}</span>
+                <span class="dish-bar" [style.width.%]="dish.share * 100" aria-hidden="true"></span>
+              </td>
+              <td class="right mono">{{ dish.percent }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p class="footnote">{{ i18n.t('demo.tool.footnote') }}</p>
+</app-demo-shell>

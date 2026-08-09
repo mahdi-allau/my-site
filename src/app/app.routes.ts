@@ -43,6 +43,21 @@ export const routes: Routes = [
     loadComponent: () => import('./demo/trattoria/trattoria').then((m) => m.Trattoria),
   },
   {
+    path: 'demo/dashboard',
+    data: { seo: 'demoDashboard' },
+    loadComponent: () => import('./demo/dashboard/demo-dashboard').then((m) => m.DemoDashboard),
+  },
+  {
+    path: 'demo/gestionale',
+    data: { seo: 'demoGestionale' },
+    loadComponent: () => import('./demo/gestionale/demo-gestionale').then((m) => m.DemoGestionale),
+  },
+  {
+    path: 'demo/iot',
+    data: { seo: 'demoIot' },
+    loadComponent: () => import('./demo/iot/demo-iot').then((m) => m.DemoIot),
+  },
+  {
     path: 'admin/login',
     data: { seo: 'admin' },
     loadComponent: () => import('./admin/login/login').then((m) => m.Login),

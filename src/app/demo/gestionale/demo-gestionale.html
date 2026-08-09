@@ -1,0 +1,168 @@
+<app-demo-shell
+  [title]="i18n.t('demo.crm.title')"
+  [subtitle]="i18n.t('demo.crm.subtitle')"
+>
+  <!-- Riepilogo -->
+  <div class="stats">
+    <div class="panel stat">
+      <p class="stat-label">{{ i18n.t('demo.crm.statBookings') }}</p>
+      <p class="stat-value">{{ counts().total }}</p>
+    </div>
+    <div class="panel stat">
+      <p class="stat-label">{{ i18n.t('demo.crm.statCovers') }}</p>
+      <p class="stat-value">{{ counts().covers }}</p>
+    </div>
+    <div class="panel stat">
+      <p class="stat-label">{{ i18n.t('demo.crm.statOpen') }}</p>
+      <p class="stat-value">{{ counts().open }}</p>
+    </div>
+  </div>
+
+  <!-- Ricerca e filtri -->
+  <div class="toolbar">
+    <input
+      type="search"
+      class="search"
+      [value]="query()"
+      (input)="onQuery($event)"
+      [placeholder]="i18n.t('demo.crm.searchPlaceholder')"
+      [attr.aria-label]="i18n.t('demo.crm.searchPlaceholder')"
+    />
+
+    <div class="filters" role="group" [attr.aria-label]="i18n.t('demo.crm.filterLabel')">
+      <button type="button" (click)="setStatusFilter('tutti')"
+              [class.is-on]="statusFilter() === 'tutti'"
+              [attr.aria-pressed]="statusFilter() === 'tutti'">
+        {{ i18n.t('demo.crm.all') }}
+      </button>
+      @for (status of statuses; track status) {
+        <button type="button" (click)="setStatusFilter(status)"
+                [class.is-on]="statusFilter() === status"
+                [attr.aria-pressed]="statusFilter() === status">
+          {{ i18n.t('demo.crm.status.' + status) }}
+        </button>
+      }
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn-ghost-app" (click)="reset()">
+        {{ i18n.t('demo.crm.resetButton') }}
+      </button>
+      <button type="button" class="btn-app" (click)="create()">
+        {{ i18n.t('demo.crm.newButton') }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabella -->
+  <div class="panel table-panel">
+    <table class="table">
+      <thead>
+        <tr>
+          <th><button type="button" (click)="sort('customer')">{{ i18n.t('demo.crm.colCustomer') }} {{ sortIcon('customer') }}</button></th>
+          <th><button type="button" (click)="sort('day')">{{ i18n.t('demo.crm.colWhen') }} {{ sortIcon('day') }}</button></th>
+          <th class="right"><button type="button" (click)="sort('covers')">{{ i18n.t('demo.crm.colCovers') }} {{ sortIcon('covers') }}</button></th>
+          <th><button type="button" (click)="sort('status')">{{ i18n.t('demo.crm.colStatus') }} {{ sortIcon('status') }}</button></th>
+          <th class="right">{{ i18n.t('demo.crm.colActions') }}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (row of visible(); track row.id) {
+          <tr>
+            <td>
+              <span class="cust">{{ row.customer }}</span>
+              @if (row.note) {
+                <span class="note">{{ row.note }}</span>
+              }
+            </td>
+            <td class="mono">{{ formatDay(row.day) }} · {{ row.time }}</td>
+            <td class="right mono">{{ row.covers }}</td>
+            <td>
+              <button type="button" class="pill" [attr.data-status]="row.status"
+                      (click)="advance(row)"
+                      [title]="i18n.t('demo.crm.advanceHint')">
+                {{ i18n.t('demo.crm.status.' + row.status) }}
+              </button>
+            </td>
+            <td class="right nowrap">
+              <button type="button" class="link" (click)="edit(row)">{{ i18n.t('demo.crm.edit') }}</button>
+              <button type="button" class="link danger" (click)="remove(row)">{{ i18n.t('demo.crm.delete') }}</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5" class="empty">{{ i18n.t('demo.crm.empty') }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <p class="count">{{ counts().shown }} / {{ counts().total }}</p>
+  </div>
+
+  <!-- Pannello di inserimento e modifica -->
+  @if (editing() !== null) {
+    <div class="drawer-backdrop" (click)="close()"></div>
+    <aside class="drawer" role="dialog" aria-modal="true">
+      <div class="drawer-head">
+        <h2>{{ editing() === 0 ? i18n.t('demo.crm.newTitle') : i18n.t('demo.crm.editTitle') }}</h2>
+        <button type="button" class="link" (click)="close()">{{ i18n.t('demo.crm.close') }}</button>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="save()" novalidate>
+        <label class="field-label" for="g-customer">{{ i18n.t('demo.crm.colCustomer') }} *</label>
+        <input id="g-customer" class="field-app" type="text" formControlName="customer" />
+        @if (invalid('customer')) {
+          <p class="field-error">{{ i18n.t('demo.crm.errCustomer') }}</p>
+        }
+
+        <label class="field-label" for="g-phone">{{ i18n.t('demo.crm.phone') }}</label>
+        <input id="g-phone" class="field-app" type="tel" formControlName="phone" />
+
+        <div class="row-2">
+          <div>
+            <label class="field-label" for="g-day">{{ i18n.t('demo.crm.day') }} *</label>
+            <input id="g-day" class="field-app" type="date" formControlName="day" />
+          </div>
+          <div>
+            <label class="field-label" for="g-time">{{ i18n.t('demo.crm.time') }} *</label>
+            <input id="g-time" class="field-app" type="time" formControlName="time" />
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div>
+            <label class="field-label" for="g-covers">{{ i18n.t('demo.crm.colCovers') }} *</label>
+            <input id="g-covers" class="field-app" type="number" min="1" max="60" formControlName="covers" />
+            @if (invalid('covers')) {
+              <p class="field-error">{{ i18n.t('demo.crm.errCovers') }}</p>
+            }
+          </div>
+          <div>
+            <label class="field-label" for="g-status">{{ i18n.t('demo.crm.colStatus') }}</label>
+            <select id="g-status" class="field-app" formControlName="status">
+              @for (status of statuses; track status) {
+                <option [value]="status">{{ i18n.t('demo.crm.status.' + status) }}</option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <label class="field-label" for="g-note">{{ i18n.t('demo.crm.note') }}</label>
+        <textarea id="g-note" class="field-app" rows="3" formControlName="note"></textarea>
+
+        <div class="drawer-foot">
+          <button type="button" class="btn-ghost-app" (click)="close()">{{ i18n.t('demo.crm.cancel') }}</button>
+          <button type="submit" class="btn-app">{{ i18n.t('demo.crm.save') }}</button>
+        </div>
+      </form>
+    </aside>
+  }
+
+  @if (toast()) {
+    <p class="toast" role="status">{{ toast() }}</p>
+  }
+
+  <p class="footnote">{{ i18n.t('demo.tool.footnote') }}</p>
+</app-demo-shell>

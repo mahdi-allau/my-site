@@ -64,6 +64,33 @@
   </url>
 
   <url>
+    <loc>https://iltuodominio.it/demo/dashboard</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/demo/dashboard"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/demo/dashboard?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/demo/dashboard"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://iltuodominio.it/demo/gestionale</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/demo/gestionale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/demo/gestionale?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/demo/gestionale"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://iltuodominio.it/demo/iot</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/demo/iot"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/demo/iot?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/demo/iot"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
     <loc>https://iltuodominio.it/privacy</loc>
     <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/privacy"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/privacy?lang=en"/>

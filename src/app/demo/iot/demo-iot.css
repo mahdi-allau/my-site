@@ -1,0 +1,289 @@
+/* Cella frigorifera. Colori dai token del guscio. */
+
+.panel {
+  background: var(--app-panel);
+  border: 1px solid var(--app-line);
+  border-radius: 0.75rem;
+  padding: 1.15rem 1.25rem;
+}
+
+.panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.panel-head h2 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--app-ink);
+}
+
+.panel-note {
+  font-size: 0.75rem;
+  color: var(--app-muted);
+}
+
+/* ----------------------------- letture ----------------------------- */
+.readouts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 900px) {
+  .readouts {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.r-label {
+  font-size: 0.75rem;
+  color: var(--app-muted);
+}
+
+.r-value {
+  margin-top: 0.25rem;
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--app-ink);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.unit {
+  margin-left: 0.15rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--app-muted);
+}
+
+.r-sub {
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--app-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.r-sub.warn {
+  color: var(--app-warn);
+  font-weight: 600;
+}
+
+/* Il riquadro della temperatura si tinge quando si esce dalla banda */
+.readout[data-status="alarm"] {
+  border-color: #e6bfa8;
+  background: var(--app-warn-soft);
+}
+
+.power-track {
+  margin-top: 0.6rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--app-line-soft);
+  overflow: hidden;
+}
+
+.power-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--app-accent);
+  transition: width 140ms linear;
+}
+
+.badge {
+  display: inline-block;
+  margin-top: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.badge[data-status="ok"] {
+  background: var(--app-accent-soft);
+  color: var(--app-accent);
+}
+
+.badge[data-status="working"] {
+  background: #fdf1e3;
+  color: #8a5116;
+}
+
+.badge[data-status="alarm"] {
+  background: var(--app-warn-soft);
+  color: var(--app-warn);
+}
+
+/* ----------------------------- grafico ----------------------------- */
+.chart {
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.chart svg {
+  width: 100%;
+  height: 11rem;
+  display: block;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--app-muted);
+}
+
+.key {
+  display: inline-block;
+  width: 0.9rem;
+  height: 0.15rem;
+  border-radius: 999px;
+}
+
+.key.measure {
+  background: var(--app-accent);
+}
+
+.key.target {
+  background: var(--app-warn);
+  margin-left: 0.6rem;
+}
+
+/* Etichette dell'asse, fuori dall'SVG per non deformarsi */
+.scale {
+  position: absolute;
+  top: 3.35rem;
+  right: 1.35rem;
+  height: 11rem;
+  width: 0;
+  pointer-events: none;
+}
+
+.scale span {
+  position: absolute;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 0.625rem;
+  color: var(--app-muted);
+  background: var(--app-panel);
+  padding-left: 0.3rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ----------------------------- comandi ----------------------------- */
+.controls {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 900px) {
+  .controls {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ctl-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.9rem 0 0.4rem;
+  font-size: 0.8125rem;
+  color: var(--app-body);
+}
+
+.ctl-label strong {
+  color: var(--app-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--app-accent);
+  cursor: pointer;
+}
+
+.ctl-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.btn-app,
+.btn-ghost-app {
+  padding: 0.55rem 1.05rem;
+  border-radius: 0.55rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-family: inherit;
+}
+
+.btn-app {
+  background: var(--app-accent);
+  color: #fff;
+}
+
+.btn-app:hover {
+  background: #235741;
+}
+
+.btn-ghost-app {
+  border-color: var(--app-line);
+  background: var(--app-panel);
+  color: var(--app-body);
+}
+
+.btn-ghost-app:hover {
+  border-color: var(--app-accent);
+  color: var(--app-accent);
+}
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.presets button {
+  padding: 0.42rem 0.8rem;
+  border: 1px solid var(--app-line);
+  border-radius: 999px;
+  background: var(--app-panel);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--app-body);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.presets button:hover {
+  border-color: var(--app-accent);
+}
+
+.presets button.is-on {
+  background: var(--app-accent);
+  border-color: var(--app-accent);
+  color: #fff;
+}
+
+.footnote {
+  margin-top: 1.25rem;
+  font-size: 0.75rem;
+  color: var(--app-muted);
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .power-fill {
+    transition: none;
+  }
+}

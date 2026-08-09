@@ -88,6 +88,7 @@ const PROJECTS: SeedProject[] = [
   {
     id: 'seed-dashboard',
     slug: 'dashboard-dati',
+    liveUrl: '/demo/dashboard',
     title: {
       it: 'Dashboard analitica per dati operativi',
       en: 'Analytics dashboard for operational data',
@@ -127,6 +128,7 @@ const PROJECTS: SeedProject[] = [
   {
     id: 'seed-iot',
     slug: 'iot-controllo-ambientale',
+    liveUrl: '/demo/iot',
     title: {
       it: 'Sistema IoT di controllo temperatura e umidità',
       en: 'IoT temperature and humidity control system',
@@ -166,6 +168,7 @@ const PROJECTS: SeedProject[] = [
   {
     id: 'seed-webapp',
     slug: 'web-application-gestionale',
+    liveUrl: '/demo/gestionale',
     title: {
       it: 'Web application gestionale',
       en: 'Business management web application',

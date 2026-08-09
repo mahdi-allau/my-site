@@ -1,0 +1,396 @@
+/* Gestionale prenotazioni. Colori dai token del guscio. */
+
+.panel {
+  background: var(--app-panel);
+  border: 1px solid var(--app-line);
+  border-radius: 0.75rem;
+}
+
+/* ----------------------------- riepilogo ----------------------------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.stat {
+  padding: 1rem 1.15rem;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--app-muted);
+}
+
+.stat-value {
+  margin-top: 0.2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--app-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ----------------------------- strumenti ----------------------------- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.search {
+  flex: 1 1 14rem;
+  min-width: 0;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--app-line);
+  border-radius: 0.55rem;
+  background: var(--app-panel);
+  color: var(--app-ink);
+  font-size: 0.875rem;
+  font-family: inherit;
+}
+
+.search:focus {
+  outline: none;
+  border-color: var(--app-accent);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.filters button {
+  padding: 0.42rem 0.8rem;
+  border: 1px solid var(--app-line);
+  border-radius: 999px;
+  background: var(--app-panel);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--app-body);
+  cursor: pointer;
+  transition: border-color 200ms ease, color 200ms ease, background-color 200ms ease;
+}
+
+.filters button:hover {
+  border-color: var(--app-accent);
+}
+
+.filters button.is-on {
+  background: var(--app-accent);
+  border-color: var(--app-accent);
+  color: #fff;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.btn-app,
+.btn-ghost-app {
+  padding: 0.55rem 1.05rem;
+  border-radius: 0.55rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-family: inherit;
+}
+
+.btn-app {
+  background: var(--app-accent);
+  color: #fff;
+}
+
+.btn-app:hover {
+  background: #235741;
+}
+
+.btn-ghost-app {
+  border-color: var(--app-line);
+  background: var(--app-panel);
+  color: var(--app-body);
+}
+
+.btn-ghost-app:hover {
+  border-color: var(--app-accent);
+  color: var(--app-accent);
+}
+
+/* ----------------------------- tabella ----------------------------- */
+.table-panel {
+  padding: 0.25rem 1.15rem 1rem;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 40rem;
+}
+
+.table th {
+  text-align: left;
+  padding: 0.85rem 0.5rem 0.6rem;
+  border-bottom: 1px solid var(--app-line);
+}
+
+.table th button {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--app-muted);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.table th button:hover {
+  color: var(--app-ink);
+}
+
+.table td {
+  padding: 0.7rem 0.5rem;
+  border-bottom: 1px solid var(--app-line-soft);
+  vertical-align: middle;
+}
+
+.table tr:last-child td {
+  border-bottom: 0;
+}
+
+.right {
+  text-align: right;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.mono {
+  font-variant-numeric: tabular-nums;
+}
+
+.cust {
+  display: block;
+  color: var(--app-ink);
+  font-weight: 500;
+}
+
+.note {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+  color: var(--app-muted);
+}
+
+.empty {
+  padding: 2.5rem 0;
+  text-align: center;
+  color: var(--app-muted);
+}
+
+.count {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--app-muted);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Stato: cliccabile, avanza al passo successivo */
+.pill {
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-family: inherit;
+  transition: filter 200ms ease;
+}
+
+.pill:hover {
+  filter: brightness(0.95);
+}
+
+.pill[data-status="nuovo"] {
+  background: #eef2f6;
+  color: #2f4a63;
+}
+
+.pill[data-status="corso"] {
+  background: #fdf1e3;
+  color: #8a5116;
+}
+
+.pill[data-status="servito"] {
+  background: var(--app-accent-soft);
+  color: var(--app-accent);
+}
+
+.pill[data-status="pagato"] {
+  background: #eceee9;
+  color: #5d6b62;
+}
+
+.link {
+  padding: 0.2rem 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--app-accent);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link.danger {
+  color: var(--app-warn);
+  margin-left: 0.4rem;
+}
+
+/* ----------------------------- pannello laterale ----------------------------- */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(22, 33, 28, 0.35);
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 41;
+  width: min(26rem, 100%);
+  padding: 1.5rem;
+  overflow-y: auto;
+  background: var(--app-panel);
+  border-left: 1px solid var(--app-line);
+  animation: drawer-in 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes drawer-in {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+.drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.drawer-head h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--app-ink);
+}
+
+.field-label {
+  display: block;
+  margin: 0.9rem 0 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--app-muted);
+}
+
+.field-app {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--app-line);
+  border-radius: 0.5rem;
+  background: var(--app-panel);
+  color: var(--app-ink);
+  font-size: 0.875rem;
+  font-family: inherit;
+}
+
+.field-app:focus {
+  outline: none;
+  border-color: var(--app-accent);
+}
+
+.field-error {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  color: var(--app-warn);
+}
+
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.drawer-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--app-line);
+}
+
+/* ----------------------------- messaggio ----------------------------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  z-index: 45;
+  transform: translateX(-50%);
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  background: var(--app-ink);
+  color: #fff;
+  font-size: 0.8125rem;
+  animation: toast-in 260ms ease;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+}
+
+.footnote {
+  margin-top: 1.25rem;
+  font-size: 0.75rem;
+  color: var(--app-muted);
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .actions button {
+    flex: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .toast {
+    animation: none;
+  }
+}
