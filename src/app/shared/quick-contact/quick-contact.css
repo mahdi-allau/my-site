@@ -1,0 +1,98 @@
+.inline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--fg-body);
+  transition: color 250ms ease;
+}
+
+.row:hover {
+  color: var(--accent);
+}
+
+.row svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.row-label {
+  display: block;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-muted);
+}
+
+.row-value {
+  display: block;
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------
+   Tasto fisso su telefono
+   -------------------------------------------------------------- */
+/* Il nascondere da desktop sta qui e non con una classe utility: gli stili
+   del componente ricevono un attributo in più e vincono per specificità,
+   quindi `lg:hidden` non avrebbe effetto. */
+.floating {
+  position: fixed;
+  right: 1rem;
+  /* Sopra la barra di sistema dei telefoni con il notch */
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 35;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+@media (min-width: 1024px) {
+  .floating {
+    display: none;
+  }
+}
+
+.fab {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 999px;
+  color: #fff;
+  box-shadow: 0 10px 26px -10px rgba(16, 31, 24, 0.55);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fab:active {
+  transform: scale(0.94);
+}
+
+.fab svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.fab-wa {
+  background: #25d366;
+}
+
+.fab-tel {
+  background: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fab {
+    transition: none;
+  }
+}

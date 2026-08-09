@@ -5,13 +5,16 @@ import { filter, map } from 'rxjs';
 import { Navbar } from './layout/navbar/navbar';
 import { Footer } from './layout/footer/footer';
 import { Ambience } from './layout/ambience/ambience';
+import { QuickContact } from './shared/quick-contact/quick-contact';
+import { AnnouncementBar } from './layout/announcement-bar/announcement-bar';
+import { AnnouncementsService } from './core/announcements.service';
 import { I18nService } from './core/i18n/i18n.service';
 import { SeoService } from './core/seo/seo.service';
 import { SiteContentService } from './core/site-content.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar, Footer, Ambience],
+  imports: [RouterOutlet, Navbar, Footer, Ambience, QuickContact, AnnouncementBar],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -45,5 +48,6 @@ export class App {
     // Testi riscritti e dati aziendali. Non si attende: la pagina parte
     // con i valori del codice e si aggiorna quando arrivano.
     void inject(SiteContentService).load();
+    void inject(AnnouncementsService).load();
   }
 }

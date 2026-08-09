@@ -8,12 +8,21 @@ import { ContactMessage, Project } from '../../core/models';
 import { Logo } from '../../shared/logo/logo';
 import { ContentEditor } from '../content-editor/content-editor';
 import { SettingsEditor } from '../settings-editor/settings-editor';
+import { AnnouncementsEditor } from '../announcements-editor/announcements-editor';
 
-type Tab = 'messages' | 'projects' | 'content' | 'settings';
+type Tab = 'messages' | 'projects' | 'content' | 'settings' | 'announcements';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [ReactiveFormsModule, RouterLink, DatePipe, Logo, ContentEditor, SettingsEditor],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    DatePipe,
+    Logo,
+    ContentEditor,
+    SettingsEditor,
+    AnnouncementsEditor,
+  ],
   templateUrl: './dashboard.html',
 })
 export class Dashboard {

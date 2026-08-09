@@ -330,6 +330,13 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'contact.errorPrefix': 'Non siamo riusciti a inviare il messaggio:',
     'contact.errorSuffix': 'Puoi scriverci direttamente a',
     'contact.directTitle': 'Scrivici direttamente',
+    'announcement.label': 'Avviso',
+    'announcement.more': 'Scopri',
+    'announcement.close': 'Chiudi l’avviso',
+
+    'contact.callUs': 'Chiamaci',
+    'contact.whatsapp': 'WhatsApp',
+    'contact.whatsappText': 'Buongiorno, vi scrivo dal vostro sito.',
 
     // --- Guida animata: cosa succede dopo aver scritto ---
     'contact.walk.eyebrow': 'Passo per passo',
@@ -863,6 +870,13 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'contact.errorPrefix': 'We couldn’t send the message:',
     'contact.errorSuffix': 'You can write to us directly at',
     'contact.directTitle': 'Write to us directly',
+    'announcement.label': 'Notice',
+    'announcement.more': 'Find out more',
+    'announcement.close': 'Dismiss the notice',
+
+    'contact.callUs': 'Call us',
+    'contact.whatsapp': 'WhatsApp',
+    'contact.whatsappText': 'Hello, I’m writing from your website.',
 
     // --- Animated walkthrough: what happens after you write ---
     'contact.walk.eyebrow': 'Step by step',

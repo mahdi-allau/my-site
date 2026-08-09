@@ -1,0 +1,119 @@
+<p class="intro">
+  La fascia in cima al sito: promozioni, sconti, chiusure. Ne compare
+  <strong>una sola</strong>, la più recente fra quelle pubblicate. Le date la
+  rendono automatica: uno sconto di Natale si prepara a ottobre e sparisce
+  da solo, senza doversi ricordare di toglierlo.
+</p>
+
+@if (error()) {
+  <p class="err">{{ error() }}</p>
+}
+
+<div class="head">
+  <button type="button" class="btn-admin" (click)="create()">Nuovo annuncio</button>
+</div>
+
+@if (loading()) {
+  <p class="muted">Caricamento…</p>
+} @else {
+  <div class="list">
+    @for (row of rows(); track row.id) {
+      <article class="item" [attr.data-state]="state(row).kind">
+        <div class="item-main">
+          <div class="badges">
+            <span class="state">{{ state(row).label }}</span>
+            <span class="kind">{{ row.kind === 'promo' ? 'Promozione' : 'Avviso' }}</span>
+            <span class="period">{{ period(row) }}</span>
+          </div>
+          <p class="msg">{{ row.messageIt }}</p>
+          @if (row.messageEn) {
+            <p class="msg-en">{{ row.messageEn }}</p>
+          }
+        </div>
+
+        <div class="item-actions">
+          @if (row.active) {
+            <button type="button" class="btn-admin-ghost" (click)="unpublish(row)">Ritira</button>
+          } @else {
+            <button type="button" class="btn-admin" (click)="publish(row)">Pubblica</button>
+          }
+          <button type="button" class="btn-admin-ghost" (click)="edit(row)">Modifica</button>
+          <button type="button" class="link-danger" (click)="remove(row)">Elimina</button>
+        </div>
+      </article>
+    } @empty {
+      <p class="muted">Nessun annuncio. Creane uno per mostrare una fascia in cima al sito.</p>
+    }
+  </div>
+}
+
+@if (editing() !== null) {
+  <div class="backdrop" (click)="close()"></div>
+  <aside class="drawer" role="dialog" aria-modal="true">
+    <div class="drawer-head">
+      <h3>{{ editing() ? 'Modifica annuncio' : 'Nuovo annuncio' }}</h3>
+      <button type="button" class="link-danger" (click)="close()">Chiudi</button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="save()" novalidate>
+      <label class="lbl" for="a-it">Testo in italiano *</label>
+      <textarea id="a-it" class="field-admin" rows="2" formControlName="messageIt"
+                placeholder="Es. Sconto del 15% sui siti per ristoranti fino al 31 dicembre"></textarea>
+      @if (invalid('messageIt')) {
+        <p class="field-err">Servono almeno quattro caratteri.</p>
+      }
+
+      <label class="lbl" for="a-en">Testo in inglese</label>
+      <textarea id="a-en" class="field-admin" rows="2" formControlName="messageEn"></textarea>
+      <p class="hint">Se lo lasci vuoto, agli utenti inglesi compare il testo italiano.</p>
+
+      <label class="lbl" for="a-kind">Tipo</label>
+      <select id="a-kind" class="field-admin" formControlName="kind">
+        <option value="promo">Promozione — fascia verde in evidenza</option>
+        <option value="info">Avviso — fascia scura, più sobria</option>
+      </select>
+
+      <label class="lbl" for="a-url">Link (facoltativo)</label>
+      <input id="a-url" class="field-admin" type="text" formControlName="linkUrl" placeholder="/services o https://…" />
+
+      <div class="row-2">
+        <div>
+          <label class="lbl" for="a-lit">Testo del link, italiano</label>
+          <input id="a-lit" class="field-admin" type="text" formControlName="linkLabelIt" />
+        </div>
+        <div>
+          <label class="lbl" for="a-len">Testo del link, inglese</label>
+          <input id="a-len" class="field-admin" type="text" formControlName="linkLabelEn" />
+        </div>
+      </div>
+
+      <div class="row-2">
+        <div>
+          <label class="lbl" for="a-from">Da</label>
+          <input id="a-from" class="field-admin" type="datetime-local" formControlName="startsAt" />
+        </div>
+        <div>
+          <label class="lbl" for="a-to">Fino a</label>
+          <input id="a-to" class="field-admin" type="datetime-local" formControlName="endsAt" />
+        </div>
+      </div>
+      <p class="hint">Lasciando le date vuote l'annuncio resta finché non lo ritiri.</p>
+
+      <label class="check">
+        <input type="checkbox" formControlName="active" />
+        Pubblica subito
+      </label>
+
+      <div class="drawer-foot">
+        <button type="button" class="btn-admin-ghost" (click)="close()">Annulla</button>
+        <button type="submit" class="btn-admin" [disabled]="saving()">
+          {{ saving() ? 'Salvo…' : 'Salva' }}
+        </button>
+      </div>
+    </form>
+  </aside>
+}
+
+@if (toast()) {
+  <p class="toast" role="status">{{ toast() }}</p>
+}

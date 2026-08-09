@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { ContentService } from '../../core/content.service';
 import { I18nService } from '../../core/i18n/i18n.service';
 import { accentWords } from '../../core/i18n/accent-words';
+import { QuickContact } from '../../shared/quick-contact/quick-contact';
 import { RevealDirective } from '../../shared/motion/reveal.directive';
 import { TiltDirective } from '../../shared/motion/tilt.directive';
 import { MagneticDirective } from '../../shared/motion/magnetic.directive';
@@ -21,6 +22,7 @@ type FormState = 'idle' | 'sending' | 'sent' | 'mailto' | 'error';
     TiltDirective,
     MagneticDirective,
     ContactWalkthrough,
+    QuickContact,
   ],
   templateUrl: './contact.html',
 })

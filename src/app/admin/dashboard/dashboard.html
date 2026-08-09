@@ -32,6 +32,9 @@
         Progetti
         <span class="ml-2 text-xs opacity-70">{{ projects().length }}</span>
       </button>
+      <button type="button" [class]="tabClass('announcements')" (click)="select('announcements')">
+        Annunci
+      </button>
       <button type="button" [class]="tabClass('content')" (click)="select('content')">
         Testi del sito
       </button>
@@ -106,6 +109,13 @@
             }
           </div>
         }
+      </section>
+    }
+
+    <!-- ============================ ANNUNCI ============================ -->
+    @if (tab() === 'announcements') {
+      <section class="mt-8">
+        <app-announcements-editor />
       </section>
     }
 
