@@ -9,8 +9,9 @@ import { Logo } from '../../shared/logo/logo';
 import { ContentEditor } from '../content-editor/content-editor';
 import { SettingsEditor } from '../settings-editor/settings-editor';
 import { AnnouncementsEditor } from '../announcements-editor/announcements-editor';
+import { PricingEditor } from '../pricing-editor/pricing-editor';
 
-type Tab = 'messages' | 'projects' | 'content' | 'settings' | 'announcements';
+type Tab = 'messages' | 'projects' | 'pricing' | 'content' | 'settings' | 'announcements';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +23,7 @@ type Tab = 'messages' | 'projects' | 'content' | 'settings' | 'announcements';
     ContentEditor,
     SettingsEditor,
     AnnouncementsEditor,
+    PricingEditor,
   ],
   templateUrl: './dashboard.html',
 })

@@ -89,7 +89,7 @@
     </div>
 
     <div class="mt-16 grid gap-6 lg:grid-cols-3">
-      @for (pack of packages; track pack.id; let i = $index) {
+      @for (pack of packages(); track pack.id; let i = $index) {
         <div appReveal [revealDelay]="i * 110" class="flex">
           <div
             appTilt
@@ -103,18 +103,30 @@
               </span>
             }
 
-            <h3 class="display text-2xl text-heading">{{ i18n.t('pricing.' + pack.id + '.name') }}</h3>
-            <p class="mt-1.5 text-[0.9375rem] text-muted">{{ i18n.t('pricing.' + pack.id + '.for') }}</p>
+            <h3 class="display text-2xl text-heading">{{ pack.name }}</h3>
+            <p class="mt-1.5 text-[0.9375rem] text-muted">{{ pack.audience }}</p>
 
-            <p class="mt-7 flex items-baseline gap-2">
+            <p class="mt-7 flex flex-wrap items-baseline gap-x-3 gap-y-1">
               <span class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">
                 {{ i18n.t('pricing.from') }}
               </span>
-              <span class="display text-5xl text-heading">{{ i18n.t('pricing.' + pack.id + '.price') }}</span>
-              <span class="display text-3xl text-accent">€</span>
+              <span class="display text-5xl text-heading">{{ pack.price }}</span>
+              @if (pack.hasDiscount) {
+                <!-- Prezzo pieno barrato: si vede quanto si risparmia -->
+                <s class="display text-2xl text-muted/70">{{ pack.fullPrice }}</s>
+              }
             </p>
+
+            @if (pack.hasDiscount && pack.discountLabel) {
+              <p class="mt-2">
+                <span class="inline-flex rounded-full bg-accent/12 px-3 py-1 text-xs font-semibold text-accent">
+                  {{ pack.discountLabel }}
+                </span>
+              </p>
+            }
+
             <p class="mt-1.5 text-xs text-muted">
-              {{ i18n.t('pricing.vat') }} · {{ i18n.t('pricing.' + pack.id + '.time') }}
+              {{ i18n.t('pricing.vat') }} · {{ pack.duration }}
             </p>
 
             <hr class="hairline my-7" />
@@ -128,7 +140,7 @@
                        class="mt-1 h-4 w-4 shrink-0 text-accent" aria-hidden="true">
                     <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
-                  <span>{{ i18n.t('pricing.' + pack.id + '.f' + feature) }}</span>
+                  <span>{{ feature }}</span>
                 </li>
               }
             </ul>

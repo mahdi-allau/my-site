@@ -32,6 +32,9 @@
         Progetti
         <span class="ml-2 text-xs opacity-70">{{ projects().length }}</span>
       </button>
+      <button type="button" [class]="tabClass('pricing')" (click)="select('pricing')">
+        Prezzi
+      </button>
       <button type="button" [class]="tabClass('announcements')" (click)="select('announcements')">
         Annunci
       </button>
@@ -109,6 +112,13 @@
             }
           </div>
         }
+      </section>
+    }
+
+    <!-- ============================ PREZZI ============================ -->
+    @if (tab() === 'pricing') {
+      <section class="mt-8">
+        <app-pricing-editor />
       </section>
     }
 

@@ -1,0 +1,182 @@
+<p class="intro">
+  I pacchetti della pagina Servizi. Il prezzo è un numero: la formattazione la
+  fa il sito secondo la lingua di chi guarda. Lo <strong>sconto</strong> è una
+  percentuale: appena la metti sopra zero, in pagina compare il prezzo pieno
+  barrato accanto a quello nuovo.
+</p>
+
+@if (error()) {
+  <p class="err">{{ error() }}</p>
+}
+
+<div class="head">
+  <button type="button" class="btn-admin" (click)="create()">Nuovo pacchetto</button>
+</div>
+
+@if (loading()) {
+  <p class="muted">Caricamento…</p>
+} @else {
+  <div class="list">
+    @for (row of rows(); track row.id) {
+      <article class="item" [attr.data-off]="!row.active" [attr.data-highlight]="row.highlight">
+        <div class="item-main">
+          <div class="badges">
+            @if (row.active) {
+              <span class="tag tag-live">In pagina</span>
+            } @else {
+              <span class="tag tag-off">Nascosto</span>
+            }
+            @if (row.highlight) {
+              <span class="tag">Il più richiesto</span>
+            }
+            @if (row.discountPercent > 0) {
+              <span class="tag tag-sale">−{{ row.discountPercent }}%</span>
+            }
+            <span class="tag">{{ row.slug }}</span>
+          </div>
+
+          <p class="name">{{ row.nameIt }}</p>
+          <p class="price">{{ preview(row) }} · {{ row.durationIt }}</p>
+          @if (row.audienceIt) {
+            <p class="audience">{{ row.audienceIt }}</p>
+          }
+        </div>
+
+        <div class="item-actions">
+          <button type="button" class="btn-admin-ghost" (click)="toggleActive(row)">
+            {{ row.active ? 'Nascondi' : 'Mostra' }}
+          </button>
+          <button type="button" class="btn-admin-ghost" (click)="edit(row)">Modifica</button>
+          <button type="button" class="link-danger" (click)="remove(row)">Elimina</button>
+        </div>
+      </article>
+    } @empty {
+      <p class="muted">
+        Nessun pacchetto. Finché la tabella è vuota, la pagina Servizi mostra i tre
+        pacchetti scritti nel codice.
+      </p>
+    }
+  </div>
+}
+
+@if (editing() !== null) {
+  <div class="backdrop" (click)="close()"></div>
+
+  <aside class="drawer" role="dialog" aria-modal="true" aria-label="Modifica pacchetto">
+    <div class="drawer-head">
+      <h3>{{ editing() ? 'Modifica pacchetto' : 'Nuovo pacchetto' }}</h3>
+      <button type="button" class="btn-admin-ghost" (click)="close()">Chiudi</button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="save()" novalidate>
+      <label class="lbl" for="p-slug">Identificativo</label>
+      <input id="p-slug" class="field" formControlName="slug" placeholder="vetrina" />
+      @if (invalid('slug')) {
+        <p class="field-err">Solo lettere minuscole, numeri e trattini.</p>
+      }
+      <p class="hint">Non compare in pagina: serve al sito per riconoscere il pacchetto.</p>
+
+      <div class="row-2">
+        <div>
+          <label class="lbl" for="p-name-it">Nome — italiano</label>
+          <input id="p-name-it" class="field" formControlName="nameIt" />
+          @if (invalid('nameIt')) {
+            <p class="field-err">Il nome serve.</p>
+          }
+        </div>
+        <div>
+          <label class="lbl" for="p-name-en">Nome — inglese</label>
+          <input id="p-name-en" class="field" formControlName="nameEn" />
+        </div>
+      </div>
+
+      <div class="row-2">
+        <div>
+          <label class="lbl" for="p-aud-it">Per chi — italiano</label>
+          <input id="p-aud-it" class="field" formControlName="audienceIt" />
+        </div>
+        <div>
+          <label class="lbl" for="p-aud-en">Per chi — inglese</label>
+          <input id="p-aud-en" class="field" formControlName="audienceEn" />
+        </div>
+      </div>
+
+      <div class="row-2">
+        <div>
+          <label class="lbl" for="p-price">Prezzo pieno (€)</label>
+          <input id="p-price" class="field" type="number" min="0" step="10" formControlName="price" />
+          @if (invalid('price')) {
+            <p class="field-err">Inserisci un numero da 0 in su.</p>
+          }
+        </div>
+        <div>
+          <label class="lbl" for="p-off">Sconto (%)</label>
+          <input id="p-off" class="field" type="number" min="0" max="99" step="1" formControlName="discountPercent" />
+          @if (invalid('discountPercent')) {
+            <p class="field-err">Da 0 a 99.</p>
+          }
+        </div>
+      </div>
+
+      <div class="preview">
+        <p class="preview-label">Come lo vedrà il cliente</p>
+        <p class="preview-value">{{ livePreview() }}</p>
+      </div>
+
+      @if (form.controls.discountPercent.value > 0) {
+        <div class="row-2">
+          <div>
+            <label class="lbl" for="p-off-it">Etichetta sconto — italiano</label>
+            <input id="p-off-it" class="field" formControlName="discountLabelIt" placeholder="Offerta di primavera" />
+          </div>
+          <div>
+            <label class="lbl" for="p-off-en">Etichetta sconto — inglese</label>
+            <input id="p-off-en" class="field" formControlName="discountLabelEn" />
+          </div>
+        </div>
+      }
+
+      <div class="row-2">
+        <div>
+          <label class="lbl" for="p-dur-it">Tempi — italiano</label>
+          <input id="p-dur-it" class="field" formControlName="durationIt" placeholder="2–3 settimane" />
+        </div>
+        <div>
+          <label class="lbl" for="p-dur-en">Tempi — inglese</label>
+          <input id="p-dur-en" class="field" formControlName="durationEn" />
+        </div>
+      </div>
+
+      <label class="lbl" for="p-feat-it">Cosa comprende — italiano</label>
+      <textarea id="p-feat-it" class="field" rows="5" formControlName="featuresIt"></textarea>
+      <p class="hint">Una voce per riga.</p>
+
+      <label class="lbl" for="p-feat-en">Cosa comprende — inglese</label>
+      <textarea id="p-feat-en" class="field" rows="5" formControlName="featuresEn"></textarea>
+
+      <label class="lbl" for="p-order">Ordine in pagina</label>
+      <input id="p-order" class="field" type="number" formControlName="sortOrder" />
+
+      <label class="check">
+        <input type="checkbox" formControlName="highlight" />
+        Evidenzia come "il più richiesto"
+      </label>
+
+      <label class="check">
+        <input type="checkbox" formControlName="active" />
+        Mostra in pagina
+      </label>
+
+      <div class="drawer-foot">
+        <button type="button" class="btn-admin-ghost" (click)="close()">Annulla</button>
+        <button type="submit" class="btn-admin" [disabled]="saving()">
+          {{ saving() ? 'Salvataggio…' : 'Salva' }}
+        </button>
+      </div>
+    </form>
+  </aside>
+}
+
+@if (toast()) {
+  <p class="toast">{{ toast() }}</p>
+}
