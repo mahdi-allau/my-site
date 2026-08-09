@@ -156,6 +156,14 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'about.path.eyebrow': 'Le competenze',
     'about.path.titleA': 'Tre ambiti,',
     'about.path.titleB': 'un modo di ragionare.',
+
+    // --- Diagramma della convergenza ---
+    'about.flow.1': 'quello che si vede',
+    'about.flow.2': 'quello che si misura',
+    'about.flow.3': 'quello che si tocca',
+    'about.flow.outTitle': 'Un lavoro solo',
+    'about.flow.outBody':
+      'Le tre competenze finiscono nello stesso progetto: l’interfaccia con cui parli ai clienti, i numeri che ti dicono come sta andando, i dispositivi che quei numeri li producono.',
     'about.area1.title': 'Sviluppo web',
     'about.area1.body':
       'Angular e TypeScript per interfacce che restano veloci e ordinate anche quando il progetto cresce. PostgreSQL e Supabase per i dati, l’autenticazione e i file.',
@@ -563,6 +571,14 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'about.path.eyebrow': 'What we know',
     'about.path.titleA': 'Three fields,',
     'about.path.titleB': 'one way of thinking.',
+
+    // --- Convergence diagram ---
+    'about.flow.1': 'what people see',
+    'about.flow.2': 'what gets measured',
+    'about.flow.3': 'what you can touch',
+    'about.flow.outTitle': 'One single job',
+    'about.flow.outBody':
+      'The three skills end up in the same project: the interface you speak to customers through, the numbers that tell you how it’s going, and the devices that produce those numbers.',
     'about.area1.title': 'Web development',
     'about.area1.body':
       'Angular and TypeScript for interfaces that stay fast and tidy as a project grows. PostgreSQL and Supabase for data, authentication and files.',

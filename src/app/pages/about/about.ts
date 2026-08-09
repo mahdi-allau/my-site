@@ -6,10 +6,11 @@ import { accentWords } from '../../core/i18n/accent-words';
 import { RevealDirective } from '../../shared/motion/reveal.directive';
 import { TiltDirective } from '../../shared/motion/tilt.directive';
 import { MagneticDirective } from '../../shared/motion/magnetic.directive';
+import { CraftFlow } from '../../shared/craft-flow/craft-flow';
 
 @Component({
   selector: 'app-about',
-  imports: [RouterLink, RevealDirective, TiltDirective, MagneticDirective],
+  imports: [RouterLink, RevealDirective, TiltDirective, MagneticDirective, CraftFlow],
   templateUrl: './about.html',
 })
 export class About {

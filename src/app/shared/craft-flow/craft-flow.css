@@ -1,0 +1,351 @@
+/* =====================================================================
+   Convergenza dei tre ambiti.
+
+   Vive dentro la fascia verde, quindi eredita i token di `.on-dark`:
+   linee chiare su fondo scuro, che è esattamente ciò che serve a un
+   disegno a tratto. Un solo giro di 9s governa tutto.
+   ===================================================================== */
+:host {
+  --loop: 9s;
+  display: block;
+}
+
+.flow {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .flow {
+    grid-template-columns: minmax(0, 1fr) 190px minmax(0, 0.95fr);
+    gap: 0;
+  }
+}
+
+/* ------------------------------------------------------------------
+   I tre ambiti
+   ------------------------------------------------------------------ */
+.flow-sources {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flow-node {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.1rem 1.3rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 0.9rem;
+  background: transparent;
+  animation: cf-node var(--loop) linear infinite;
+  animation-delay: calc(var(--i) * 2.2s);
+}
+
+/* Si accende e resta accesa fino alla fine del giro: le competenze non
+   si alternano, si sommano. */
+@keyframes cf-node {
+  0%,
+  6% {
+    border-color: var(--border-soft);
+    background: transparent;
+  }
+  10%,
+  90% {
+    border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+    background: var(--surface-alt);
+  }
+  96%,
+  100% {
+    border-color: var(--border-soft);
+    background: transparent;
+  }
+}
+
+.flow-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 999px;
+  background: var(--fg-muted);
+  animation: cf-dot var(--loop) linear infinite;
+  animation-delay: calc(var(--i) * 2.2s);
+}
+
+@keyframes cf-dot {
+  0%,
+  6% {
+    background: var(--fg-muted);
+    box-shadow: none;
+  }
+  10%,
+  90% {
+    background: var(--accent);
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+  96%,
+  100% {
+    background: var(--fg-muted);
+    box-shadow: none;
+  }
+}
+
+.flow-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.flow-hint {
+  margin-top: 0.15rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------------
+   Le curve
+   ------------------------------------------------------------------ */
+.flow-canvas {
+  display: none;
+  height: 100%;
+  min-height: 15rem;
+}
+
+@media (min-width: 1024px) {
+  .flow-canvas {
+    display: block;
+  }
+}
+
+.flow-canvas svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cf-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  opacity: 0.55;
+  /* La lunghezza reale non conta: con pathLength implicito basta un
+     valore abbondante, il tratto viene comunque coperto. */
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: cf-draw var(--loop) linear infinite;
+}
+
+.cf-line-1 {
+  animation-delay: 0s;
+}
+.cf-line-2 {
+  animation-delay: 2.2s;
+}
+.cf-line-3 {
+  animation-delay: 4.4s;
+}
+
+@keyframes cf-draw {
+  0%,
+  8% {
+    stroke-dashoffset: 400;
+  }
+  30%,
+  90% {
+    stroke-dashoffset: 0;
+  }
+  96%,
+  100% {
+    stroke-dashoffset: 400;
+  }
+}
+
+.cf-bead {
+  fill: var(--fg);
+  opacity: 0;
+  animation: cf-bead var(--loop) linear infinite;
+}
+
+.cf-bead-1 {
+  animation-delay: 0s;
+}
+.cf-bead-2 {
+  animation-delay: 2.2s;
+}
+.cf-bead-3 {
+  animation-delay: 4.4s;
+}
+
+@keyframes cf-bead {
+  0%,
+  8% {
+    opacity: 0;
+  }
+  11%,
+  27% {
+    opacity: 1;
+  }
+  31%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Su telefono al posto delle curve scende un filo */
+.flow-drop {
+  display: grid;
+  place-items: center;
+  height: 3.5rem;
+}
+
+.flow-drop span {
+  display: block;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  transform-origin: top;
+  animation: cf-drop var(--loop) linear infinite;
+}
+
+@keyframes cf-drop {
+  0%,
+  8% {
+    transform: scaleY(0);
+  }
+  30%,
+  90% {
+    transform: scaleY(1);
+  }
+  96%,
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+@media (min-width: 1024px) {
+  .flow-drop {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Il progetto che ne esce
+   ------------------------------------------------------------------ */
+.flow-out {
+  padding: 2rem 1.75rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 1.1rem;
+  background: transparent;
+  text-align: center;
+  animation: cf-out var(--loop) linear infinite;
+}
+
+@keyframes cf-out {
+  0%,
+  64% {
+    border-color: var(--border-soft);
+    background: transparent;
+  }
+  72%,
+  90% {
+    border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+    background: var(--surface-alt);
+  }
+  96%,
+  100% {
+    border-color: var(--border-soft);
+    background: transparent;
+  }
+}
+
+.flow-out-ring {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: 0 auto 1.25rem;
+  border-radius: 999px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  animation: cf-ring var(--loop) linear infinite;
+}
+
+.flow-out-ring svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+@keyframes cf-ring {
+  0%,
+  66% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 40%, transparent);
+    transform: scale(1);
+  }
+  74% {
+    box-shadow: 0 0 0 16px transparent;
+    transform: scale(1.06);
+  }
+  80%,
+  100% {
+    box-shadow: 0 0 0 16px transparent;
+    transform: scale(1);
+  }
+}
+
+.flow-out-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--fg);
+}
+
+.flow-out-body {
+  margin-top: 0.75rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--fg-body);
+}
+
+/* ------------------------------------------------------------------
+   Movimento ridotto: diagramma completo e fermo, tutto già acceso.
+   ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .flow-node,
+  .flow-dot,
+  .cf-line,
+  .flow-drop span,
+  .flow-out,
+  .flow-out-ring {
+    animation: none;
+  }
+
+  .cf-bead {
+    display: none;
+  }
+
+  .flow-node {
+    border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+    background: var(--surface-alt);
+  }
+
+  .flow-dot {
+    background: var(--accent);
+  }
+
+  .cf-line {
+    stroke-dashoffset: 0;
+  }
+
+  .flow-drop span {
+    transform: scaleY(1);
+  }
+
+  .flow-out {
+    border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+    background: var(--surface-alt);
+  }
+}

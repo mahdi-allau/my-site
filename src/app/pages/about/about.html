@@ -69,6 +69,12 @@
       </h2>
     </div>
 
+    <!-- La sezione si intitola "Tre ambiti, un modo di ragionare": qui lo
+         si vede, prima di leggerlo scheda per scheda. -->
+    <div appReveal [revealDelay]="180" class="mt-16">
+      <app-craft-flow />
+    </div>
+
     <div class="mt-16 space-y-5">
       @for (area of areas; track area; let i = $index) {
         <div appReveal [revealDelay]="i * 110">

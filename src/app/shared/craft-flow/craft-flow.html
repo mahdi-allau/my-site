@@ -1,0 +1,55 @@
+<div class="flow">
+  <!-- I tre ambiti -->
+  <ol class="flow-sources">
+    @for (source of sources; track source; let i = $index) {
+      <li class="flow-node" [style.--i]="i">
+        <span class="flow-dot" aria-hidden="true"></span>
+        <div>
+          <p class="flow-name">{{ i18n.t('about.area' + source + '.title') }}</p>
+          <p class="flow-hint">{{ i18n.t('about.flow.' + source) }}</p>
+        </div>
+      </li>
+    }
+  </ol>
+
+  <!-- Le curve. Decorative: quello che dicono è già scritto qui accanto. -->
+  <div class="flow-canvas" aria-hidden="true">
+    <svg viewBox="0 0 200 300" preserveAspectRatio="none">
+      <!-- vector-effect tiene lo spessore costante nonostante lo stiramento -->
+      <path id="cf1" class="cf-line cf-line-1" d="M0,50 C90,50 110,150 200,150" vector-effect="non-scaling-stroke" />
+      <path id="cf2" class="cf-line cf-line-2" d="M0,150 L200,150" vector-effect="non-scaling-stroke" />
+      <path id="cf3" class="cf-line cf-line-3" d="M0,250 C90,250 110,150 200,150" vector-effect="non-scaling-stroke" />
+
+      <circle class="cf-bead cf-bead-1" r="3.5">
+        <animateMotion dur="9s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.08;0.30;1" calcMode="linear">
+          <mpath href="#cf1" />
+        </animateMotion>
+      </circle>
+      <circle class="cf-bead cf-bead-2" r="3.5">
+        <animateMotion dur="9s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.30;0.52;1" calcMode="linear">
+          <mpath href="#cf2" />
+        </animateMotion>
+      </circle>
+      <circle class="cf-bead cf-bead-3" r="3.5">
+        <animateMotion dur="9s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.52;0.74;1" calcMode="linear">
+          <mpath href="#cf3" />
+        </animateMotion>
+      </circle>
+    </svg>
+  </div>
+
+  <!-- Su telefono le curve non ci stanno: resta un filo che scende -->
+  <div class="flow-drop" aria-hidden="true"><span></span></div>
+
+  <!-- Il progetto che ne esce -->
+  <div class="flow-out">
+    <span class="flow-out-ring" aria-hidden="true">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4">
+        <path d="M24 6l16 9v18l-16 9-16-9V15z" stroke-linejoin="round" />
+        <path d="M8 15l16 9 16-9M24 24v18" stroke-linejoin="round" />
+      </svg>
+    </span>
+    <p class="flow-out-title">{{ i18n.t('about.flow.outTitle') }}</p>
+    <p class="flow-out-body">{{ i18n.t('about.flow.outBody') }}</p>
+  </div>
+</div>
