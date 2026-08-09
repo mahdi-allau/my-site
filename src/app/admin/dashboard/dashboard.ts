@@ -10,8 +10,16 @@ import { ContentEditor } from '../content-editor/content-editor';
 import { SettingsEditor } from '../settings-editor/settings-editor';
 import { AnnouncementsEditor } from '../announcements-editor/announcements-editor';
 import { PricingEditor } from '../pricing-editor/pricing-editor';
+import { SecurityEditor } from '../security-editor/security-editor';
 
-type Tab = 'messages' | 'projects' | 'pricing' | 'content' | 'settings' | 'announcements';
+type Tab =
+  | 'messages'
+  | 'projects'
+  | 'pricing'
+  | 'content'
+  | 'settings'
+  | 'announcements'
+  | 'security';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,6 +32,7 @@ type Tab = 'messages' | 'projects' | 'pricing' | 'content' | 'settings' | 'annou
     SettingsEditor,
     AnnouncementsEditor,
     PricingEditor,
+    SecurityEditor,
   ],
   templateUrl: './dashboard.html',
 })

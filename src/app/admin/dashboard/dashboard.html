@@ -35,6 +35,9 @@
       <button type="button" [class]="tabClass('pricing')" (click)="select('pricing')">
         Prezzi
       </button>
+      <button type="button" [class]="tabClass('security')" (click)="select('security')">
+        Sicurezza
+      </button>
       <button type="button" [class]="tabClass('announcements')" (click)="select('announcements')">
         Annunci
       </button>
@@ -112,6 +115,13 @@
             }
           </div>
         }
+      </section>
+    }
+
+    <!-- ============================ SICUREZZA ============================ -->
+    @if (tab() === 'security') {
+      <section class="mt-8">
+        <app-security-editor />
       </section>
     }
 

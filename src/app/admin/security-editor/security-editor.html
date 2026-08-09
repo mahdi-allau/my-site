@@ -1,0 +1,127 @@
+<p class="intro">
+  La password protegge l’accesso. La <strong>verifica in due passaggi</strong> aggiunge
+  un codice di sei cifre che cambia ogni trenta secondi sul tuo telefono: chi
+  rubasse la password, senza il telefono non entra comunque.
+</p>
+
+@if (error()) {
+  <p class="err">{{ error() }}</p>
+}
+
+@if (loading()) {
+  <p class="muted">Caricamento…</p>
+} @else {
+  <!-- ===================== Stato ===================== -->
+  <section class="panel" [attr.data-on]="!!active">
+    <div class="panel-head">
+      <div>
+        <h3>Verifica in due passaggi</h3>
+        <p class="account">{{ email }}</p>
+      </div>
+      @if (active) {
+        <span class="badge badge-on">Attiva</span>
+      } @else {
+        <span class="badge badge-off">Non attiva</span>
+      }
+    </div>
+
+    @if (active && !enrollment()) {
+      <p class="note">
+        Per entrare servono password e codice. Se cambi telefono, disattivala e
+        riattivala <strong>prima</strong> di cancellare l’app dal vecchio.
+      </p>
+      <div class="actions">
+        <button type="button" class="link-danger" (click)="disable(active!)" [disabled]="busy()">
+          Disattiva
+        </button>
+      </div>
+    }
+
+    @if (!active && !enrollment()) {
+      <div class="actions">
+        <button type="button" class="btn-admin" (click)="startEnroll()" [disabled]="busy()">
+          {{ busy() ? 'Attendere…' : 'Attiva' }}
+        </button>
+      </div>
+    }
+  </section>
+
+  <!-- ===================== Attivazione ===================== -->
+  @if (enrollment(); as enroll) {
+    <section class="panel enroll">
+      <h3>Inquadra il codice</h3>
+
+      <ol class="steps">
+        <li>
+          Installa sul telefono un’app di autenticazione: vanno bene
+          <strong>Google Authenticator</strong>, <strong>Microsoft Authenticator</strong>
+          o <strong>Aegis</strong>. Sono gratuite.
+        </li>
+        <li>Apri l’app, scegli «aggiungi account» e inquadra questo quadrato.</li>
+        <li>Scrivi qui sotto le sei cifre che compaiono.</li>
+      </ol>
+
+      <div class="qr" [innerHTML]="qr()"></div>
+
+      <div class="manual">
+        <p class="manual-label">Non riesci a inquadrarlo?</p>
+        <div class="manual-row">
+          @if (showSecret()) {
+            <code class="secret">{{ enroll.secret }}</code>
+          } @else {
+            <code class="secret secret-hidden">••••••••••••••••</code>
+          }
+          <button type="button" class="btn-admin-ghost" (click)="showSecret.set(!showSecret())">
+            {{ showSecret() ? 'Nascondi' : 'Mostra' }}
+          </button>
+          <button type="button" class="btn-admin-ghost" (click)="copySecret()">Copia</button>
+        </div>
+        <p class="hint">Inseriscilo a mano nell’app al posto della scansione.</p>
+      </div>
+
+      <form [formGroup]="codeForm" (ngSubmit)="confirm()" novalidate>
+        <label class="lbl" for="mfa-code">Codice dall’app</label>
+        <input
+          id="mfa-code"
+          class="field code-input"
+          type="text"
+          inputmode="numeric"
+          maxlength="6"
+          autocomplete="one-time-code"
+          formControlName="code"
+          placeholder="000000"
+        />
+        @if (invalidCode()) {
+          <p class="field-err">Servono sei cifre.</p>
+        }
+
+        <div class="actions">
+          <button type="button" class="btn-admin-ghost" (click)="cancelEnroll()">Annulla</button>
+          <button type="submit" class="btn-admin" [disabled]="busy()">
+            {{ busy() ? 'Verifica…' : 'Conferma e attiva' }}
+          </button>
+        </div>
+      </form>
+    </section>
+  }
+
+  <!-- ===================== Se perdi tutto ===================== -->
+  <section class="panel warn">
+    <h3>Se perdi il telefono</h3>
+    <p class="note">
+      L’unica via di rientro è il <strong>recupero della password via email</strong>:
+      dalla pagina di accesso, «Password dimenticata». Perciò l’indirizzo
+      <strong>{{ email }}</strong> deve restare raggiungibile, e conviene che abbia
+      a sua volta una verifica in due passaggi.
+    </p>
+    <p class="note">
+      Se perdessi anche l’accesso all’email, si rientra solo dal pannello Supabase,
+      con l’account con cui è stato creato il progetto. Vale la pena verificare
+      adesso di saperci entrare.
+    </p>
+  </section>
+}
+
+@if (toast()) {
+  <p class="toast">{{ toast() }}</p>
+}

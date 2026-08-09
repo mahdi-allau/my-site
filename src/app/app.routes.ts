@@ -63,6 +63,12 @@ export const routes: Routes = [
     loadComponent: () => import('./admin/login/login').then((m) => m.Login),
   },
   {
+    // Aperta dal link di recupero: niente guard, la sessione arriva col token.
+    path: 'admin/nuova-password',
+    data: { seo: 'admin' },
+    loadComponent: () => import('./admin/new-password/new-password').then((m) => m.NewPassword),
+  },
+  {
     path: 'admin',
     data: { seo: 'admin' },
     canActivate: [adminGuard],

@@ -14,7 +14,14 @@
         <app-logo [markHeight]="42" [showWordmark]="false" />
         <div>
           <h1 class="text-lg font-semibold text-heading">Area riservata</h1>
-          <p class="text-xs text-muted">Accesso amministratore</p>
+          <p class="text-xs text-muted">
+            @switch (step()) {
+              @case ('code') { Verifica in due passaggi }
+              @case ('reset') { Recupero password }
+              @case ('resetSent') { Recupero password }
+              @default { Accesso amministratore }
+            }
+          </p>
         </div>
       </div>
 
@@ -29,27 +36,118 @@
           </p>
         </div>
       } @else {
-        <form [formGroup]="form" (ngSubmit)="submit()" class="mt-7" novalidate>
-          <div>
-            <label class="label" for="admin-email">Email</label>
-            <input id="admin-email" type="email" class="field" formControlName="email" autocomplete="username" />
-          </div>
+        <!-- ===================== 1 · Email e password ===================== -->
+        @if (step() === 'password') {
+          <form [formGroup]="form" (ngSubmit)="submit()" class="mt-7" novalidate>
+            <div>
+              <label class="label" for="admin-email">Email</label>
+              <input id="admin-email" type="email" class="field" formControlName="email" autocomplete="username" />
+            </div>
 
-          <div class="mt-4">
-            <label class="label" for="admin-password">Password</label>
-            <input id="admin-password" type="password" class="field" formControlName="password" autocomplete="current-password" />
-          </div>
+            <div class="mt-4">
+              <label class="label" for="admin-password">Password</label>
+              <input id="admin-password" type="password" class="field" formControlName="password" autocomplete="current-password" />
+            </div>
 
-          @if (error()) {
-            <p class="mt-4 rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">
-              {{ error() }}
+            @if (error()) {
+              <p class="mt-4 rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+                {{ error() }}
+              </p>
+            }
+
+            <button type="submit" class="btn btn-primary mt-6 w-full" [disabled]="busy()">
+              {{ busy() ? 'Accesso in corso…' : 'Accedi' }}
+            </button>
+
+            <button type="button" class="mt-4 w-full text-center text-sm text-muted underline hover:text-accent"
+                    (click)="goToReset()">
+              Password dimenticata?
+            </button>
+          </form>
+        }
+
+        <!-- ===================== 2 · Codice dall'app ===================== -->
+        @if (step() === 'code') {
+          <form [formGroup]="codeForm" (ngSubmit)="submitCode()" class="mt-7" novalidate>
+            <p class="text-sm leading-relaxed text-body">
+              Apri l’app di autenticazione sul telefono e scrivi il codice a sei cifre.
             </p>
-          }
 
-          <button type="submit" class="btn btn-primary mt-6 w-full" [disabled]="busy()">
-            @if (busy()) { Accesso in corso… } @else { Accedi }
-          </button>
-        </form>
+            <div class="mt-5">
+              <label class="label" for="admin-code">Codice</label>
+              <input
+                id="admin-code"
+                type="text"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                maxlength="6"
+                class="field text-center text-2xl tracking-[0.4em]"
+                formControlName="code"
+                placeholder="000000"
+              />
+              @if (invalidCode()) {
+                <p class="mt-2 text-xs text-red-400">Servono sei cifre.</p>
+              }
+            </div>
+
+            @if (error()) {
+              <p class="mt-4 rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+                {{ error() }}
+              </p>
+            }
+
+            <button type="submit" class="btn btn-primary mt-6 w-full" [disabled]="busy()">
+              {{ busy() ? 'Verifica…' : 'Verifica' }}
+            </button>
+
+            <button type="button" class="mt-4 w-full text-center text-sm text-muted underline hover:text-accent"
+                    (click)="abandon()">
+              Accedi con un altro account
+            </button>
+          </form>
+        }
+
+        <!-- ===================== 3 · Recupero ===================== -->
+        @if (step() === 'reset') {
+          <form [formGroup]="resetForm" (ngSubmit)="submitReset()" class="mt-7" novalidate>
+            <p class="text-sm leading-relaxed text-body">
+              Scrivi l’indirizzo dell’account: ti arriva un link per impostare una
+              password nuova.
+            </p>
+
+            <div class="mt-5">
+              <label class="label" for="reset-email">Email</label>
+              <input id="reset-email" type="email" class="field" formControlName="email" autocomplete="username" />
+            </div>
+
+            @if (error()) {
+              <p class="mt-4 rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+                {{ error() }}
+              </p>
+            }
+
+            <button type="submit" class="btn btn-primary mt-6 w-full" [disabled]="busy()">
+              {{ busy() ? 'Invio…' : 'Invia il link' }}
+            </button>
+
+            <button type="button" class="mt-4 w-full text-center text-sm text-muted underline hover:text-accent"
+                    (click)="backToPassword()">
+              Torna all’accesso
+            </button>
+          </form>
+        }
+
+        @if (step() === 'resetSent') {
+          <div class="mt-7">
+            <p class="text-sm leading-relaxed text-body">
+              Se quell’indirizzo corrisponde a un account, il link è partito. Controlla
+              la posta, anche nello spam: il link vale un’ora.
+            </p>
+            <button type="button" class="btn btn-ghost mt-6 w-full" (click)="backToPassword()">
+              Torna all’accesso
+            </button>
+          </div>
+        }
       }
     </div>
 

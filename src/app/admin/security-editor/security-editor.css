@@ -1,0 +1,217 @@
+.intro {
+  max-width: 46rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--fg-body);
+}
+
+.err {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid color-mix(in srgb, #b4541f 40%, transparent);
+  border-radius: 0.6rem;
+  background: color-mix(in srgb, #b4541f 8%, transparent);
+  color: #b4541f;
+  font-size: 0.875rem;
+}
+
+.muted {
+  color: var(--fg-muted);
+  font-size: 0.9375rem;
+}
+
+/* ----------------------------- pannelli ----------------------------- */
+.panel {
+  max-width: 42rem;
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 0.9rem;
+  background: var(--surface);
+}
+
+.panel[data-on="true"] {
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.panel h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.account {
+  margin-top: 0.2rem;
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+}
+
+.badge {
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-on {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent);
+}
+
+.badge-off {
+  background: var(--surface-alt);
+  color: var(--fg-muted);
+}
+
+.note {
+  margin-top: 0.9rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--fg-body);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  margin-top: 1.15rem;
+}
+
+.link-danger {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #b4541f;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.link-danger:hover {
+  text-decoration: underline;
+}
+
+/* ----------------------------- attivazione ----------------------------- */
+.steps {
+  margin: 1rem 0 1.25rem 1.1rem;
+  padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--fg-body);
+}
+
+.steps li {
+  margin-bottom: 0.35rem;
+}
+
+/* Il QR arriva come SVG: sfondo bianco e riquadro fisso perché resti
+   leggibile dalla fotocamera anche su fondo colorato. */
+.qr {
+  width: 12.5rem;
+  height: 12.5rem;
+  display: grid;
+  place-items: center;
+  padding: 0.75rem;
+  border-radius: 0.6rem;
+  background: #fff;
+  border: 1px solid var(--border-soft);
+}
+
+.qr :global(svg),
+.qr svg,
+.qr img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.manual {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-soft);
+}
+
+.manual-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.manual-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.secret {
+  padding: 0.45rem 0.7rem;
+  border-radius: 0.4rem;
+  background: var(--surface-alt);
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  color: var(--fg);
+  word-break: break-all;
+}
+
+.secret-hidden {
+  color: var(--fg-muted);
+}
+
+.hint {
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+}
+
+.lbl {
+  display: block;
+  margin: 1.25rem 0 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--fg-muted);
+}
+
+.code-input {
+  max-width: 11rem;
+  text-align: center;
+  font-size: 1.5rem;
+  letter-spacing: 0.35em;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+.field-err {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  color: #b4541f;
+}
+
+/* Il pannello che spiega come rientrare non deve sembrare un dettaglio */
+.warn {
+  border-color: color-mix(in srgb, #b4541f 28%, transparent);
+  background: color-mix(in srgb, #b4541f 4%, transparent);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  z-index: 50;
+  transform: translateX(-50%);
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  background: var(--fg);
+  color: var(--surface);
+  font-size: 0.8125rem;
+}
