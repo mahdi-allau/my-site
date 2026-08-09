@@ -1,0 +1,59 @@
+<div class="stage" aria-hidden="true">
+  @switch (name()) {
+    <!-- Siti web moderni: lo stesso layout che si riadatta al telefono -->
+    @case ('globe') {
+      <div class="sm-resize">
+        <span class="sm-bar"></span>
+        <div class="sm-page">
+          <span class="sm-hero"></span>
+          <div class="sm-cols">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="sm-line"></span>
+          <span class="sm-line sm-line-short"></span>
+        </div>
+      </div>
+    }
+
+    <!-- Ristoranti: il menù che si aggiorna da solo -->
+    @case ('restaurant') {
+      <div class="sm-menu">
+        <span class="sm-menu-head"></span>
+        <div class="sm-dish"><i></i><b></b></div>
+        <div class="sm-dish sm-dish-edit"><i></i><b></b><span class="sm-caret"></span></div>
+        <div class="sm-dish"><i></i><b></b></div>
+        <div class="sm-dish sm-dish-new"><i></i><b></b></div>
+      </div>
+    }
+
+    <!-- Web application: righe che si filtrano e una che si spunta -->
+    @case ('app') {
+      <div class="sm-app">
+        <div class="sm-toolbar"><span class="sm-search"></span><span class="sm-chip"></span></div>
+        <div class="sm-row sm-row-1"><span class="sm-check"></span><i></i><b></b></div>
+        <div class="sm-row sm-row-2"><span class="sm-check"></span><i></i><b></b></div>
+        <div class="sm-row sm-row-3"><span class="sm-check"></span><i></i><b></b></div>
+      </div>
+    }
+
+    <!-- Dashboard: barre che crescono e una linea che le attraversa -->
+    @default {
+      <div class="sm-chart">
+        <div class="sm-bars">
+          <span style="--h: 45%; --d: 0s"></span>
+          <span style="--h: 72%; --d: .12s"></span>
+          <span style="--h: 38%; --d: .24s"></span>
+          <span style="--h: 88%; --d: .36s"></span>
+          <span style="--h: 61%; --d: .48s"></span>
+          <span style="--h: 96%; --d: .6s"></span>
+        </div>
+        <svg class="sm-trend" viewBox="0 0 120 60" fill="none" preserveAspectRatio="none">
+          <path d="M2,46 L22,38 L42,44 L62,24 L82,30 L118,8"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"
+                vector-effect="non-scaling-stroke" />
+        </svg>
+      </div>
+    }
+  }
+</div>

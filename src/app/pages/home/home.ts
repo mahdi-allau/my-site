@@ -5,7 +5,7 @@ import { Project, ServiceOffer } from '../../core/models';
 import { I18nService } from '../../core/i18n/i18n.service';
 import { accentWords } from '../../core/i18n/accent-words';
 import { ProjectCard } from '../../shared/project-card/project-card';
-import { ServiceIconComponent } from '../../shared/service-icon/service-icon';
+import { ServiceMotion } from '../../shared/service-motion/service-motion';
 import { SitePreview } from '../../shared/site-preview/site-preview';
 import { RevealDirective } from '../../shared/motion/reveal.directive';
 import { TiltDirective } from '../../shared/motion/tilt.directive';
@@ -17,7 +17,7 @@ import { RotatingLine } from '../../shared/rotating-line/rotating-line';
   imports: [
     RouterLink,
     ProjectCard,
-    ServiceIconComponent,
+    ServiceMotion,
     SitePreview,
     RevealDirective,
     TiltDirective,

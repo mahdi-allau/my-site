@@ -179,8 +179,8 @@ const PROJECTS: SeedProject[] = [
       en: 'An Angular application with a private area, records and PostgreSQL persistence: the base of a bespoke management tool.',
     },
     description: {
-      it: 'Single page application in Angular e TypeScript, con routing protetto, form tipizzati e validazione lato client. I dati risiedono su PostgreSQL, con un modello pensato per crescere: ruoli, entità collegate e storico delle modifiche. È il punto di partenza dei gestionali leggeri che realizzo per le piccole attività.',
-      en: 'A single page application in Angular and TypeScript, with guarded routing, typed forms and client-side validation. The data lives on PostgreSQL, with a model built to grow: roles, linked entities and change history. It’s the starting point for the lightweight management tools I build for small businesses.',
+      it: 'Single page application in Angular e TypeScript, con routing protetto, form tipizzati e validazione lato client. I dati risiedono su PostgreSQL, con un modello pensato per crescere: ruoli, entità collegate e storico delle modifiche. È il punto di partenza dei gestionali leggeri che realizziamo per le piccole attività.',
+      en: 'A single page application in Angular and TypeScript, with guarded routing, typed forms and client-side validation. The data lives on PostgreSQL, with a model built to grow: roles, linked entities and change history. It’s the starting point for the lightweight management tools we build for small businesses.',
     },
     technologies: {
       it: ['Angular', 'TypeScript', 'PostgreSQL'],
@@ -241,8 +241,8 @@ const SERVICES: SeedService[] = [
       en: 'Menu, opening hours and bookings, always current.',
     },
     description: {
-      it: 'La specializzazione su cui sto costruendo la mia attività. Il sito mette in primo piano quello che i clienti cercano davvero: il menù aggiornato, dove siete, quando siete aperti e come prenotare. Il menù si modifica dal pannello di amministrazione, senza chiamare nessuno.',
-      en: 'The specialisation I’m building my business around. The site puts front and centre what customers actually look for: the current menu, where you are, when you’re open and how to book. The menu is edited from the admin panel, without calling anyone.',
+      it: 'La specializzazione su cui stiamo costruendo la nostra attività. Il sito mette in primo piano quello che i clienti cercano davvero: il menù aggiornato, dove siete, quando siete aperti e come prenotare. Il menù si modifica dal pannello di amministrazione, senza chiamare nessuno.',
+      en: 'The specialisation we’re building our business around. The site puts front and centre what customers actually look for: the current menu, where you are, when you’re open and how to book. The menu is edited from the admin panel, without calling anyone.',
     },
     deliverables: {
       it: [
@@ -295,8 +295,8 @@ const SERVICES: SeedService[] = [
       en: 'Your numbers, read in thirty seconds.',
     },
     description: {
-      it: 'Raccolgo i dati che già producete — incassi, coperti, ordini, consumi — e li trasformo in un cruscotto chiaro. Niente esportazioni manuali ogni lunedì mattina: gli indicatori si aggiornano da soli.',
-      en: 'I take the data you already produce — takings, covers, orders, consumption — and turn it into a clear dashboard. No manual exports every Monday morning: the indicators update themselves.',
+      it: 'Raccogliamo i dati che già producete — incassi, coperti, ordini, consumi — e li trasformiamo in un cruscotto chiaro. Niente esportazioni manuali ogni lunedì mattina: gli indicatori si aggiornano da soli.',
+      en: 'We take the data you already produce — takings, covers, orders, consumption — and turn it into a clear dashboard. No manual exports every Monday morning: the indicators update themselves.',
     },
     deliverables: {
       it: [

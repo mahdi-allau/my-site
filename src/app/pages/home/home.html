@@ -104,9 +104,9 @@
       @for (service of topServices(); track service.id; let i = $index) {
         <div appReveal [revealDelay]="i * 110" class="flex">
           <a appTilt routerLink="/services" [fragment]="service.slug" class="card group flex w-full flex-col p-9">
-            <span class="grid h-14 w-14 place-items-center rounded-xl rounded-bl-none border border-line bg-surface-alt text-accent transition-colors duration-500 group-hover:border-accent">
-              <app-service-icon [name]="service.icon" />
-            </span>
+            <!-- Ogni servizio ha la sua scena: mostra la cosa che fa,
+                 invece di un'icona che vale per tutti. -->
+            <app-service-motion [name]="service.icon" />
             <h3 class="display mt-7 text-2xl text-heading">{{ service.title }}</h3>
             <p class="mt-2.5 font-display text-lg italic text-accent">{{ service.tagline }}</p>
             <p class="mt-4 text-[0.9375rem] leading-relaxed text-body">{{ service.description }}</p>
