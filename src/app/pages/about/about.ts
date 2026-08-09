@@ -1,22 +1,28 @@
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { SKILL_GROUPS } from '../../core/seed-content';
 import { I18nService } from '../../core/i18n/i18n.service';
 import { accentWords } from '../../core/i18n/accent-words';
 import { RevealDirective } from '../../shared/motion/reveal.directive';
 import { TiltDirective } from '../../shared/motion/tilt.directive';
 import { MagneticDirective } from '../../shared/motion/magnetic.directive';
 import { CraftFlow } from '../../shared/craft-flow/craft-flow';
+import { PromiseSeals } from '../../shared/promise-seals/promise-seals';
 
 @Component({
   selector: 'app-about',
-  imports: [RouterLink, RevealDirective, TiltDirective, MagneticDirective, CraftFlow],
+  imports: [
+    RouterLink,
+    RevealDirective,
+    TiltDirective,
+    MagneticDirective,
+    CraftFlow,
+    PromiseSeals,
+  ],
   templateUrl: './about.html',
 })
 export class About {
   protected readonly i18n = inject(I18nService);
 
-  protected readonly skillGroups = SKILL_GROUPS;
   protected readonly areas = [1, 2, 3];
   protected readonly principles = [1, 2, 3, 4];
 

@@ -125,33 +125,32 @@
   </div>
 </section>
 
-<!-- Competenze -->
+<!-- Impegni. Al posto dell'elenco di tecnologie, che invecchia a ogni
+     cambio di stack e a un ristoratore non dice niente. -->
 <section class="relative py-28 md:py-36">
   <hr class="hairline absolute inset-x-0 top-0" />
 
   <div class="container-page">
     <div class="max-w-2xl">
-      <span appReveal class="eyebrow">{{ i18n.t('about.skills.eyebrow') }}</span>
+      <span appReveal class="eyebrow">{{ i18n.t('about.promise.eyebrow') }}</span>
       <h2 appReveal [revealDelay]="90" class="display mt-6 text-[2.5rem] sm:text-6xl">
-        {{ i18n.t('about.skills.title') }}
+        {{ i18n.t('about.promise.title') }}<br />
+        <span class="headline-accent">{{ i18n.t('about.promise.titleB') }}</span>
       </h2>
+      <p appReveal [revealDelay]="180" class="mt-7 text-[0.9375rem] leading-relaxed text-body">
+        {{ i18n.t('about.promise.body') }}
+      </p>
     </div>
 
-    <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      @for (group of skillGroups; track group.labelKey; let i = $index) {
-        <div appReveal [revealDelay]="i * 90">
-          <div appTilt class="card h-full p-8">
-            <h3 class="text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-accent">
-              {{ i18n.t(group.labelKey) }}
-            </h3>
-            <div class="mt-5 flex flex-wrap gap-2.5">
-              @for (item of group.items; track item) {
-                <span class="chip">{{ item }}</span>
-              }
-            </div>
-          </div>
-        </div>
-      }
+    <div appReveal [revealDelay]="260" class="mt-16">
+      <app-promise-seals />
+    </div>
+
+    <!-- La pagina finiva su un elenco: ora si chiude con un invito. -->
+    <div appReveal class="mt-14 text-center">
+      <a routerLink="/contact" appMagnetic class="btn btn-primary">
+        {{ i18n.t('about.promise.cta') }}
+      </a>
     </div>
   </div>
 </section>

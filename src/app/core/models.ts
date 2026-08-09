@@ -53,11 +53,6 @@ export interface ContactDraft {
   message: string;
 }
 
-export interface SkillGroup {
-  /** Chiave di traduzione dell'etichetta del gruppo. */
-  labelKey: string;
-  items: string[];
-}
 
 /** Input per creare o aggiornare un progetto dalla dashboard admin. */
 export type ProjectDraft = Omit<Project, 'id'> & { id?: string };

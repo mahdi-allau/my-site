@@ -1,0 +1,17 @@
+<ul class="seals">
+  @for (seal of seals; track seal; let i = $index) {
+    <li class="seal" [style.--i]="i">
+      <span class="seal-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+          <circle class="seal-ring" cx="20" cy="20" r="18" opacity=".35" />
+          <path class="seal-tick" d="M12 20.5l5.5 5.5L28 15" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+
+      <div>
+        <p class="seal-title">{{ i18n.t('about.promise.' + seal + '.title') }}</p>
+        <p class="seal-body">{{ i18n.t('about.promise.' + seal + '.body') }}</p>
+      </div>
+    </li>
+  }
+</ul>

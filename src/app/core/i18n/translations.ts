@@ -188,13 +188,30 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'about.principle4.title': 'Parlare chiaro',
     'about.principle4.body':
       'Preventivi leggibili, tempi realistici e nessun gergo inutile. Se qualcosa non conviene farla, te lo diciamo.',
-    'about.skills.eyebrow': 'Competenze tecniche',
-    'about.skills.title': 'Lo strumentario completo.',
-    'skills.frontend': 'Frontend',
-    'skills.backend': 'Backend e dati',
-    'skills.languages': 'Linguaggi',
-    'skills.iot': 'IoT e analisi',
-    'skills.tools': 'Strumenti',
+    // --- Impegni: hanno preso il posto dell'elenco di tecnologie, che
+    //     invecchia a ogni cambio di stack. Nessuna promessa nuova: sono
+    //     quelle gia dichiarate nei prezzi e nelle domande frequenti.
+    'about.promise.eyebrow': 'Gli impegni',
+    'about.promise.title': 'Quello che non cambia,',
+    'about.promise.titleB': 'qualunque tecnologia usiamo.',
+    'about.promise.accent': 'qualunque tecnologia usiamo.',
+    'about.promise.body':
+      'Gli strumenti cambiano ogni due anni. Questi quattro punti no: valgono per ogni progetto che consegniamo.',
+
+    'about.promise.1.title': 'Gli accessi restano tuoi',
+    'about.promise.1.body':
+      'Dominio, hosting e caselle email li intestiamo a te. Se un domani vuoi cambiare fornitore, porti via tutto senza chiedere il permesso a nessuno.',
+    'about.promise.2.title': 'Aggiorni senza chiamarci',
+    'about.promise.2.body':
+      'Il pannello di amministrazione è parte del progetto, non un servizio a parte. Testi, foto e menù li cambi tu, quando vuoi, senza toccare il codice.',
+    'about.promise.3.title': 'La prima proposta è gratis',
+    'about.promise.3.body':
+      'Ti facciamo vedere come verrebbe prima che tu abbia speso un euro. Se non ti convince, ci salutiamo: il tempo lo abbiamo messo noi.',
+    'about.promise.4.title': 'Il prezzo non si muove',
+    'about.promise.4.body':
+      'Il preventivo è scritto e voce per voce. Quello che c’è dentro costa quello che c’è scritto, dall’inizio alla consegna.',
+
+    'about.promise.cta': 'Parliamo del tuo progetto',
 
     'projects.eyebrow': 'Portfolio',
     'projects.title': 'Progetti.',
@@ -603,13 +620,30 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'about.principle4.title': 'Plain speaking',
     'about.principle4.body':
       'Readable quotes, realistic timelines and no needless jargon. If something isn’t worth doing, we’ll say so.',
-    'about.skills.eyebrow': 'Technical skills',
-    'about.skills.title': 'The full toolkit.',
-    'skills.frontend': 'Frontend',
-    'skills.backend': 'Backend and data',
-    'skills.languages': 'Languages',
-    'skills.iot': 'IoT and analytics',
-    'skills.tools': 'Tools',
+    // --- Commitments: replaced the list of technologies, which ages with
+    //     every change of stack. No new promises: these are the ones
+    //     already stated in the pricing and the FAQ.
+    'about.promise.eyebrow': 'Our commitments',
+    'about.promise.title': 'What doesn’t change,',
+    'about.promise.titleB': 'whatever technology we use.',
+    'about.promise.accent': 'whatever technology we use.',
+    'about.promise.body':
+      'Tools change every couple of years. These four don’t: they hold for every project we hand over.',
+
+    'about.promise.1.title': 'The credentials stay yours',
+    'about.promise.1.body':
+      'Domain, hosting and email accounts go in your name. If one day you want to change supplier, you take everything with you without asking anyone’s permission.',
+    'about.promise.2.title': 'You update without calling us',
+    'about.promise.2.body':
+      'The admin panel is part of the project, not a separate service. Text, photos and the menu are yours to change, whenever you want, without touching any code.',
+    'about.promise.3.title': 'The first proposal is free',
+    'about.promise.3.body':
+      'We show you how it would look before you’ve spent a euro. If it doesn’t convince you, we shake hands: the time was ours to spend.',
+    'about.promise.4.title': 'The price doesn’t move',
+    'about.promise.4.body':
+      'The quote is written and itemised. What’s in it costs what it says, from the start to the hand-over.',
+
+    'about.promise.cta': 'Let’s talk about your project',
 
     'projects.eyebrow': 'Portfolio',
     'projects.title': 'Work.',

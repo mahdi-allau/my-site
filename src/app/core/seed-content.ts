@@ -1,5 +1,5 @@
 import { Lang } from './i18n/i18n.service';
-import { Project, ServiceOffer, SkillGroup } from './models';
+import { Project, ServiceOffer } from './models';
 
 /**
  * Contenuti di partenza, presi dal CV, in italiano e in inglese.
@@ -375,27 +375,8 @@ export function seedServices(lang: Lang): ServiceOffer[] {
   }));
 }
 
-/** Le etichette dei gruppi sono chiavi di traduzione; i nomi degli
- *  strumenti restano invariati nelle due lingue. */
-export const SKILL_GROUPS: SkillGroup[] = [
-  {
-    labelKey: 'skills.frontend',
-    items: ['Angular', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS', 'Vite'],
-  },
-  {
-    labelKey: 'skills.backend',
-    items: ['Supabase', 'Supabase Auth', 'Supabase Storage', 'PostgreSQL', 'SQL', 'Python'],
-  },
-  {
-    labelKey: 'skills.languages',
-    items: ['Java', 'C', 'C++', 'Python', 'TypeScript', 'MATLAB'],
-  },
-  {
-    labelKey: 'skills.iot',
-    items: ['Arduino', 'ESP32', 'PID', 'Power BI'],
-  },
-  {
-    labelKey: 'skills.tools',
-    items: ['Git', 'GitHub', 'Vite', 'Power BI'],
-  },
-];
+/* L'elenco completo di linguaggi e strumenti stava qui: è stato tolto
+   insieme alla sezione "Lo strumentario completo" di Chi siamo. Un elenco
+   di tecnologie invecchia a ogni cambio di stack e non dice niente al
+   cliente tipo di questo sito. Le tecnologie restano dove servono
+   davvero: sulle schede dei singoli progetti. */

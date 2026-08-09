@@ -1,0 +1,178 @@
+/* =====================================================================
+   I quattro impegni.
+
+   Un solo giro di 10s: ogni spunta si disegna 1,4s dopo la precedente e
+   resta tracciata fino alla fine. Sono impegni che si sommano, non
+   alternative fra cui scegliere, quindi nessuno si spegne prima del
+   riavvio del ciclo.
+   ===================================================================== */
+:host {
+  --loop: 10s;
+  --gap: 1.4s;
+  display: block;
+}
+
+.seals {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .seals {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+.seal {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.35rem;
+  align-items: start;
+  padding: 1.75rem;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  animation: seal-lift var(--loop) linear infinite;
+  animation-delay: calc(var(--i) * var(--gap));
+}
+
+@keyframes seal-lift {
+  0%,
+  8% {
+    border-color: var(--border-soft);
+  }
+  14%,
+  92% {
+    border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  }
+  97%,
+  100% {
+    border-color: var(--border-soft);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Il sigillo
+   ------------------------------------------------------------------ */
+.seal-mark {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 999px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  animation: seal-pulse var(--loop) linear infinite;
+  animation-delay: calc(var(--i) * var(--gap));
+}
+
+.seal-mark svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+@keyframes seal-pulse {
+  0%,
+  9% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 35%, transparent);
+    transform: scale(1);
+  }
+  13% {
+    transform: scale(1.08);
+  }
+  20%,
+  100% {
+    box-shadow: 0 0 0 12px transparent;
+    transform: scale(1);
+  }
+}
+
+/* Il cerchio si chiude, poi la spunta si traccia dentro */
+.seal-ring {
+  stroke-dasharray: 114;
+  stroke-dashoffset: 114;
+  transform-origin: center;
+  transform: rotate(-90deg);
+  animation: seal-ring var(--loop) linear infinite;
+  animation-delay: calc(var(--i) * var(--gap));
+}
+
+@keyframes seal-ring {
+  0%,
+  4% {
+    stroke-dashoffset: 114;
+  }
+  12%,
+  92% {
+    stroke-dashoffset: 0;
+  }
+  97%,
+  100% {
+    stroke-dashoffset: 114;
+  }
+}
+
+.seal-tick {
+  stroke-dasharray: 26;
+  stroke-dashoffset: 26;
+  animation: seal-tick var(--loop) linear infinite;
+  animation-delay: calc(var(--i) * var(--gap));
+}
+
+@keyframes seal-tick {
+  0%,
+  9% {
+    stroke-dashoffset: 26;
+  }
+  15%,
+  92% {
+    stroke-dashoffset: 0;
+  }
+  97%,
+  100% {
+    stroke-dashoffset: 26;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Testo
+   ------------------------------------------------------------------ */
+.seal-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  line-height: 1.2;
+  color: var(--fg);
+}
+
+.seal-body {
+  margin-top: 0.6rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--fg-body);
+}
+
+/* ------------------------------------------------------------------
+   Movimento ridotto: tutti i sigilli gia chiusi e leggibili.
+   ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .seal,
+  .seal-mark,
+  .seal-ring,
+  .seal-tick {
+    animation: none;
+  }
+
+  .seal {
+    border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  }
+
+  .seal-ring,
+  .seal-tick {
+    stroke-dashoffset: 0;
+  }
+}
