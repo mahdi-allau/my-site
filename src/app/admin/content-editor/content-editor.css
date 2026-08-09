@@ -1,0 +1,179 @@
+/* Editor dei testi. Usa i token del sito, non quelli dei demo. */
+
+.intro {
+  max-width: 46rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--fg-body);
+}
+
+.err {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid color-mix(in srgb, #b4541f 40%, transparent);
+  border-radius: 0.6rem;
+  background: color-mix(in srgb, #b4541f 8%, transparent);
+  color: #b4541f;
+  font-size: 0.875rem;
+}
+
+.muted {
+  color: var(--fg-muted);
+  font-size: 0.9375rem;
+}
+
+/* ----------------------------- filtri ----------------------------- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.search {
+  flex: 1 1 20rem;
+  min-width: 0;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--fg-body);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.toggle input {
+  accent-color: var(--accent);
+  width: 1rem;
+  height: 1rem;
+}
+
+.groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.groups button {
+  position: relative;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--fg-body);
+  cursor: pointer;
+  transition: border-color 200ms ease, background-color 200ms ease, color 200ms ease;
+}
+
+.groups button:hover {
+  border-color: var(--accent);
+}
+
+.groups button.is-on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--surface);
+}
+
+/* Pallino: in questa sezione ci sono testi riscritti */
+.dot {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-left: 0.4rem;
+  border-radius: 999px;
+  background: currentColor;
+  vertical-align: middle;
+}
+
+/* ----------------------------- righe ----------------------------- */
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.row {
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 0.75rem;
+  background: var(--surface);
+}
+
+.row.is-changed {
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.row-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.row-head code {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  word-break: break-all;
+}
+
+.tag {
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pair {
+  display: grid;
+  gap: 0.85rem;
+}
+
+@media (min-width: 860px) {
+  .pair {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.lbl {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+}
+
+.row-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+/* ----------------------------- messaggio ----------------------------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  z-index: 50;
+  transform: translateX(-50%);
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  background: var(--fg);
+  color: var(--surface);
+  font-size: 0.8125rem;
+}

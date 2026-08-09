@@ -7,6 +7,7 @@ import { Footer } from './layout/footer/footer';
 import { Ambience } from './layout/ambience/ambience';
 import { I18nService } from './core/i18n/i18n.service';
 import { SeoService } from './core/seo/seo.service';
+import { SiteContentService } from './core/site-content.service';
 
 @Component({
   selector: 'app-root',
@@ -40,5 +41,9 @@ export class App {
     // Va agganciato dopo `currentUrl`, così il primo NavigationEnd trova
     // entrambi gli ascoltatori già in ascolto.
     inject(SeoService).init();
+
+    // Testi riscritti e dati aziendali. Non si attende: la pagina parte
+    // con i valori del codice e si aggiorna quando arrivano.
+    void inject(SiteContentService).load();
   }
 }

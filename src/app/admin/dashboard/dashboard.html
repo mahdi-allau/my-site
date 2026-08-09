@@ -32,6 +32,12 @@
         Progetti
         <span class="ml-2 text-xs opacity-70">{{ projects().length }}</span>
       </button>
+      <button type="button" [class]="tabClass('content')" (click)="select('content')">
+        Testi del sito
+      </button>
+      <button type="button" [class]="tabClass('settings')" (click)="select('settings')">
+        Azienda
+      </button>
 
       <button type="button" class="ml-auto rounded-full px-4 py-2 text-sm text-muted transition-colors hover:text-heading"
               (click)="load()" [disabled]="loading()">
@@ -100,6 +106,20 @@
             }
           </div>
         }
+      </section>
+    }
+
+    <!-- ============================ TESTI ============================ -->
+    @if (tab() === 'content') {
+      <section class="mt-8">
+        <app-content-editor />
+      </section>
+    }
+
+    <!-- ============================ AZIENDA ============================ -->
+    @if (tab() === 'settings') {
+      <section class="mt-8">
+        <app-settings-editor />
       </section>
     }
 

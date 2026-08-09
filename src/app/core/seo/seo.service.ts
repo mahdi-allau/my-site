@@ -5,6 +5,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { DEFAULT_LANG, I18nService, LANG_PARAM, Lang } from '../i18n/i18n.service';
+import { SiteContentService } from '../site-content.service';
 
 /**
  * Testa del documento: titolo, descrizione, canonical, hreflang, anteprima
@@ -26,6 +27,7 @@ export class SeoService {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly i18n = inject(I18nService);
+  private readonly site = inject(SiteContentService);
 
   init(): void {
     this.router.events
@@ -181,20 +183,44 @@ export class SeoService {
    * titolare del trattamento e i due devono coincidere.
    */
   private setStructuredData(origin: string, lang: Lang, description: string): void {
+    const settings = this.site.settings();
+
+    // Indirizzo e telefono compaiono solo se compilati nell'area riservata:
+    // dichiarare una sede vuota è peggio che non dichiararla.
+    const address =
+      settings.city || settings.street
+        ? {
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: settings.street || undefined,
+              postalCode: settings.postalCode || undefined,
+              addressLocality: settings.city || undefined,
+              addressRegion: settings.region || undefined,
+              addressCountry: settings.country || 'IT',
+            },
+          }
+        : {};
+
     const graph = {
       '@context': 'https://schema.org',
       '@graph': [
         {
           '@type': ['Organization', 'ProfessionalService'],
           '@id': `${origin}/#business`,
-          name: 'SARAH',
+          name: settings.companyName,
           alternateName: 'SARAH — sviluppo web su misura',
           description,
           url: origin,
           logo: `${origin}/logo-full.png`,
           image: `${origin}/og-cover.png`,
-          email: `mailto:${environment.contactEmail}`,
-          areaServed: { '@type': 'Country', name: 'Italia' },
+          email: `mailto:${settings.email || environment.contactEmail}`,
+          ...(settings.phone ? { telephone: settings.phone } : {}),
+          ...(settings.vat ? { vatID: settings.vat } : {}),
+          ...(settings.mapsUrl ? { hasMap: settings.mapsUrl } : {}),
+          ...address,
+          areaServed: settings.city
+            ? [{ '@type': 'City', name: settings.city }, { '@type': 'Country', name: 'Italia' }]
+            : { '@type': 'Country', name: 'Italia' },
           knowsLanguage: ['it', 'en'],
           founder: { '@type': 'Person', name: 'Mahdi Allau' },
           hasOfferCatalog: {

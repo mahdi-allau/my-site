@@ -1,0 +1,83 @@
+<p class="intro">
+  Questi dati compaiono nel piè di pagina, nella pagina contatti e nei dati
+  strutturati che legge Google. <strong>Compilare città e indirizzo conta:</strong>
+  senza, il sito non dice dove siete, e le ricerche del tipo
+  «sito web ristorante + città» restano fuori portata.
+</p>
+
+@if (error()) {
+  <p class="err">{{ error() }}</p>
+}
+
+<form [formGroup]="form" (ngSubmit)="save()" novalidate class="grid">
+  <div class="block">
+    <h3>Azienda</h3>
+
+    <label class="lbl" for="s-name">Nome *</label>
+    <input id="s-name" class="field-admin" type="text" formControlName="companyName" />
+    @if (invalid('companyName')) {
+      <p class="field-err">Serve un nome di almeno due lettere.</p>
+    }
+
+    <label class="lbl" for="s-vat">Partita IVA</label>
+    <input id="s-vat" class="field-admin" type="text" formControlName="vat" />
+  </div>
+
+  <div class="block">
+    <h3>Contatti</h3>
+
+    <label class="lbl" for="s-email">Email *</label>
+    <input id="s-email" class="field-admin" type="email" formControlName="email" />
+    @if (invalid('email')) {
+      <p class="field-err">Controlla l'indirizzo email.</p>
+    }
+
+    <label class="lbl" for="s-phone">Telefono</label>
+    <input id="s-phone" class="field-admin" type="tel" formControlName="phone" placeholder="+39 035 000 0000" />
+
+    <label class="lbl" for="s-wa">WhatsApp</label>
+    <input id="s-wa" class="field-admin" type="tel" formControlName="whatsapp" placeholder="+39 300 000 0000" />
+  </div>
+
+  <div class="block">
+    <h3>Dove siete</h3>
+
+    <label class="lbl" for="s-street">Indirizzo</label>
+    <input id="s-street" class="field-admin" type="text" formControlName="street" />
+
+    <div class="row-2">
+      <div>
+        <label class="lbl" for="s-cap">CAP</label>
+        <input id="s-cap" class="field-admin" type="text" formControlName="postalCode" />
+      </div>
+      <div>
+        <label class="lbl" for="s-city">Città</label>
+        <input id="s-city" class="field-admin" type="text" formControlName="city" />
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div>
+        <label class="lbl" for="s-region">Provincia</label>
+        <input id="s-region" class="field-admin" type="text" formControlName="region" />
+      </div>
+      <div>
+        <label class="lbl" for="s-country">Paese</label>
+        <input id="s-country" class="field-admin" type="text" formControlName="country" />
+      </div>
+    </div>
+
+    <label class="lbl" for="s-maps">Link alla mappa</label>
+    <input id="s-maps" class="field-admin" type="url" formControlName="mapsUrl" placeholder="https://maps.app.goo.gl/…" />
+  </div>
+
+  <div class="foot">
+    <button type="submit" class="btn-admin" [disabled]="saving()">
+      {{ saving() ? 'Salvo…' : 'Salva le impostazioni' }}
+    </button>
+  </div>
+</form>
+
+@if (toast()) {
+  <p class="toast" role="status">{{ toast() }}</p>
+}

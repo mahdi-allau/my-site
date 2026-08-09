@@ -1,0 +1,100 @@
+<p class="intro">
+  Qui si riscrive qualunque testo del sito, nelle due lingue. Quello che non
+  tocchi resta come nel codice: <strong>Ripristina</strong> cancella la
+  modifica e fa tornare l'originale.
+</p>
+
+@if (error()) {
+  <p class="err">{{ error() }}</p>
+}
+
+<!-- Ricerca e gruppi -->
+<div class="filters">
+  <input
+    type="search"
+    class="field-admin search"
+    [value]="search()"
+    (input)="search.set($any($event.target).value)"
+    placeholder="Cerca una parola in italiano o in inglese…"
+    aria-label="Cerca nei testi"
+  />
+
+  <label class="toggle">
+    <input type="checkbox" [checked]="onlyChanged()" (change)="onlyChanged.set($any($event.target).checked)" />
+    Solo modificati ({{ changedCount() }})
+  </label>
+</div>
+
+@if (!search()) {
+  <div class="groups" role="group" aria-label="Sezioni del sito">
+    @for (g of groups(); track g.prefix) {
+      <button type="button" (click)="group.set(g.prefix)"
+              [class.is-on]="group() === g.prefix"
+              [attr.aria-pressed]="group() === g.prefix">
+        {{ g.label }}
+        @if (g.changed) {
+          <span class="dot" [title]="g.changed + ' modificati'"></span>
+        }
+      </button>
+    }
+  </div>
+}
+
+@if (loading()) {
+  <p class="muted">Caricamento…</p>
+} @else {
+  <div class="rows">
+    @for (row of visible(); track row.key) {
+      <article class="row" [class.is-changed]="row.overridden">
+        <header class="row-head">
+          <code>{{ row.key }}</code>
+          @if (row.overridden) {
+            <span class="tag">modificato</span>
+          }
+        </header>
+
+        <div class="pair">
+          <div>
+            <label class="lbl" [attr.for]="'it-' + row.key">Italiano</label>
+            <textarea
+              [id]="'it-' + row.key"
+              class="field-admin"
+              [rows]="linesFor(row)"
+              [value]="row.it"
+              (input)="setIt(row, $any($event.target).value)"
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="lbl" [attr.for]="'en-' + row.key">Inglese</label>
+            <textarea
+              [id]="'en-' + row.key"
+              class="field-admin"
+              [rows]="linesFor(row)"
+              [value]="row.en"
+              (input)="setEn(row, $any($event.target).value)"
+            ></textarea>
+          </div>
+        </div>
+
+        <footer class="row-foot">
+          <button type="button" class="btn-admin" (click)="save(row)" [disabled]="savingKey() === row.key">
+            {{ savingKey() === row.key ? 'Salvo…' : 'Salva' }}
+          </button>
+
+          @if (row.overridden) {
+            <button type="button" class="btn-admin-ghost" (click)="reset(row)" [disabled]="savingKey() === row.key">
+              Ripristina l'originale
+            </button>
+          }
+        </footer>
+      </article>
+    } @empty {
+      <p class="muted">Nessun testo corrisponde alla ricerca.</p>
+    }
+  </div>
+}
+
+@if (toast()) {
+  <p class="toast" role="status">{{ toast() }}</p>
+}

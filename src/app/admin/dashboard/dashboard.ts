@@ -6,12 +6,14 @@ import { AuthService } from '../../core/auth.service';
 import { ContentService } from '../../core/content.service';
 import { ContactMessage, Project } from '../../core/models';
 import { Logo } from '../../shared/logo/logo';
+import { ContentEditor } from '../content-editor/content-editor';
+import { SettingsEditor } from '../settings-editor/settings-editor';
 
-type Tab = 'messages' | 'projects';
+type Tab = 'messages' | 'projects' | 'content' | 'settings';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [ReactiveFormsModule, RouterLink, DatePipe, Logo],
+  imports: [ReactiveFormsModule, RouterLink, DatePipe, Logo, ContentEditor, SettingsEditor],
   templateUrl: './dashboard.html',
 })
 export class Dashboard {

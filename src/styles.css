@@ -461,6 +461,64 @@
 
   /* =============================== FORM =============================== */
 
+  /* Area riservata: campi e pulsanti più compatti di quelli del sito,
+     perché lì si compilano moduli, non si legge una pagina. */
+  .field-admin {
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background: var(--surface);
+    color: var(--fg);
+    font-family: inherit;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    resize: vertical;
+  }
+
+  .field-admin:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+
+  .btn-admin,
+  .btn-admin-ghost {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .btn-admin {
+    background: var(--accent);
+    color: var(--surface);
+  }
+
+  .btn-admin:hover:not(:disabled) {
+    background: var(--accent-strong);
+  }
+
+  .btn-admin-ghost {
+    border-color: var(--border);
+    background: var(--surface);
+    color: var(--fg-body);
+  }
+
+  .btn-admin-ghost:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .btn-admin:disabled,
+  .btn-admin-ghost:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   .field {
     width: 100%;
     background: var(--surface-alt);

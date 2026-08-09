@@ -30,6 +30,14 @@ export const DEFAULT_LANG: Lang = 'it';
 export class I18nService {
   private readonly current = signal<Lang>(detectInitialLang());
 
+  /**
+   * Testi riscritti dall'area riservata, per chiave e per lingua.
+   *
+   * È un signal, quindi appena arrivano dal database ogni testo della
+   * pagina si aggiorna da solo: i template chiamano `t()`, che lo legge.
+   */
+  private readonly overrides = signal<Record<string, Partial<Record<Lang, string>>>>({});
+
   readonly lang = this.current.asReadonly();
   readonly isEnglish = computed(() => this.current() === 'en');
 
@@ -37,10 +45,48 @@ export class I18nService {
     this.applyToDocument(this.current());
   }
 
-  /** Testo tradotto. Se manca in inglese ricade sull'italiano, poi sulla chiave. */
+  /**
+   * Testo tradotto.
+   *
+   * Ordine: quello riscritto dall'admin, poi quello del codice nella
+   * lingua scelta, poi l'italiano, infine la chiave stessa. Il codice
+   * resta la base: l'admin salva solo le voci che cambia, quindi una
+   * chiave aggiunta domani funziona subito senza toccare il database.
+   */
   t(key: string): string {
     const lang = this.current();
+    const custom = this.overrides()[key]?.[lang];
+    if (custom) {
+      return custom;
+    }
     return TRANSLATIONS[lang][key] ?? TRANSLATIONS.it[key] ?? key;
+  }
+
+  /** Testo originale del codice, ignorando le riscritture. */
+  original(key: string, lang: Lang): string {
+    return TRANSLATIONS[lang][key] ?? '';
+  }
+
+  /** Elenco completo delle chiavi, per l'editor dell'area riservata. */
+  allKeys(): string[] {
+    return Object.keys(TRANSLATIONS.it).sort();
+  }
+
+  setOverrides(map: Record<string, Partial<Record<Lang, string>>>): void {
+    this.overrides.set(map);
+  }
+
+  /** Riscrittura di una sola chiave, per vedere subito l'effetto del salvataggio. */
+  patchOverride(key: string, values: Partial<Record<Lang, string>> | null): void {
+    this.overrides.update((all) => {
+      const next = { ...all };
+      if (values) {
+        next[key] = values;
+      } else {
+        delete next[key];
+      }
+      return next;
+    });
   }
 
   setLang(lang: Lang): void {
