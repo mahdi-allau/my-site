@@ -1,0 +1,64 @@
+<div class="grid gap-10 lg:grid-cols-[1fr_1.15fr] lg:items-center">
+  <!-- Elenco dei passi: si illuminano in sincrono con lo schermo -->
+  <ol class="wt-steps" [style.--n]="steps.length">
+    @for (step of steps; track step; let i = $index) {
+      <li class="wt-step" [style.--i]="i">
+        <span class="wt-step-num">0{{ step }}</span>
+        <div>
+          <p class="wt-step-label">{{ i18n.t('contact.walk.' + step + '.label') }}</p>
+          <p class="wt-step-caption">{{ i18n.t('contact.walk.' + step + '.caption') }}</p>
+        </div>
+        <span class="wt-step-bar" aria-hidden="true"></span>
+      </li>
+    }
+  </ol>
+
+  <!-- Finestra: la parte decorativa, nascosta ai lettori di schermo perché
+       ripete quello che i passi qui accanto dicono già a parole. -->
+  <div class="wt-frame" aria-hidden="true" [style.--n]="steps.length">
+    <div class="wt-bar">
+      <span class="wt-dot"></span><span class="wt-dot"></span><span class="wt-dot"></span>
+      <span class="wt-url">{{ i18n.t('contact.walk.url') }}</span>
+    </div>
+
+    <div class="wt-screen">
+      <!-- 1 · Il modulo che si compila -->
+      <div class="wt-slide" style="--i: 0">
+        <p class="wt-title">{{ i18n.t('contact.walk.screen1') }}</p>
+        <div class="wt-field"><i class="wt-fill wt-fill-1"></i></div>
+        <div class="wt-field"><i class="wt-fill wt-fill-2"></i></div>
+        <div class="wt-field wt-field-tall"><i class="wt-fill wt-fill-3"></i></div>
+        <span class="wt-send">{{ i18n.t('contact.submit') }}</span>
+      </div>
+
+      <!-- 2 · La risposta -->
+      <div class="wt-slide" style="--i: 1">
+        <p class="wt-title">{{ i18n.t('contact.walk.screen2') }}</p>
+        <div class="wt-bubble wt-bubble-in"><i></i><i></i></div>
+        <div class="wt-bubble wt-bubble-out"><i></i><i></i><i></i></div>
+        <div class="wt-bubble wt-bubble-in wt-bubble-3"><i></i></div>
+      </div>
+
+      <!-- 3 · La chiamata -->
+      <div class="wt-slide wt-slide-call" style="--i: 2">
+        <span class="wt-ring">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"
+                  stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <p class="wt-call-text">{{ i18n.t('contact.walk.screen3') }}</p>
+        <span class="wt-timer">00:20</span>
+      </div>
+
+      <!-- 4 · Il preventivo -->
+      <div class="wt-slide" style="--i: 3">
+        <p class="wt-title">{{ i18n.t('contact.walk.screen4') }}</p>
+        <div class="wt-row"><i></i><b></b></div>
+        <div class="wt-row wt-row-2"><i></i><b></b></div>
+        <div class="wt-row wt-row-3"><i></i><b></b></div>
+        <div class="wt-total"><i></i><b></b></div>
+      </div>
+    </div>
+  </div>
+</div>

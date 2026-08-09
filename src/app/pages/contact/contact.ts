@@ -8,12 +8,20 @@ import { accentWords } from '../../core/i18n/accent-words';
 import { RevealDirective } from '../../shared/motion/reveal.directive';
 import { TiltDirective } from '../../shared/motion/tilt.directive';
 import { MagneticDirective } from '../../shared/motion/magnetic.directive';
+import { ContactWalkthrough } from '../../shared/contact-walkthrough/contact-walkthrough';
 
 type FormState = 'idle' | 'sending' | 'sent' | 'mailto' | 'error';
 
 @Component({
   selector: 'app-contact',
-  imports: [ReactiveFormsModule, RouterLink, RevealDirective, TiltDirective, MagneticDirective],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    RevealDirective,
+    TiltDirective,
+    MagneticDirective,
+    ContactWalkthrough,
+  ],
   templateUrl: './contact.html',
 })
 export class Contact {
@@ -24,10 +32,13 @@ export class Contact {
   protected readonly email = environment.contactEmail;
   protected readonly state = signal<FormState>('idle');
   protected readonly errorMessage = signal('');
-  protected readonly steps = [1, 2, 3];
 
   protected readonly headline = computed(() =>
     accentWords(this.i18n.t('contact.title'), this.i18n.t('contact.accent')),
+  );
+
+  protected readonly walkHeadline = computed(() =>
+    accentWords(this.i18n.t('contact.walk.title'), this.i18n.t('contact.walk.accent')),
   );
 
   /** Le fasce di budget sono etichette tradotte; il valore salvato è la chiave. */

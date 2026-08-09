@@ -141,24 +141,6 @@
       <div appReveal="right" [revealDelay]="170">
         <div appTilt class="card p-8">
           <h2 class="text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-accent">
-            {{ i18n.t('contact.nextTitle') }}
-          </h2>
-          <ol class="mt-6 space-y-5">
-            @for (step of steps; track step) {
-              <li class="flex gap-5">
-                <span class="font-display text-2xl text-accent">{{ step }}</span>
-                <p class="text-[0.9375rem] leading-relaxed text-body">
-                  {{ i18n.t('contact.next' + step) }}
-                </p>
-              </li>
-            }
-          </ol>
-        </div>
-      </div>
-
-      <div appReveal="right" [revealDelay]="260">
-        <div appTilt class="card p-8">
-          <h2 class="text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-accent">
             {{ i18n.t('contact.replyTitle') }}
           </h2>
           <p class="mt-4 text-[0.9375rem] leading-relaxed text-body">
@@ -167,5 +149,28 @@
         </div>
       </div>
     </aside>
+  </div>
+</section>
+
+<!-- Guida animata: sostituisce l'elenco statico che stava qui accanto,
+     perché diceva le stesse cose senza mostrarle. -->
+<section class="band-dark on-dark py-28 md:py-36">
+  <div class="container-page">
+    <div class="max-w-2xl">
+      <span appReveal class="eyebrow">{{ i18n.t('contact.walk.eyebrow') }}</span>
+      <h2 appReveal [revealDelay]="90" class="display mt-6 text-[2.5rem] sm:text-6xl">
+        @for (word of walkHeadline(); track $index) {
+          <span [class.headline-accent]="word.accent">{{ word.text }}</span>
+          {{ ' ' }}
+        }
+      </h2>
+      <p appReveal [revealDelay]="180" class="mt-7 text-[0.9375rem] leading-relaxed text-body">
+        {{ i18n.t('contact.walk.body') }}
+      </p>
+    </div>
+
+    <div appReveal [revealDelay]="260" class="mt-16">
+      <app-contact-walkthrough />
+    </div>
   </div>
 </section>

@@ -305,10 +305,30 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'contact.errorPrefix': 'Non siamo riusciti a inviare il messaggio:',
     'contact.errorSuffix': 'Puoi scriverci direttamente a',
     'contact.directTitle': 'Scrivici direttamente',
-    'contact.nextTitle': 'Cosa succede dopo',
-    'contact.next1': 'Leggiamo il messaggio e ti rispondiamo con qualche domanda per capire meglio.',
-    'contact.next2': 'Ci sentiamo per una chiamata di venti minuti, senza impegno.',
-    'contact.next3': 'Ricevi un preventivo scritto con struttura, tempi e costo voce per voce.',
+
+    // --- Guida animata: cosa succede dopo aver scritto ---
+    'contact.walk.eyebrow': 'Passo per passo',
+    'contact.walk.title': 'Cosa succede dopo che ci hai scritto.',
+    'contact.walk.accent': 'dopo che ci hai scritto.',
+    'contact.walk.body':
+      'Nessun impegno e nessun costo fino al preventivo. Se a quel punto non ti convince, finisce lì.',
+    'contact.walk.url': 'sarah.it/contatti',
+    'contact.walk.1.label': 'Scrivi due righe',
+    'contact.walk.1.caption':
+      'Bastano il nome, una email e cosa ti serve. Il resto lo chiediamo noi dopo.',
+    'contact.walk.2.label': 'Ti rispondiamo',
+    'contact.walk.2.caption':
+      'Entro uno o due giorni lavorativi, con qualche domanda per capire meglio il progetto.',
+    'contact.walk.3.label': 'Ci sentiamo venti minuti',
+    'contact.walk.3.caption':
+      'Una chiamata per guardarci in faccia sul progetto. Senza impegno e senza tecnicismi.',
+    'contact.walk.4.label': 'Ricevi il preventivo',
+    'contact.walk.4.caption':
+      'Scritto, voce per voce, con tempi e costo. Da lì il prezzo non si muove.',
+    'contact.walk.screen1': 'Il modulo',
+    'contact.walk.screen2': 'La risposta',
+    'contact.walk.screen3': 'Ci sentiamo',
+    'contact.walk.screen4': 'Il preventivo',
     'contact.replyTitle': 'Tempi di risposta',
     'contact.replyBody':
       'Di norma rispondiamo entro uno o due giorni lavorativi. Se hai una scadenza stretta, scrivilo nel messaggio.',
@@ -692,10 +712,30 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'contact.errorPrefix': 'We couldn’t send the message:',
     'contact.errorSuffix': 'You can write to us directly at',
     'contact.directTitle': 'Write to us directly',
-    'contact.nextTitle': 'What happens next',
-    'contact.next1': 'We read your message and reply with a few questions to understand it better.',
-    'contact.next2': 'We have a twenty-minute call, no obligation.',
-    'contact.next3': 'You get a written quote with structure, timeline and itemised price.',
+
+    // --- Animated walkthrough: what happens after you write ---
+    'contact.walk.eyebrow': 'Step by step',
+    'contact.walk.title': 'What happens after you write to us.',
+    'contact.walk.accent': 'after you write to us.',
+    'contact.walk.body':
+      'No commitment and no cost until the quote. If it doesn’t convince you at that point, it ends there.',
+    'contact.walk.url': 'sarah.it/contact',
+    'contact.walk.1.label': 'Write two lines',
+    'contact.walk.1.caption':
+      'Your name, an email and what you need. We’ll ask for the rest afterwards.',
+    'contact.walk.2.label': 'We reply',
+    'contact.walk.2.caption':
+      'Within one or two working days, with a few questions to understand the project better.',
+    'contact.walk.3.label': 'A twenty-minute call',
+    'contact.walk.3.caption':
+      'A call to look each other in the eye about the project. No obligation, no jargon.',
+    'contact.walk.4.label': 'You get the quote',
+    'contact.walk.4.caption':
+      'Written, itemised, with timeline and price. From there the price doesn’t move.',
+    'contact.walk.screen1': 'The form',
+    'contact.walk.screen2': 'The reply',
+    'contact.walk.screen3': 'The call',
+    'contact.walk.screen4': 'The quote',
     'contact.replyTitle': 'Response time',
     'contact.replyBody':
       'We normally reply within one or two working days. If you’re on a tight deadline, say so in the message.',

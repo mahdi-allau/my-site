@@ -1,0 +1,630 @@
+/* =====================================================================
+   Guida animata al contatto.
+
+   Un solo ciclo governa tutto: ogni schermata dura `--dur` e parte con un
+   ritardo pari alla sua posizione. Le percentuali dei keyframe sono
+   quindi riferite al giro intero, non al singolo passo — con quattro
+   passi ciascuno occupa il 25%.
+   ===================================================================== */
+:host {
+  --dur: 3.6s;
+  --loop: calc(var(--n, 4) * var(--dur));
+  display: block;
+}
+
+/* ------------------------------------------------------------------
+   Elenco dei passi
+   ------------------------------------------------------------------ */
+.wt-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wt-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.25rem;
+  align-items: start;
+  padding: 1.15rem 1.25rem 1.35rem;
+  border-radius: 0.9rem;
+  background: transparent;
+  animation: wt-step-on var(--loop) linear infinite;
+  animation-delay: calc(var(--i) * var(--dur));
+}
+
+@keyframes wt-step-on {
+  0%,
+  1% {
+    background: transparent;
+  }
+  3%,
+  22% {
+    background: var(--surface-alt);
+  }
+  25%,
+  100% {
+    background: transparent;
+  }
+}
+
+.wt-step-num {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--fg-muted);
+  animation: wt-num-on var(--loop) linear infinite;
+  animation-delay: calc(var(--i) * var(--dur));
+}
+
+@keyframes wt-num-on {
+  0%,
+  1% {
+    color: var(--fg-muted);
+    opacity: 0.55;
+  }
+  3%,
+  22% {
+    color: var(--accent);
+    opacity: 1;
+  }
+  25%,
+  100% {
+    color: var(--fg-muted);
+    opacity: 0.55;
+  }
+}
+
+.wt-step-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.wt-step-caption {
+  margin-top: 0.35rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--fg-body);
+}
+
+/* Barra che si riempie per la durata del passo */
+.wt-step-bar {
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  bottom: 0.55rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0;
+  animation: wt-bar var(--loop) linear infinite;
+  animation-delay: calc(var(--i) * var(--dur));
+}
+
+@keyframes wt-bar {
+  0%,
+  2% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  3% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  22% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  25%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Finestra
+   ------------------------------------------------------------------ */
+/* La finestra ha una tavolozza propria, fissa, e non eredita quella della
+   fascia in cui si trova: dentro `.on-dark` le superfici del tema sono
+   bianchi quasi trasparenti e lo schermo risultava un riquadro vuoto.
+   Del resto un browser vero è chiaro, qualunque sia lo sfondo attorno. */
+.wt-frame {
+  --scr: #fdfbf6;
+  --scr-alt: #efe7d6;
+  --scr-line: #ded2ba;
+  --scr-fg: #101f18;
+  --scr-muted: #74806f;
+  --scr-accent: #2c6b4f;
+
+  border: 1px solid rgba(16, 31, 24, 0.12);
+  border-radius: 1rem;
+  overflow: hidden;
+  background: var(--scr);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.55);
+}
+
+.wt-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--scr-line);
+  background: var(--scr-alt);
+}
+
+.wt-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--scr-line);
+}
+
+.wt-url {
+  margin-left: 0.75rem;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  background: var(--scr);
+  border: 1px solid var(--scr-line);
+  font-size: 0.6875rem;
+  color: var(--scr-muted);
+}
+
+.wt-screen {
+  position: relative;
+  /* Altezza fissa: le schermate sono fuori flusso e senza questa il
+     riquadro collasserebbe. */
+  height: 17rem;
+}
+
+.wt-slide {
+  position: absolute;
+  inset: 0;
+  padding: 1.5rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  opacity: 0;
+  animation: wt-slide var(--loop) linear infinite;
+  animation-delay: calc(var(--i) * var(--dur));
+}
+
+@keyframes wt-slide {
+  0%,
+  0.5% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  3%,
+  21% {
+    opacity: 1;
+    transform: none;
+  }
+  24%,
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.wt-title {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--scr-muted);
+  margin-bottom: 0.2rem;
+}
+
+/* --------------------------- 1 · modulo --------------------------- */
+.wt-field {
+  height: 2.1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--scr-line);
+  background: var(--scr-alt);
+  overflow: hidden;
+}
+
+.wt-field-tall {
+  flex: 1;
+}
+
+/* Il "testo" che compare: una barra che cresce, come se qualcuno scrivesse */
+.wt-fill {
+  display: block;
+  height: 0.5rem;
+  margin: 0.8rem 0 0 0.7rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--scr-accent) 55%, transparent);
+  width: 0;
+}
+
+.wt-field-tall .wt-fill {
+  margin-top: 1rem;
+}
+
+.wt-fill-1 {
+  animation: wt-type-1 var(--loop) linear infinite;
+}
+.wt-fill-2 {
+  animation: wt-type-2 var(--loop) linear infinite;
+}
+.wt-fill-3 {
+  animation: wt-type-3 var(--loop) linear infinite;
+}
+
+@keyframes wt-type-1 {
+  0%,
+  4% {
+    width: 0;
+  }
+  8%,
+  100% {
+    width: 45%;
+  }
+}
+
+@keyframes wt-type-2 {
+  0%,
+  8% {
+    width: 0;
+  }
+  12%,
+  100% {
+    width: 62%;
+  }
+}
+
+@keyframes wt-type-3 {
+  0%,
+  12% {
+    width: 0;
+  }
+  17%,
+  100% {
+    width: 78%;
+  }
+}
+
+.wt-send {
+  align-self: flex-start;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  background: var(--scr-accent);
+  color: var(--scr);
+  font-size: 0.75rem;
+  font-weight: 600;
+  animation: wt-press var(--loop) linear infinite;
+}
+
+@keyframes wt-press {
+  0%,
+  17% {
+    transform: none;
+    box-shadow: none;
+  }
+  19% {
+    transform: scale(0.94);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--scr-accent) 22%, transparent);
+  }
+  21%,
+  100% {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* --------------------------- 2 · risposta --------------------------- */
+/* Gli elementi dentro una schermata non usano un ritardo: le loro finestre
+   sono già espresse sul giro intero. `animation-delay` accetta solo tempi,
+   non percentuali, e ragionare in assoluto evita di doverli convertire. */
+.wt-bubble {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-width: 68%;
+  padding: 0.7rem 0.85rem;
+  border-radius: 0.8rem;
+  opacity: 0;
+  animation-duration: var(--loop);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.wt-bubble i {
+  display: block;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+.wt-bubble i:first-child {
+  width: 100%;
+  min-width: 5rem;
+}
+
+.wt-bubble i:nth-child(2) {
+  width: 70%;
+}
+.wt-bubble i:nth-child(3) {
+  width: 45%;
+}
+
+/* Schermata 2: dal 25% al 50% del giro */
+.wt-bubble-in {
+  align-self: flex-start;
+  background: var(--scr-alt);
+  color: var(--scr-fg);
+  border-bottom-left-radius: 0.2rem;
+  animation-name: wt-pop-a;
+}
+
+.wt-bubble-out {
+  align-self: flex-end;
+  background: color-mix(in srgb, var(--scr-accent) 18%, transparent);
+  color: var(--scr-accent);
+  border-bottom-right-radius: 0.2rem;
+  animation-name: wt-pop-b;
+}
+
+.wt-bubble-3 {
+  animation-name: wt-pop-c;
+}
+
+@keyframes wt-pop-a {
+  0%,
+  28% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  30%,
+  45% {
+    opacity: 1;
+    transform: none;
+  }
+  47%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+@keyframes wt-pop-b {
+  0%,
+  32% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  34%,
+  45% {
+    opacity: 1;
+    transform: none;
+  }
+  47%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+@keyframes wt-pop-c {
+  0%,
+  36% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  38%,
+  45% {
+    opacity: 1;
+    transform: none;
+  }
+  47%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+/* --------------------------- 3 · chiamata --------------------------- */
+.wt-slide-call {
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.wt-ring {
+  display: grid;
+  place-items: center;
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--scr-accent) 14%, transparent);
+  color: var(--scr-accent);
+  animation: wt-ring var(--loop) linear infinite;
+}
+
+.wt-ring svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+/* Schermata 3: dal 50% al 75%. Due squilli. */
+@keyframes wt-ring {
+  0%,
+  53% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--scr-accent) 45%, transparent);
+  }
+  58% {
+    box-shadow: 0 0 0 16px transparent;
+  }
+  59%,
+  62% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--scr-accent) 45%, transparent);
+  }
+  67%,
+  100% {
+    box-shadow: 0 0 0 16px transparent;
+  }
+}
+
+.wt-call-text {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--scr-fg);
+  text-align: center;
+}
+
+.wt-timer {
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  color: var(--scr-muted);
+}
+
+/* --------------------------- 4 · preventivo --------------------------- */
+/* Schermata 4: dal 75% al 100%. Le voci compaiono una dopo l'altra. */
+.wt-row,
+.wt-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px dashed var(--scr-line);
+  opacity: 0;
+  animation-duration: var(--loop);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: wt-row-1;
+}
+
+.wt-row-2 {
+  animation-name: wt-row-2;
+}
+.wt-row-3 {
+  animation-name: wt-row-3;
+}
+
+@keyframes wt-row-1 {
+  0%,
+  78% { opacity: 0; transform: translateY(6px); }
+  80%, 96% { opacity: 1; transform: none; }
+  98%, 100% { opacity: 0; transform: none; }
+}
+
+@keyframes wt-row-2 {
+  0%,
+  81% { opacity: 0; transform: translateY(6px); }
+  83%, 96% { opacity: 1; transform: none; }
+  98%, 100% { opacity: 0; transform: none; }
+}
+
+@keyframes wt-row-3 {
+  0%,
+  84% { opacity: 0; transform: translateY(6px); }
+  86%, 96% { opacity: 1; transform: none; }
+  98%, 100% { opacity: 0; transform: none; }
+}
+
+@keyframes wt-row-total {
+  0%,
+  88% { opacity: 0; transform: translateY(6px); }
+  90%, 96% { opacity: 1; transform: none; }
+  98%, 100% { opacity: 0; transform: none; }
+}
+
+.wt-row i,
+.wt-total i {
+  display: block;
+  height: 0.45rem;
+  width: 45%;
+  border-radius: 999px;
+  background: var(--scr-fg);
+  opacity: 0.28;
+}
+
+.wt-row b,
+.wt-total b {
+  display: block;
+  height: 0.45rem;
+  width: 15%;
+  border-radius: 999px;
+  background: var(--scr-fg);
+  opacity: 0.28;
+}
+
+.wt-total {
+  margin-top: auto;
+  border-bottom: 0;
+  animation-name: wt-row-total;
+}
+
+.wt-total i {
+  width: 30%;
+  background: var(--scr-accent);
+  opacity: 1;
+  height: 0.55rem;
+}
+
+.wt-total b {
+  width: 22%;
+  background: var(--scr-accent);
+  opacity: 1;
+  height: 0.7rem;
+}
+
+/* ------------------------------------------------------------------
+   Movimento ridotto: tutto fermo e leggibile, primo passo in evidenza.
+   ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .wt-step,
+  .wt-step-num,
+  .wt-step-bar,
+  .wt-slide,
+  .wt-fill,
+  .wt-send,
+  .wt-bubble,
+  .wt-ring,
+  .wt-row,
+  .wt-total {
+    animation: none;
+  }
+
+  .wt-step-bar {
+    opacity: 0;
+  }
+
+  .wt-step {
+    background: var(--surface-alt);
+  }
+
+  .wt-step-num {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  /* Resta visibile la sola prima schermata, con i campi già compilati */
+  .wt-slide {
+    opacity: 0;
+  }
+
+  .wt-slide:first-child {
+    opacity: 1;
+  }
+
+  .wt-fill-1 {
+    width: 45%;
+  }
+  .wt-fill-2 {
+    width: 62%;
+  }
+  .wt-fill-3 {
+    width: 78%;
+  }
+}
