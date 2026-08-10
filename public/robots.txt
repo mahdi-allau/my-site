@@ -4,5 +4,5 @@ Allow: /
 Disallow: /admin
 Disallow: /admin/
 
-# Sostituisci il dominio con `npm run seo:url https://sarahstudio.it`
-Sitemap: https://sarahstudio.it/sitemap.xml
+# Sostituisci il dominio con `npm run seo:url https://sarah-studio-it.netlify.app`
+Sitemap: https://sarah-studio-it.netlify.app/sitemap.xml
