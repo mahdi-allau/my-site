@@ -93,6 +93,10 @@
 }
 
 .title {
+  /* Dimensione dichiarata apposta: è un h1, che senza questa prenderebbe
+     i 2em del browser e diventerebbe enorme in una barra alta 3rem. */
+  margin: 0;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--app-ink);
   line-height: 1.25;

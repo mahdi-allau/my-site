@@ -16,6 +16,12 @@
   <hr class="hairline absolute inset-x-0 top-0" />
 
   <div class="container-page pt-16">
+    <!-- Le schede dei progetti usano h3, perché in home stanno sotto il
+         titolo di sezione. Qui sopra c'è solo l'h1 della pagina: senza
+         questo titolo si salterebbe da h1 a h3, e chi naviga per titoli
+         perderebbe un livello. Non serve a schermo, l'elenco si vede. -->
+    <h2 class="sr-only">{{ i18n.t('projects.listHeading') }}</h2>
+
     @if (categories().length > 2) {
       <div appReveal class="flex flex-wrap gap-2.5" role="group" [attr.aria-label]="i18n.t('projects.filterLabel')">
         @for (category of categories(); track category) {

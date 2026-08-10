@@ -100,6 +100,29 @@ L'area amministrativa è solo in italiano: la usa una persona sola.
 
 ---
 
+## Il controllo automatico
+
+```bash
+npm run check
+```
+
+Con il server acceso apre ogni pagina in italiano e in inglese e cerca i
+difetti che guardando lo schermo non si vedono:
+
+- chiavi di traduzione rimaste a vista (`home.hero.title` invece del testo)
+- link interni verso rotte che non esistono
+- immagini senza testo alternativo e comandi senza nome accessibile
+- campi di modulo senza etichetta
+- pagine senza titolo `h1`, o con salti nella gerarchia dei titoli
+- scorrimento orizzontale sul telefono, con l'elemento che lo causa
+- errori in console
+
+Esce con codice di errore se trova qualcosa, quindi si può agganciare a un
+controllo automatico prima di pubblicare. Per controllare il sito già
+online: `npm run check -- https://iltuodominio.it`.
+
+---
+
 ## Farsi trovare (SEO)
 
 `SeoService` riscrive la testa del documento a ogni cambio di pagina o di
@@ -169,6 +192,7 @@ rifiuta messaggi con email non plausibile o testo troppo corto.
 | `npm start`      | server di sviluppo su :4200                    |
 | `npm run build`  | build di produzione in `dist/my-site/browser`  |
 | `npm test`       | unit test (Karma)                              |
+| `npm run check`  | controllo di tutte le pagine nelle due lingue  |
 
 ---
 

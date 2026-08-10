@@ -30,7 +30,9 @@ import { I18nService } from '../../core/i18n/i18n.service';
         <div class="brand">
           <img src="logo-mark.png" width="259" height="294" alt="" aria-hidden="true" />
           <div>
-            <p class="title">{{ title() }}</p>
+            <!-- Titolo della pagina: ogni pagina ne deve avere uno solo,
+                 ed è quello che i lettori di schermo annunciano all'arrivo. -->
+            <h1 class="title">{{ title() }}</h1>
             <p class="subtitle">{{ subtitle() }}</p>
           </div>
         </div>

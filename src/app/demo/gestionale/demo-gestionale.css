@@ -134,20 +134,26 @@
   min-width: 40rem;
 }
 
+/* L'aspetto sta sulla cella, non sul pulsante che contiene: le colonne
+   ordinabili hanno dentro un <button>, l'ultima è testo semplice, e
+   quando lo stile stava sul pulsante quella restava grande e scura. */
 .table th {
   text-align: left;
   padding: 0.85rem 0.5rem 0.6rem;
   border-bottom: 1px solid var(--app-line);
-}
-
-.table th button {
   font-size: 0.6875rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 600;
   color: var(--app-muted);
+}
+
+.table th button {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
   cursor: pointer;
-  font-family: inherit;
 }
 
 .table th button:hover {
@@ -164,7 +170,11 @@
   border-bottom: 0;
 }
 
-.right {
+/* `.table th` vale 0,1,1 e batteva `.right` a 0,1,0: le intestazioni delle
+   colonne numeriche restavano allineate a sinistra mentre i valori sotto
+   andavano a destra. Con `.table` davanti la regola torna a vincere. */
+.right,
+.table .right {
   text-align: right;
 }
 
