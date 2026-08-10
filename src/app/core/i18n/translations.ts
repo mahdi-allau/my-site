@@ -345,7 +345,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'contact.walk.accent': 'dopo che ci hai scritto.',
     'contact.walk.body':
       'Nessun impegno e nessun costo fino al preventivo. Se a quel punto non ti convince, finisce lì.',
-    'contact.walk.url': 'sarah.it/contatti',
+    'contact.walk.url': 'sarahstudio.it/contatti',
     'contact.walk.1.label': 'Scrivi due righe',
     'contact.walk.1.caption':
       'Bastano il nome, una email e cosa ti serve. Il resto lo chiediamo noi dopo.',
@@ -886,7 +886,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'contact.walk.accent': 'after you write to us.',
     'contact.walk.body':
       'No commitment and no cost until the quote. If it doesn’t convince you at that point, it ends there.',
-    'contact.walk.url': 'sarah.it/contact',
+    'contact.walk.url': 'sarahstudio.it/contact',
     'contact.walk.1.label': 'Write two lines',
     'contact.walk.1.caption':
       'Your name, an email and what you need. We’ll ask for the rest afterwards.',

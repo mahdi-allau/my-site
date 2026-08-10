@@ -4,97 +4,97 @@
   l'inglese sullo stesso percorso con ?lang=en. Ogni voce dichiara
   l'altra con hreflang, cosÃ¬ i motori non le trattano come duplicati.
 
-  Sostituisci il dominio con: npm run seo:url https://iltuodominio.it
+  Sostituisci il dominio con: npm run seo:url https://sarahstudio.it
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>https://iltuodominio.it/</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/"/>
+    <loc>https://sarahstudio.it/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://sarahstudio.it/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sarahstudio.it/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sarahstudio.it/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://iltuodominio.it/services</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/services"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/services?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/services"/>
+    <loc>https://sarahstudio.it/services</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://sarahstudio.it/services"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sarahstudio.it/services?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sarahstudio.it/services"/>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://iltuodominio.it/projects</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/projects"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/projects?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/projects"/>
+    <loc>https://sarahstudio.it/projects</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://sarahstudio.it/projects"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sarahstudio.it/projects?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sarahstudio.it/projects"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://iltuodominio.it/about</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/about"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/about?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/about"/>
+    <loc>https://sarahstudio.it/about</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://sarahstudio.it/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sarahstudio.it/about?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sarahstudio.it/about"/>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://iltuodominio.it/contact</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/contact"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/contact?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/contact"/>
+    <loc>https://sarahstudio.it/contact</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://sarahstudio.it/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sarahstudio.it/contact?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sarahstudio.it/contact"/>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://iltuodominio.it/demo/trattoria</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/demo/trattoria"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/demo/trattoria?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/demo/trattoria"/>
+    <loc>https://sarahstudio.it/demo/trattoria</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://sarahstudio.it/demo/trattoria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sarahstudio.it/demo/trattoria?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sarahstudio.it/demo/trattoria"/>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://iltuodominio.it/demo/dashboard</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/demo/dashboard"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/demo/dashboard?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/demo/dashboard"/>
+    <loc>https://sarahstudio.it/demo/dashboard</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://sarahstudio.it/demo/dashboard"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sarahstudio.it/demo/dashboard?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sarahstudio.it/demo/dashboard"/>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://iltuodominio.it/demo/gestionale</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/demo/gestionale"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/demo/gestionale?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/demo/gestionale"/>
+    <loc>https://sarahstudio.it/demo/gestionale</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://sarahstudio.it/demo/gestionale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sarahstudio.it/demo/gestionale?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sarahstudio.it/demo/gestionale"/>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://iltuodominio.it/demo/iot</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/demo/iot"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/demo/iot?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/demo/iot"/>
+    <loc>https://sarahstudio.it/demo/iot</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://sarahstudio.it/demo/iot"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sarahstudio.it/demo/iot?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sarahstudio.it/demo/iot"/>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://iltuodominio.it/privacy</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://iltuodominio.it/privacy"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iltuodominio.it/privacy?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://iltuodominio.it/privacy"/>
+    <loc>https://sarahstudio.it/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://sarahstudio.it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sarahstudio.it/privacy?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sarahstudio.it/privacy"/>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
