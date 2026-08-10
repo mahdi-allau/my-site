@@ -196,17 +196,62 @@ rifiuta messaggi con email non plausibile o testo troppo corto.
 
 ---
 
-## Pubblicazione
+## Pubblicazione su Netlify
 
-Il risultato della build è un sito statico: `dist/my-site/browser`.
+Il risultato della build è un sito statico in `dist/my-site/browser`.
+`netlify.toml` contiene già tutto: comando di build, cartella da pubblicare,
+rimando delle rotte a `index.html` (senza, aprire `/projects` darebbe 404),
+intestazioni di sicurezza e regole di cache.
 
-**Vercel / Netlify / Cloudflare Pages** — build command `npm run build`, output
-directory `dist/my-site/browser`.
+### La via breve, senza account collegati
 
-Trattandosi di una single page application, il server deve reindirizzare tutte le
-rotte su `index.html`, altrimenti aprendo direttamente `/projects` si ottiene un 404.
-Il file `public/_redirects` (già presente) lo configura per Netlify; Vercel e
-Cloudflare Pages lo rilevano in automatico per i progetti Angular.
+```bash
+npm run build
+```
+
+Poi trascina la cartella `dist/my-site/browser` su
+[app.netlify.com/drop](https://app.netlify.com/drop). Il sito è online in
+pochi secondi su un indirizzo `qualcosa.netlify.app`.
+
+**Attenzione:** con il trascinamento Netlify pubblica solo i file, senza
+leggere `netlify.toml`. Il rimando delle rotte funziona lo stesso grazie a
+`public/_redirects`, ma le intestazioni di sicurezza no. Per averle serve
+collegare il repository.
+
+### La via giusta, con gli aggiornamenti automatici
+
+Metti il progetto su GitHub, poi su Netlify *Add new site → Import an
+existing project*. Netlify legge `netlify.toml` e da lì in poi ogni `git
+push` ripubblica il sito da solo.
+
+### Provare la build prima di pubblicarla
+
+```bash
+npm run build
+npm run serve:dist
+npm run check -- http://localhost:4300
+```
+
+`serve:dist` serve la build applicando le stesse intestazioni di
+`netlify.toml`, Content Security Policy compresa. È l'unico modo per
+scoprire prima della pubblicazione i problemi che in sviluppo non
+esistono: è così che è emerso che l'ottimizzazione del CSS critico di
+Angular inseriva un gestore di eventi inline, bloccato dalla CSP, che
+avrebbe lasciato il sito quasi senza stili una volta online. Per questo
+`inlineCritical` è disattivato in `angular.json`.
+
+### Dopo la prima pubblicazione
+
+Tre cose, nell'ordine:
+
+1. **Scrivi il dominio in sitemap e robots** e rifai la build:
+   ```bash
+   npm run seo:url https://iltuosito.netlify.app
+   ```
+2. **Autorizza l'indirizzo su Supabase**: *Authentication → URL
+   Configuration*, mettilo in *Site URL* e in *Redirect URLs*. Senza questo
+   i link di recupero password non funzionano.
+3. **Ricontrolla il sito vero**: `npm run check -- https://iltuosito.netlify.app`
 
 ---
 
