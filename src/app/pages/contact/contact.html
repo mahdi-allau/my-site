@@ -52,19 +52,30 @@
           <div class="grid gap-6 sm:grid-cols-2">
             <div>
               <label class="label" for="name">{{ i18n.t('contact.name') }}</label>
+              <!-- aria-invalid e aria-describedby legano il campo al suo
+                   errore: senza, un lettore di schermo annuncia il campo
+                   ma non dice cosa c'è che non va. -->
               <input id="name" type="text" class="field" formControlName="name" autocomplete="name"
+                     [attr.aria-invalid]="invalid('name') ? 'true' : null"
+                     [attr.aria-describedby]="invalid('name') ? 'name-error' : null"
                      [attr.placeholder]="i18n.t('contact.namePlaceholder')" />
               @if (invalid('name')) {
-                <p class="mt-2 text-xs text-red-600">{{ i18n.t('contact.nameError') }}</p>
+                <p id="name-error" role="alert" class="mt-2 text-xs text-red-600">
+                  {{ i18n.t('contact.nameError') }}
+                </p>
               }
             </div>
 
             <div>
               <label class="label" for="email">{{ i18n.t('contact.email') }}</label>
               <input id="email" type="email" class="field" formControlName="email" autocomplete="email"
+                     [attr.aria-invalid]="invalid('email') ? 'true' : null"
+                     [attr.aria-describedby]="invalid('email') ? 'email-error' : null"
                      [attr.placeholder]="i18n.t('contact.emailPlaceholder')" />
               @if (invalid('email')) {
-                <p class="mt-2 text-xs text-red-600">{{ i18n.t('contact.emailError') }}</p>
+                <p id="email-error" role="alert" class="mt-2 text-xs text-red-600">
+                  {{ i18n.t('contact.emailError') }}
+                </p>
               }
             </div>
 
@@ -88,9 +99,13 @@
           <div class="mt-6">
             <label class="label" for="message">{{ i18n.t('contact.message') }}</label>
             <textarea id="message" rows="6" class="field resize-y" formControlName="message"
+                      [attr.aria-invalid]="invalid('message') ? 'true' : null"
+                      [attr.aria-describedby]="invalid('message') ? 'message-error' : null"
                       [attr.placeholder]="i18n.t('contact.messagePlaceholder')"></textarea>
             @if (invalid('message')) {
-              <p class="mt-2 text-xs text-red-600">{{ i18n.t('contact.messageError') }}</p>
+              <p id="message-error" role="alert" class="mt-2 text-xs text-red-600">
+                {{ i18n.t('contact.messageError') }}
+              </p>
             }
           </div>
 

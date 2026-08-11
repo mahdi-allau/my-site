@@ -64,6 +64,7 @@ export class Contact {
   protected async submit(): Promise<void> {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      this.goToFirstError();
       return;
     }
 
@@ -102,6 +103,32 @@ export class Contact {
 
     this.form.reset();
     this.state.set('sent');
+  }
+
+  /**
+   * Porta il cursore sul primo campo sbagliato.
+   *
+   * Senza questo il modulo sembrava rotto: gli errori comparivano sopra
+   * il bottone e su telefono restavano fuori dallo schermo, così premere
+   * "Invia" non produceva niente di visibile. Il campo va anche messo a
+   * fuoco, non solo portato in vista: è ciò che dice a chi usa un lettore
+   * di schermo dove si trova il problema.
+   */
+  private goToFirstError(): void {
+    const ordine = ['name', 'email', 'message'];
+    const primo = ordine.find((campo) => this.form.get(campo)?.invalid);
+    if (!primo) {
+      return;
+    }
+
+    const elemento = document.getElementById(primo);
+    if (!elemento) {
+      return;
+    }
+
+    elemento.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    // Il fuoco dopo lo scorrimento, altrimenti il browser salta di suo.
+    setTimeout(() => elemento.focus({ preventScroll: true }), 250);
   }
 
   protected reset(): void {

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex">
+  <title>Modulo</title>
+</head>
+<body>
+  <!--
+    Questa pagina non è fatta per essere visitata: esiste perché Netlify
+    possa gestire gli invii del modulo preventivi.
+
+    Il sito è un'applicazione a pagina singola, quindi netlify.toml rimanda
+    ogni percorso a index.html. Quel rimando intercettava anche le POST del
+    modulo, che ricevevano 200 senza mai arrivare al gestore dei moduli:
+    la richiesta finiva nel database ma nessuna email partiva.
+
+    Inviando a /__forms.html, che è un file vero, il rimando non si attiva
+    e Netlify processa l'invio. È lo stesso accorgimento usato dai
+    framework che generano siti statici.
+  -->
+  <form name="preventivi" data-netlify="true" netlify-honeypot="website" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="text" name="company" />
+    <input type="text" name="budget" />
+    <textarea name="message"></textarea>
+    <input type="text" name="website" />
+  </form>
+</body>
+</html>

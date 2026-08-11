@@ -158,9 +158,56 @@ export class ContentService {
         return { ok: false, error: error.message };
       }
 
+      // Il salvataggio è andato: da qui in poi la richiesta è al sicuro.
+      // La notifica è un di più, e se fallisce non deve far credere al
+      // cliente che il messaggio sia andato perso.
+      await this.notifyByEmail(draft);
+
       return { ok: true, mode: 'stored' };
     } catch (err) {
       return { ok: false, error: err instanceof Error ? err.message : String(err) };
+    }
+  }
+
+  /**
+   * Manda la richiesta anche ai moduli di Netlify, che la recapitano per
+   * email.
+   *
+   * Senza questo passaggio il messaggio finiva solo nel database: nessuno
+   * veniva avvisato, e per accorgersi di una richiesta bisognava entrare
+   * nell'area riservata e andarla a cercare. Netlify è stato scelto
+   * perché non richiede chiavi da custodire nel browser.
+   */
+  private async notifyByEmail(draft: ContactDraft): Promise<void> {
+    // In sviluppo non esiste nessun gestore: si eviterebbe solo di
+    // sporcare la console con un errore atteso.
+    if (!location.hostname.endsWith('netlify.app') && location.hostname !== 'sarahstudio.it') {
+      return;
+    }
+
+    const corpo = new URLSearchParams({
+      'form-name': 'preventivi',
+      name: draft.name.trim(),
+      email: draft.email.trim(),
+      company: draft.company.trim(),
+      budget: draft.budget.trim(),
+      message: draft.message.trim(),
+      website: '',
+    });
+
+    try {
+      // L'invio va a un file che esiste davvero. Mandandolo a "/" il
+      // rimando dell'applicazione a pagina singola lo intercettava e
+      // rispondeva 200 senza che Netlify lo vedesse: la richiesta veniva
+      // salvata ma nessuna email partiva.
+      await fetch('/__forms.html', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: corpo.toString(),
+      });
+    } catch {
+      // La richiesta è già salvata: l'avviso mancato non è un errore
+      // da mostrare a chi ha appena scritto.
     }
   }
 
