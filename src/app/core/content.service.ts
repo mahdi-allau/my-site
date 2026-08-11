@@ -380,7 +380,13 @@ function toMessage(row: MessageRow): ContactMessage {
   };
 }
 
-/** Fallback usato quando il database non è ancora collegato. */
+/**
+ * Riserva usata quando il database non è collegato.
+ *
+ * Qui l'indirizzo arriva per forza da `environment`: senza database non
+ * si possono nemmeno leggere le impostazioni. Ovunque altro sul sito
+ * l'email viene invece da quelle salvate nell'area riservata.
+ */
 function buildMailto(draft: ContactDraft): string {
   const body = [
     `Nome: ${draft.name}`,

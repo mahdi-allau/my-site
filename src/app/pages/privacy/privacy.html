@@ -45,9 +45,9 @@
         <h2 class="text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-accent">
           {{ i18n.t('privacy.contactTitle') }}
         </h2>
-        <a [href]="'mailto:' + email"
+        <a [href]="'mailto:' + email()"
            class="mt-4 inline-block font-display text-2xl text-heading transition-colors duration-300 hover:text-accent">
-          {{ email }}
+          {{ email() }}
         </a>
         <div class="mt-8">
           <a routerLink="/contact" class="link-arrow">

@@ -1,8 +1,8 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { environment } from '../../../environments/environment';
 import { ContentService } from '../../core/content.service';
+import { SiteContentService } from '../../core/site-content.service';
 import { I18nService } from '../../core/i18n/i18n.service';
 import { accentWords } from '../../core/i18n/accent-words';
 import { QuickContact } from '../../shared/quick-contact/quick-contact';
@@ -29,9 +29,11 @@ type FormState = 'idle' | 'sending' | 'sent' | 'mailto' | 'error';
 export class Contact {
   private readonly fb = inject(FormBuilder);
   private readonly content = inject(ContentService);
+  private readonly site = inject(SiteContentService);
   protected readonly i18n = inject(I18nService);
 
-  protected readonly email = environment.contactEmail;
+  /** Dalle impostazioni salvate, non da una costante di build. */
+  protected readonly email = computed(() => this.site.settings().email);
   protected readonly state = signal<FormState>('idle');
   protected readonly errorMessage = signal('');
 
