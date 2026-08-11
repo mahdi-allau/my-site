@@ -4,54 +4,59 @@
     <div class="container-page flex h-16 items-center justify-between gap-4">
       <div class="flex items-center gap-3">
         <app-logo [markHeight]="34" [showWordmark]="false" />
-        <div class="leading-tight">
+        <div class="min-w-0 leading-tight">
           <p class="text-sm font-semibold text-heading">Dashboard</p>
-          <p class="text-xs text-muted">{{ userEmail() }}</p>
+          <p class="admin-email text-xs text-muted">{{ userEmail() }}</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-2">
+      <div class="flex shrink-0 items-center gap-2">
         <a routerLink="/" class="hidden rounded-full px-4 py-2 text-sm text-muted transition-colors hover:text-heading sm:block">
           Vedi il sito
         </a>
+        <!-- "Aggiorna" era dentro la barra delle schede, spinto a destra
+             da `ml-auto`: quando le schede andavano a capo finiva da solo
+             sull'ultima riga. Non è una scheda, è un'azione: sta qui. -->
+        <button type="button"
+                class="grid h-11 w-11 place-items-center rounded-full text-muted transition-colors hover:text-heading disabled:opacity-40"
+                (click)="load()" [disabled]="loading()"
+                [attr.aria-label]="loading() ? 'Aggiornamento in corso' : 'Aggiorna i dati'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+               class="h-5 w-5" [class.animate-spin]="loading()" aria-hidden="true">
+            <path d="M21 12a9 9 0 1 1-2.64-6.36M21 4v5h-5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
         <button type="button" class="btn btn-ghost btn-sm" (click)="signOut()">Esci</button>
       </div>
     </div>
   </header>
 
   <div class="container-page py-10">
-    <!-- Tab -->
-    <div class="flex flex-wrap items-center gap-2 rounded-full border border-line-soft bg-surface p-1.5">
-      <button type="button" [class]="tabClass('messages')" (click)="select('messages')">
-        Messaggi
-        @if (unreadCount() > 0) {
-          <span class="ml-2 rounded-full bg-black/15 px-2 py-0.5 text-xs">{{ unreadCount() }}</span>
+    <!-- Schede: una riga sola che scorre di lato. Andavano a capo su tre
+         righe dentro una pillola arrotondata, ed era il difetto più
+         evidente dell'area su telefono. -->
+    <div class="tabs" [class.is-end]="tabsAtEnd()">
+      <div #tabsTrack class="tabs-track" role="tablist" aria-label="Sezioni dell'area riservata"
+           (scroll)="onTabsScroll()">
+        @for (voce of tabs; track voce.id) {
+          <button
+            type="button"
+            role="tab"
+            class="tab"
+            [class.is-active]="tab() === voce.id"
+            [attr.aria-selected]="tab() === voce.id"
+            (click)="select(voce.id)"
+          >
+            {{ voce.label }}
+            @if (voce.id === 'messages' && unreadCount() > 0) {
+              <span class="tab-badge">{{ unreadCount() }}</span>
+            }
+            @if (voce.id === 'projects' && projects().length > 0) {
+              <span class="tab-badge">{{ projects().length }}</span>
+            }
+          </button>
         }
-      </button>
-      <button type="button" [class]="tabClass('projects')" (click)="select('projects')">
-        Progetti
-        <span class="ml-2 text-xs opacity-70">{{ projects().length }}</span>
-      </button>
-      <button type="button" [class]="tabClass('pricing')" (click)="select('pricing')">
-        Prezzi
-      </button>
-      <button type="button" [class]="tabClass('security')" (click)="select('security')">
-        Sicurezza
-      </button>
-      <button type="button" [class]="tabClass('announcements')" (click)="select('announcements')">
-        Annunci
-      </button>
-      <button type="button" [class]="tabClass('content')" (click)="select('content')">
-        Testi del sito
-      </button>
-      <button type="button" [class]="tabClass('settings')" (click)="select('settings')">
-        Azienda
-      </button>
-
-      <button type="button" class="ml-auto rounded-full px-4 py-2 text-sm text-muted transition-colors hover:text-heading"
-              (click)="load()" [disabled]="loading()">
-        @if (loading()) { Aggiorno… } @else { Aggiorna }
-      </button>
+      </div>
     </div>
 
     @if (error()) {

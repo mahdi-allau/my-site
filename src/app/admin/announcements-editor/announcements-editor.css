@@ -191,10 +191,17 @@
   color: #b4541f;
 }
 
+/* Su telefono una colonna sola: vedi la nota in settings-editor.css. */
 .row-2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 0.6rem;
+}
+
+@media (min-width: 640px) {
+  .row-2 {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .check {

@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, ElementRef, computed, inject, signal, viewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -35,6 +35,7 @@ type Tab =
     SecurityEditor,
   ],
   templateUrl: './dashboard.html',
+  styleUrl: './dashboard.css',
 })
 export class Dashboard {
   private readonly auth = inject(AuthService);
@@ -103,15 +104,52 @@ export class Dashboard {
     }
   }
 
+  /** Ordine delle schede: le più usate per prime, perché su telefono
+   *  sono quelle che si vedono senza dover scorrere. */
+  protected readonly tabs: ReadonlyArray<{ id: Tab; label: string }> = [
+    { id: 'messages', label: 'Messaggi' },
+    { id: 'projects', label: 'Progetti' },
+    { id: 'pricing', label: 'Prezzi' },
+    { id: 'announcements', label: 'Annunci' },
+    { id: 'content', label: 'Testi del sito' },
+    { id: 'settings', label: 'Azienda' },
+    { id: 'security', label: 'Sicurezza' },
+  ];
+
+  private readonly tabsTrack = viewChild<ElementRef<HTMLElement>>('tabsTrack');
+
+  /** Serve a spegnere la sfumatura quando non c'è più niente da scorrere. */
+  protected readonly tabsAtEnd = signal(false);
+
   protected select(tab: Tab): void {
     this.tab.set(tab);
+    this.scrollTabIntoView();
   }
 
-  protected tabClass(tab: Tab): string {
-    const base = 'rounded-full px-4 py-2 text-sm font-medium transition-colors';
-    return this.tab() === tab
-      ? `${base} bg-forest-800 text-sand-100`
-      : `${base} text-muted hover:text-heading`;
+  protected onTabsScroll(): void {
+    const track = this.tabsTrack()?.nativeElement;
+    if (!track) {
+      return;
+    }
+    const rimasto = track.scrollWidth - track.clientWidth - track.scrollLeft;
+    this.tabsAtEnd.set(rimasto < 8);
+  }
+
+  /**
+   * Porta la scheda scelta dentro la parte visibile.
+   *
+   * Con una riga che scorre, toccare l'ultima scheda la lascerebbe a
+   * metà fuori: si vedrebbe selezionata senza vederla per intero.
+   */
+  private scrollTabIntoView(): void {
+    setTimeout(() => {
+      const track = this.tabsTrack()?.nativeElement;
+      track?.querySelector('.tab.is-active')?.scrollIntoView({
+        block: 'nearest',
+        inline: 'center',
+        behavior: 'smooth',
+      });
+    });
   }
 
   // ------------------------------------------------------------------

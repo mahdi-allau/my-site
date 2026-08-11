@@ -1,0 +1,140 @@
+/* =====================================================================
+   Navigazione dell'area riservata.
+
+   Prima erano sette schede più il pulsante "Aggiorna" dentro un
+   contenitore `rounded-full` con `flex-wrap`. Su iPhone andavano a capo
+   su tre righe: una pillola arrotondata alta 138px, con "Aggiorna"
+   spinto a destra sull'ultima riga, staccato da tutto. Il 16% dello
+   schermo occupato solo per navigare.
+
+   Ora è una riga sola che scorre di lato, come le schede di App Store.
+   ===================================================================== */
+
+.tabs {
+  position: relative;
+}
+
+.tabs-track {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  background: var(--surface);
+
+  /* Il punto: una riga sola, che scorre invece di andare a capo. */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+
+  /* La barra di scorrimento sotto una pillola sarebbe brutta e inutile:
+     su telefono si scorre col dito, su desktop le schede ci stanno tutte. */
+  scrollbar-width: none;
+}
+
+.tabs-track::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  /* 44px è la misura minima perché un dito centri il bersaglio: prima
+     erano tutti sotto. */
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--fg-muted);
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 250ms var(--ease-soft), color 250ms var(--ease-soft);
+}
+
+.tab:hover {
+  color: var(--fg);
+}
+
+.tab.is-active {
+  background: var(--color-forest-800);
+  color: var(--color-sand-100);
+}
+
+.tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: color-mix(in srgb, var(--fg) 12%, transparent);
+}
+
+.tab.is-active .tab-badge {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Sfumatura sul bordo destro: dice che c'è altro da vedere, senza
+   occupare spazio. Sparisce quando si è arrivati in fondo. */
+.tabs::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  right: 1px;
+  width: 2.5rem;
+  border-radius: 0 999px 999px 0;
+  background: linear-gradient(to right, transparent, var(--surface) 70%);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 250ms var(--ease-soft);
+}
+
+.tabs.is-end::after {
+  opacity: 0;
+}
+
+/* Da tablet in su ci stanno tutte: niente scorrimento, niente sfumatura. */
+@media (min-width: 900px) {
+  .tabs-track {
+    overflow-x: visible;
+    flex-wrap: wrap;
+  }
+
+  .tabs::after {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Intestazione
+   --------------------------------------------------------------------- */
+
+/* L'indirizzo email è lungo e su telefono spingeva fuori i pulsanti. */
+.admin-email {
+  display: block;
+  max-width: 9.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .admin-email {
+    max-width: 18rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabs-track {
+    scroll-behavior: auto;
+  }
+}
