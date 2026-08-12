@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "seo:url": "node scripts/set-site-url.mjs",
-    "check": "node scripts/audit.mjs",`n    "favicon": "node scripts/make-favicon.mjs",
+    "check": "node scripts/audit.mjs",
+    "favicon": "node scripts/make-favicon.mjs",
     "serve:dist": "node scripts/serve-dist.mjs"
   },
   "prettier": {
