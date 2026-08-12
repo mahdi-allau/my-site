@@ -6,6 +6,7 @@ import { RevealDirective } from '../../shared/motion/reveal.directive';
 import { TiltDirective } from '../../shared/motion/tilt.directive';
 import { MagneticDirective } from '../../shared/motion/magnetic.directive';
 import { CraftFlow } from '../../shared/craft-flow/craft-flow';
+import { CraftScene } from '../../shared/craft-scene/craft-scene';
 import { PromiseSeals } from '../../shared/promise-seals/promise-seals';
 
 @Component({
@@ -16,6 +17,7 @@ import { PromiseSeals } from '../../shared/promise-seals/promise-seals';
     TiltDirective,
     MagneticDirective,
     CraftFlow,
+    CraftScene,
     PromiseSeals,
   ],
   templateUrl: './about.html',
@@ -30,10 +32,4 @@ export class About {
     accentWords(this.i18n.t('about.title'), this.i18n.t('about.accent')),
   );
 
-  /** Gli stack delle tre aree sono nomi propri: identici nelle due lingue. */
-  protected readonly areaStacks: Record<number, string[]> = {
-    1: ['Angular', 'TypeScript', 'Tailwind CSS', 'Supabase', 'PostgreSQL'],
-    2: ['Python', 'SQL', 'PostgreSQL', 'Power BI'],
-    3: ['Arduino', 'ESP32', 'C', 'C++', 'MATLAB'],
-  };
 }

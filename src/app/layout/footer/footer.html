@@ -62,9 +62,14 @@
 
     <hr class="hairline mt-16" />
 
+    <!-- Qui c'era "Costruito con Angular, Tailwind CSS e Supabase":
+         elencare gli strumenti che usiamo non serve al cliente e regala
+         informazioni sul nostro lavoro. -->
     <div class="flex flex-col gap-3 pt-8 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
       <p>© {{ year }} {{ companyName() }}. {{ i18n.t('footer.rights') }}</p>
-      <p>{{ i18n.t('footer.builtWith') }}</p>
+      @if (vat()) {
+        <p>{{ i18n.t('footer.vat') }} {{ vat() }}</p>
+      }
     </div>
   </div>
 </footer>

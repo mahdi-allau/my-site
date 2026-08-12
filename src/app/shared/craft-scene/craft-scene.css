@@ -1,0 +1,292 @@
+/* =====================================================================
+   Si scrive una riga, quella riga diventa una parte del sito, poi la si
+   rifinisce. Un giro di 12 secondi governa tutto: le righe compaiono a
+   sinistra e ogni blocco a destra segue con un ritardo, così il legame
+   fra le due metà si vede senza doverlo spiegare.
+   ===================================================================== */
+:host {
+  --giro: 12s;
+  display: block;
+}
+
+.scena {
+  margin: 0;
+}
+
+.telaio {
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+/* -------------------------------- barra -------------------------------- */
+.barra {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--surface-alt);
+}
+
+.pallino {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--border);
+}
+
+/* -------------------------------- corpo -------------------------------- */
+.corpo {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 15rem;
+}
+
+@media (min-width: 480px) {
+  .corpo {
+    grid-template-columns: 1.05fr 1fr;
+  }
+}
+
+/* ------------------------------ editor ------------------------------ */
+.editor {
+  position: relative;
+  padding: 1.1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+@media (min-width: 480px) {
+  .editor {
+    border-bottom: 0;
+    border-right: 1px solid var(--border-soft);
+  }
+}
+
+.riga {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  opacity: 0;
+  animation: riga-in var(--giro) linear infinite;
+  /* Una riga ogni 0,8s: la mano che scrive, non un lampo. */
+  animation-delay: calc(var(--i) * 0.8s);
+}
+
+@keyframes riga-in {
+  0%,
+  2% {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  6%,
+  86% {
+    opacity: 1;
+    transform: none;
+  }
+  92%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+.numero {
+  flex: 0 0 auto;
+  width: 0.9rem;
+  height: 0.3rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--fg) 12%, transparent);
+}
+
+.pezzo {
+  display: block;
+  height: 0.4rem;
+  width: calc(var(--w) * 1%);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 38%, transparent);
+}
+
+/* Il secondo segmento di ogni riga più smorto: dà profondità al finto codice */
+.pezzo:nth-child(3) {
+  background: color-mix(in srgb, var(--fg) 16%, transparent);
+}
+
+.cursore {
+  position: absolute;
+  left: 2.4rem;
+  bottom: 1.1rem;
+  width: 2px;
+  height: 0.85rem;
+  background: var(--accent);
+  animation: cursore var(--giro) linear infinite;
+}
+
+@keyframes cursore {
+  0%,
+  3% {
+    opacity: 0;
+    transform: translateY(-3.4rem);
+  }
+  5%,
+  7% {
+    opacity: 1;
+  }
+  9%,
+  11% {
+    opacity: 0;
+  }
+  13%,
+  15% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  40%,
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+
+/* ------------------------------ anteprima ------------------------------ */
+.anteprima {
+  position: relative;
+  padding: 1.1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: var(--surface-alt);
+}
+
+.blocco {
+  display: block;
+  border-radius: 0.35rem;
+  opacity: 0;
+  animation: blocco-in var(--giro) linear infinite;
+}
+
+/* Ogni blocco arriva poco dopo la riga che lo ha "scritto" */
+.intestazione {
+  height: 0.75rem;
+  width: 55%;
+  background: color-mix(in srgb, var(--accent) 55%, transparent);
+  animation-delay: 0.55s;
+}
+
+.titolo {
+  height: 1.5rem;
+  background: color-mix(in srgb, var(--fg) 18%, transparent);
+  animation-delay: 1.35s;
+}
+
+.testo {
+  height: 0.45rem;
+  background: color-mix(in srgb, var(--fg) 11%, transparent);
+  animation-delay: 2.15s;
+}
+
+.testo.corto {
+  width: 62%;
+  animation-delay: 2.95s;
+}
+
+.pulsante {
+  margin-top: auto;
+  height: 1.6rem;
+  width: 45%;
+  border-radius: 999px;
+  background: var(--accent);
+  animation-delay: 3.75s;
+}
+
+@keyframes blocco-in {
+  0%,
+  4% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  9%,
+  86% {
+    opacity: 1;
+    transform: none;
+  }
+  92%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+/* La rifinitura: una lente scorre sull'anteprima quando è completa.
+   È il "con cura" della scena — il lavoro non finisce quando funziona. */
+.lente {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -35%;
+  width: 35%;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    color-mix(in srgb, var(--accent) 12%, transparent) 45%,
+    transparent
+  );
+  animation: lente var(--giro) linear infinite;
+}
+
+@keyframes lente {
+  0%,
+  45% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  72% {
+    transform: translateX(400%);
+    opacity: 1;
+  }
+  76%,
+  100% {
+    transform: translateX(400%);
+    opacity: 0;
+  }
+}
+
+.didascalia {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--fg-muted);
+  text-align: center;
+}
+
+/* ------------------------------------------------------------------
+   Movimento ridotto: la scena resta al suo fotogramma completo.
+   ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .riga,
+  .blocco,
+  .cursore,
+  .lente {
+    animation: none;
+  }
+
+  .riga,
+  .blocco {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cursore,
+  .lente {
+    opacity: 0;
+  }
+}

@@ -25,6 +25,8 @@ export class Footer {
   protected readonly email = computed(() => this.site.settings().email);
   protected readonly companyName = computed(() => this.site.settings().companyName);
   protected readonly addressLine = this.site.addressLine;
+  /** Al posto della riga sugli strumenti usati: se c'è, la partita IVA. */
+  protected readonly vat = computed(() => this.site.settings().vat.trim());
 
   protected readonly siteLinks = [
     { key: 'nav.home', path: '/' },

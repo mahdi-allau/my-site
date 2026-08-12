@@ -22,38 +22,12 @@
         </div>
       </div>
 
+      <!-- Qui c'era la scheda "In sintesi": elencava ruolo, fondatore,
+           stack e ambiti. Nome e strumenti non li dichiariamo, e a un
+           ristoratore non dicevano niente. Al loro posto il modo di
+           lavorare, mostrato invece che raccontato. -->
       <div appReveal="right" [revealDelay]="400">
-        <div appTilt class="card p-9">
-          <h2 class="text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-accent">
-            {{ i18n.t('about.summary') }}
-          </h2>
-          <dl class="mt-7 space-y-6">
-            <div>
-              <dt class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">{{ i18n.t('about.roleLabel') }}</dt>
-              <dd class="mt-1.5 text-heading">{{ i18n.t('about.roleValue') }}</dd>
-            </div>
-            <hr class="hairline" />
-            <div>
-              <dt class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">{{ i18n.t('about.founderLabel') }}</dt>
-              <dd class="mt-1.5 text-heading">{{ i18n.t('about.founderValue') }}</dd>
-            </div>
-            <hr class="hairline" />
-            <div>
-              <dt class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">{{ i18n.t('about.focusLabel') }}</dt>
-              <dd class="mt-1.5 text-heading">{{ i18n.t('about.focusValue') }}</dd>
-            </div>
-            <hr class="hairline" />
-            <div>
-              <dt class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">{{ i18n.t('about.stackLabel') }}</dt>
-              <dd class="mt-1.5 text-heading">{{ i18n.t('about.stackValue') }}</dd>
-            </div>
-            <hr class="hairline" />
-            <div>
-              <dt class="text-[0.6875rem] uppercase tracking-[0.2em] text-muted">{{ i18n.t('about.otherLabel') }}</dt>
-              <dd class="mt-1.5 text-heading">{{ i18n.t('about.otherValue') }}</dd>
-            </div>
-          </dl>
-        </div>
+        <app-craft-scene />
       </div>
     </div>
   </div>
@@ -82,14 +56,13 @@
             <span class="numeral">0{{ area }}</span>
             <div>
               <h3 class="display text-2xl text-heading sm:text-3xl">{{ i18n.t('about.area' + area + '.title') }}</h3>
+              <!-- Qui c'erano le etichette con i nomi degli strumenti:
+                   stesso elenco della scheda "In sintesi", tolto per lo
+                   stesso motivo. Il testo dice cosa sappiamo fare, che è
+                   quello che interessa a chi legge. -->
               <p class="mt-4 max-w-3xl text-[0.9375rem] leading-relaxed text-body">
                 {{ i18n.t('about.area' + area + '.body') }}
               </p>
-              <div class="mt-6 flex flex-wrap gap-2.5">
-                @for (tech of areaStacks[area]; track tech) {
-                  <span class="chip">{{ tech }}</span>
-                }
-              </div>
             </div>
           </div>
         </div>

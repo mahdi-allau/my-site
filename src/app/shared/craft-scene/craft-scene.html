@@ -1,0 +1,37 @@
+<figure class="scena">
+  <div class="telaio" aria-hidden="true">
+    <!-- Barra della finestra -->
+    <div class="barra">
+      <span class="pallino"></span><span class="pallino"></span><span class="pallino"></span>
+    </div>
+
+    <div class="corpo">
+      <!-- A sinistra: le righe che si scrivono una dopo l'altra -->
+      <div class="editor">
+        @for (riga of righe; track $index; let i = $index) {
+          <div class="riga" [style.--i]="i">
+            <span class="numero"></span>
+            @for (larghezza of riga; track $index) {
+              <i class="pezzo" [style.--w.%]="larghezza"></i>
+            }
+          </div>
+        }
+        <span class="cursore"></span>
+      </div>
+
+      <!-- A destra: quello che ne esce, che si compone in sincrono -->
+      <div class="anteprima">
+        <span class="blocco intestazione"></span>
+        <span class="blocco titolo"></span>
+        <span class="blocco testo"></span>
+        <span class="blocco testo corto"></span>
+        <span class="blocco pulsante"></span>
+
+        <!-- La rifinitura: una lente che passa e allinea l'ultimo dettaglio -->
+        <span class="lente"></span>
+      </div>
+    </div>
+  </div>
+
+  <figcaption class="didascalia">{{ i18n.t('about.scene.caption') }}</figcaption>
+</figure>

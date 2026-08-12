@@ -142,17 +142,10 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'Lavorare in più persone cambia una cosa concreta per chi ci commissiona un lavoro: chi scrive l’interfaccia non è chi progetta il database, e ogni parte la segue chi la sa fare meglio. Questo sito è il nostro portfolio ed è costruito con lo stesso stack che usiamo per i clienti.',
     'about.ctaPrimary': 'Lavoriamo insieme',
     'about.ctaSecondary': 'Cosa abbiamo costruito',
-    'about.summary': 'In sintesi',
-    'about.roleLabel': 'Cosa siamo',
-    'about.roleValue': 'Studio di sviluppo web',
-    'about.founderLabel': 'Fondatore',
-    'about.founderValue': 'Mahdi Allau',
-    'about.focusLabel': 'Specializzazione',
-    'about.focusValue': 'Siti e web app per ristorazione e piccole imprese',
-    'about.stackLabel': 'Stack principale',
-    'about.stackValue': 'Angular, TypeScript, Tailwind CSS, Supabase, PostgreSQL',
-    'about.otherLabel': 'Altri ambiti',
-    'about.otherValue': 'Python e SQL per i dati, Arduino/ESP32 per l’IoT',
+    // La scheda "In sintesi" è stata tolta: dichiarava il nome del
+    // fondatore e gli strumenti usati. Resta solo la didascalia della
+    // scena animata che ha preso il suo posto.
+    'about.scene.caption': 'Una riga alla volta, finché non è come deve essere.',
     'about.path.eyebrow': 'Le competenze',
     'about.path.titleA': 'Tre ambiti,',
     'about.path.titleB': 'un modo di ragionare.',
@@ -166,13 +159,13 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'Le tre competenze finiscono nello stesso progetto: l’interfaccia con cui parli ai clienti, i numeri che ti dicono come sta andando, i dispositivi che quei numeri li producono.',
     'about.area1.title': 'Sviluppo web',
     'about.area1.body':
-      'Angular e TypeScript per interfacce che restano veloci e ordinate anche quando il progetto cresce. PostgreSQL e Supabase per i dati, l’autenticazione e i file.',
+      'Interfacce che restano veloci e ordinate anche quando il progetto cresce, e dati custoditi come si deve: accessi, permessi e file al sicuro. La parte che si vede e quella che la regge, curate insieme.',
     'about.area2.title': 'Dati e analisi',
     'about.area2.body':
-      'Raccolta, pulizia e modellazione dei dati con Python e SQL, per arrivare a dashboard che rispondono alle domande vere di un’attività invece di riempire pagine di grafici.',
+      'Raccolta, pulizia e modellazione dei dati fino a un cruscotto che risponde alle domande vere di un’attività, invece di riempire pagine di grafici che nessuno guarda.',
     'about.area3.title': 'Sistemi embedded e IoT',
     'about.area3.body':
-      'Firmware su Arduino ed ESP32, lettura di sensori e regolazione con controllo PID. È la parte del nostro percorso che ci ha insegnato a lavorare con vincoli stretti e a testare sul campo.',
+      'Dispositivi che leggono i sensori e tengono da soli temperatura e umidità nel range giusto, senza oscillare. È la parte del nostro percorso che ci ha insegnato a lavorare con vincoli stretti e a provare sul campo.',
     'about.method.eyebrow': 'Metodo',
     'about.method.titleA': 'Quattro cose su cui',
     'about.method.titleB': 'non transigiamo.',
@@ -378,7 +371,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.quote': 'Richiedi un preventivo',
     'footer.admin': 'Area riservata',
     'footer.rights': 'Tutti i diritti riservati.',
-    'footer.builtWith': 'Costruito con Angular, Tailwind CSS e Supabase.',
+    'footer.vat': 'P. IVA',
 
     // --- Testa del documento ---
     'seo.home.title': 'SARAH — Siti web per ristoranti e piccole aziende',
@@ -683,17 +676,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'Being more than one person changes something concrete for whoever hires us: the person writing the interface isn’t the person designing the database, and each part is handled by whoever does it best. This site is our portfolio, built with the same stack we use for clients.',
     'about.ctaPrimary': 'Let’s work together',
     'about.ctaSecondary': 'What we’ve built',
-    'about.summary': 'At a glance',
-    'about.roleLabel': 'What we are',
-    'about.roleValue': 'A web development studio',
-    'about.founderLabel': 'Founder',
-    'about.founderValue': 'Mahdi Allau',
-    'about.focusLabel': 'Focus',
-    'about.focusValue': 'Sites and web apps for hospitality and small business',
-    'about.stackLabel': 'Main stack',
-    'about.stackValue': 'Angular, TypeScript, Tailwind CSS, Supabase, PostgreSQL',
-    'about.otherLabel': 'Also',
-    'about.otherValue': 'Python and SQL for data, Arduino/ESP32 for IoT',
+    // See the note in the Italian block: the "At a glance" card is gone.
+    'about.scene.caption': 'One line at a time, until it is how it should be.',
     'about.path.eyebrow': 'What we know',
     'about.path.titleA': 'Three fields,',
     'about.path.titleB': 'one way of thinking.',
@@ -707,13 +691,13 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
       'The three skills end up in the same project: the interface you speak to customers through, the numbers that tell you how it’s going, and the devices that produce those numbers.',
     'about.area1.title': 'Web development',
     'about.area1.body':
-      'Angular and TypeScript for interfaces that stay fast and tidy as a project grows. PostgreSQL and Supabase for data, authentication and files.',
+      'Interfaces that stay fast and tidy as a project grows, and data kept properly: sign-ins, permissions and files safe. The part people see and the part holding it up, looked after together.',
     'about.area2.title': 'Data and analysis',
     'about.area2.body':
-      'Collecting, cleaning and modelling data with Python and SQL, to reach dashboards that answer a business’s real questions instead of filling pages with charts.',
+      'Collecting, cleaning and modelling data down to a dashboard that answers a business’s real questions, instead of filling pages with charts nobody looks at.',
     'about.area3.title': 'Embedded systems and IoT',
     'about.area3.body':
-      'Firmware on Arduino and ESP32, sensor readings and PID control loops. This is the part of our background that taught us to work under tight constraints and to test in the field.',
+      'Devices that read sensors and hold temperature and humidity in range on their own, without swinging. This is the part of our background that taught us to work under tight constraints and to test in the field.',
     'about.method.eyebrow': 'Method',
     'about.method.titleA': 'Four things we',
     'about.method.titleB': 'won’t compromise on.',
@@ -919,7 +903,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'footer.quote': 'Request a quote',
     'footer.admin': 'Admin area',
     'footer.rights': 'All rights reserved.',
-    'footer.builtWith': 'Built with Angular, Tailwind CSS and Supabase.',
+    'footer.vat': 'VAT',
 
     // --- Document head ---
     'seo.home.title': 'SARAH — Websites for restaurants and small businesses',
